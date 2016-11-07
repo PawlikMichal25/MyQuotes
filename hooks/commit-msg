@@ -1,0 +1,11 @@
+#!/bin/sh
+
+commit_regex='^ISSUE-[0-9]*:[[:blank:]]'
+
+if ! grep -qE "$commit_regex" "$1"; then
+	echo "$error_msg" >&2
+	echo "Invalid commit message."
+	echo "Should be 'ISSUE-NN: XXXX'"
+	echo "Aborting commit."
+	exit 1
+fi
