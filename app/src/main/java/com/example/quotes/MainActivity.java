@@ -12,14 +12,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.TextView;
+
 
 public class MainActivity extends AppCompatActivity {
 
-
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
+    private int[] tabIcons = {R.drawable.quotes_icon, R.drawable.authors_icon};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +37,10 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
 
-    }
+        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
 
+    }
 
 
     /**
@@ -93,9 +95,9 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Quotes";
+                    return getString(R.string.quotes_tab);
                 case 1:
-                    return "Authors";
+                    return getString(R.string.authors_tab);
             }
             return null;
         }
