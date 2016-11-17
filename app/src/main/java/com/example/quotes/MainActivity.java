@@ -1,5 +1,6 @@
 package com.example.quotes;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
+    private FloatingActionButton floatingAddButton;
     private int[] tabIcons = {R.drawable.quotes_icon, R.drawable.authors_icon};
 
     @Override
@@ -31,13 +33,34 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        floatingAddButton = (FloatingActionButton) findViewById(R.id.fab);
 
+        setUpViewPager();
+        setUpTabLayout();
+    }
+
+    private void setUpViewPager(){
         viewPager = (ViewPager) findViewById(R.id.container);
-        viewPager.setAdapter(sectionsPagerAdapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0) floatingAddButton.show();
+                else if (position == 1) floatingAddButton.hide();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {}
+
+        });
+        viewPager.setAdapter(sectionsPagerAdapter);
+    }
+
+    private void setUpTabLayout() {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
-
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
     }
@@ -58,12 +81,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public static class PlaceholderFragment extends Fragment {
 
-        public PlaceholderFragment() {
-        }
-
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            return new PlaceholderFragment();
-        }
+        public PlaceholderFragment() {}
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,29 +92,27 @@ public class MainActivity extends AppCompatActivity {
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+        private Fragment[] fragments = {new QuotesFragment(), new PlaceholderFragment()};
+        private String[] fragmentTitles = {getString(R.string.quotes_tab),
+                getString(R.string.authors_tab)};
+
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
-            return PlaceholderFragment.newInstance(position + 1);
+            return fragments[position];
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return fragments.length;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return getString(R.string.quotes_tab);
-                case 1:
-                    return getString(R.string.authors_tab);
-            }
-            return null;
+            return fragmentTitles[position];
         }
     }
 }
