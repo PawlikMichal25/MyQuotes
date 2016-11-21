@@ -76,23 +76,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {}
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.fragment_main, container, false);
-        }
-    }
-
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        private Fragment[] fragments = {new QuotesFragment(), new PlaceholderFragment()};
+        private Fragment[] fragments = {new QuotesFragment(), new AuthorsFragment()};
         private String[] fragmentTitles = {getString(R.string.quotes_tab),
                 getString(R.string.authors_tab)};
 
