@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int currentPosition = 0;
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
     private FloatingActionButton floatingAddButton;
@@ -47,8 +48,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 0) floatingAddButton.show();
-                else if (position == 1) floatingAddButton.hide();
+                currentPosition = position;
+                if (position == 0){
+                    floatingAddButton.show();
+                    invalidateOptionsMenu();
+                    setActionBarTitle();
+                }
+                else if (position == 1){
+                    floatingAddButton.hide();
+                    invalidateOptionsMenu();
+                    setActionBarTitle();
+                }
             }
 
             @Override
@@ -56,6 +66,19 @@ public class MainActivity extends AppCompatActivity {
 
         });
         viewPager.setAdapter(sectionsPagerAdapter);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu){
+        if(currentPosition == 0){
+            menu.findItem(R.id.search).setVisible(true);
+            menu.findItem(R.id.sort).setVisible(false);
+        }
+        else{
+            menu.findItem(R.id.search).setVisible(false);
+            menu.findItem(R.id.sort).setVisible(true);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     private void setUpTabLayout() {
@@ -100,5 +123,10 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return fragmentTitles[position];
         }
+    }
+
+    private void setActionBarTitle(){
+        String title = sectionsPagerAdapter.fragmentTitles[currentPosition];
+        getSupportActionBar().setTitle(title);
     }
 }
