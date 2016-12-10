@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int currentPosition = 0;
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
     private FloatingActionButton floatingAddButton;
@@ -47,13 +48,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
+                currentPosition = position;
                 if (position == 0){
                     floatingAddButton.show();
-                    setActionBarTitle(position);
+                    invalidateOptionsMenu();
+                    setActionBarTitle();
                 }
                 else if (position == 1){
                     floatingAddButton.hide();
-                    setActionBarTitle(position);
+                    invalidateOptionsMenu();
+                    setActionBarTitle();
                 }
             }
 
@@ -62,6 +66,19 @@ public class MainActivity extends AppCompatActivity {
 
         });
         viewPager.setAdapter(sectionsPagerAdapter);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu){
+        if(currentPosition == 0){
+            menu.findItem(R.id.search).setVisible(true);
+            menu.findItem(R.id.sort).setVisible(false);
+        }
+        else{
+            menu.findItem(R.id.search).setVisible(false);
+            menu.findItem(R.id.sort).setVisible(true);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
 
     private void setUpTabLayout() {
@@ -108,9 +125,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setActionBarTitle(int position){
+    private void setActionBarTitle(){
         String title;
-        if(position == 0)
+        if(currentPosition == 0)
             title = getResources().getString(R.string.quotes_tab);
         else
             title = getResources().getString(R.string.authors_tab);
