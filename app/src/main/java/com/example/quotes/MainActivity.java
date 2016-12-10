@@ -126,11 +126,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setActionBarTitle(){
-        String title;
-        if(currentPosition == 0)
-            title = getResources().getString(R.string.quotes_tab);
-        else
-            title = getResources().getString(R.string.authors_tab);
+        String title = sectionsPagerAdapter.fragmentTitles[currentPosition];
         getSupportActionBar().setTitle(title);
     }
 }
