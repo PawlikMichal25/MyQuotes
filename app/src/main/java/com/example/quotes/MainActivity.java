@@ -47,8 +47,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (position == 0) floatingAddButton.show();
-                else if (position == 1) floatingAddButton.hide();
+                if (position == 0){
+                    floatingAddButton.show();
+                    setActionBarTitle(position);
+                }
+                else if (position == 1){
+                    floatingAddButton.hide();
+                    setActionBarTitle(position);
+                }
             }
 
             @Override
@@ -100,5 +106,14 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return fragmentTitles[position];
         }
+    }
+
+    private void setActionBarTitle(int position){
+        String title;
+        if(position == 0)
+            title = getResources().getString(R.string.quotes_tab);
+        else
+            title = getResources().getString(R.string.authors_tab);
+        getSupportActionBar().setTitle(title);
     }
 }
