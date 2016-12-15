@@ -1,5 +1,6 @@
 package com.example.quotes;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -36,8 +37,18 @@ public class MainActivity extends AppCompatActivity {
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         floatingAddButton = (FloatingActionButton) findViewById(R.id.fab);
 
+        setUpFloatingAddButton();
         setUpViewPager();
         setUpTabLayout();
+    }
+
+    private void setUpFloatingAddButton(){
+        floatingAddButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddQuote.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setUpViewPager(){
