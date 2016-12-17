@@ -8,13 +8,10 @@ import android.widget.TextView;
 
 import com.example.quotes.model.Quote;
 
-import org.w3c.dom.Text;
 
 import java.util.List;
 
-/**
- * Created by Ja on 2016-12-16.
- */
+
 
 public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
 

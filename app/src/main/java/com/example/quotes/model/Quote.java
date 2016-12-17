@@ -1,9 +1,5 @@
 package com.example.quotes.model;
 
-/**
- * Created by Ja on 2016-12-16.
- */
-
 public class Quote {
 
     private Author author;
