@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +18,12 @@ import android.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.quotes.model.Author;
+import com.example.quotes.model.Quote;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -62,14 +70,12 @@ public class MainActivity extends AppCompatActivity {
                 currentPosition = position;
                 if (position == 0){
                     floatingAddButton.show();
-                    invalidateOptionsMenu();
-                    setActionBarTitle();
                 }
                 else if (position == 1){
                     floatingAddButton.hide();
-                    invalidateOptionsMenu();
-                    setActionBarTitle();
                 }
+                invalidateOptionsMenu();
+                setActionBarTitle();
             }
 
             @Override
