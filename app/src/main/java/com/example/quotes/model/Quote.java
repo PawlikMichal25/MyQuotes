@@ -6,10 +6,10 @@ public class Quote {
     private String content;
     private boolean isFavorite;
 
-    public Quote(Author author, String content){
+    public Quote(Author author, String content, boolean isFavorite){
         this.author = author;
         this.content = content;
-        isFavorite = false;
+        this.isFavorite = isFavorite;
     }
 
     public boolean isFavorite() {
