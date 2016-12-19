@@ -1,11 +1,19 @@
 <resources>
     <string name="app_name">Quotes</string>
+
+    <string name="title_activity_main">Quotes</string>
+    <string name="title_activity_add_quote">Add Quote</string>
+
+    <string name="quotes_tab">Quotes</string>
+    <string name="authors_tab">Authors</string>
+
     <string name="search_title">Type quote\'s fragment</string>
     <string name="sort_title">Sort by name</string>
     <string name="settings">Settings</string>
-    <string name="title_activity_main">Quotes</string>
     <string name="action_settings">Settings</string>
-    <string name="quotes_tab">Quotes</string>
-    <string name="authors_tab">Authors</string>
     <string name="authors_empty">No authors in database</string>
+
+    <string name="add_quote_content">Type Quote</string>
+    <string name="add_quote_author">Type Author</string>
+    <string name="add_quote_button">Add Quote</string>
 </resources>

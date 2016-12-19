@@ -1,10 +1,9 @@
 package com.example.quotes;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,15 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.quotes.model.Author;
-import com.example.quotes.model.Quote;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -44,10 +35,25 @@ public class MainActivity extends AppCompatActivity {
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         floatingAddButton = (FloatingActionButton) findViewById(R.id.fab);
 
+        setUpFloatingAddButton();
         setUpViewPager();
         setUpTabLayout();
     }
 
+    private void setUpFloatingAddButton(){
+        floatingAddButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddQuoteActivity.class);
+                startActivityForResult(intent, AddQuoteActivity.NEW_QUOTE_ADDED);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(makeFragmentName(R.id.container, 0)); // TODO Create constant or sth else for fragment's position.
+        fragment.onActivityResult(requestCode, resultCode, data);
+    }
 
     private void setUpViewPager(){
         viewPager = (ViewPager) findViewById(R.id.container);
@@ -135,5 +141,9 @@ public class MainActivity extends AppCompatActivity {
     private void setActionBarTitle(){
         String title = sectionsPagerAdapter.fragmentTitles[currentPosition];
         getSupportActionBar().setTitle(title);
+    }
+
+    private static String makeFragmentName(int viewPagerId, int index) {
+        return "android:switcher:" + viewPagerId + ":" + index;
     }
 }

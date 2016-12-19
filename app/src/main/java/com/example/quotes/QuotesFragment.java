@@ -1,6 +1,7 @@
 package com.example.quotes;
 
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -10,12 +11,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CursorAdapter;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.example.quotes.model.Author;
@@ -39,16 +37,29 @@ public class QuotesFragment extends Fragment {
         initDataSet();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        quotes.clear();
+        initDataSet();
+
+        quotesAdapter = new QuotesAdapter(quotes);
+        recyclerView.setAdapter(quotesAdapter);
+        quotesAdapter.notifyDataSetChanged();
+
+    }
+
     private void initDataSet() {
         quotes = new ArrayList<Quote>();
         try {
             SQLiteOpenHelper dbHelper = new QuotesDatabaseHelper(getActivity());
             SQLiteDatabase db = dbHelper.getReadableDatabase();
-            Cursor cursor = db.rawQuery("SELECT author_id, content, favorite FROM Quotes", null);
+            Cursor cursor = db.rawQuery("SELECT Author_id, Content, Favorite FROM Quotes", null);
             if (cursor.moveToFirst()){
                 do{
                     int authorID = cursor.getInt(0);
-                    Cursor authorCursor = db.query("Authors", new String[]{"name", "surname"},
+                    Cursor authorCursor = db.query("Authors", new String[]{"FirstName", "LastName"},
                             "_id = ?", new String[]{String.valueOf(authorID)}, null, null, null);
                     if (authorCursor.moveToFirst()){
                         Author author = new Author(authorCursor.getString(0),
