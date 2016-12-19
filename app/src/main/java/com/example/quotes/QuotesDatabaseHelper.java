@@ -49,10 +49,10 @@ public class QuotesDatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    long insertAuthor(SQLiteDatabase db, String name, String surname){
+    long insertAuthor(SQLiteDatabase db, String firstName, String lastName){
         ContentValues values = new ContentValues();
-        values.put("FirstName", name);
-        values.put("LastName", surname);
+        values.put("FirstName", firstName);
+        values.put("LastName", lastName);
         return db.insert("Authors", null, values);
     }
 
