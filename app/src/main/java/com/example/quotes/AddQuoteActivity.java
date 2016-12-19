@@ -35,15 +35,16 @@ public class AddQuoteActivity extends AppCompatActivity {
             // Check if author already exists:
             Cursor cursor = db.query("Authors",
                     new String[]{"_id"},
-                    "name = ? and surname = ?",
+                    "FirstName = ? and LastName = ?",
                     new String[]{author[0], author[1]},
                     null, null, null);
 
             long authorId;
-            if (cursor != null && cursor.getCount() > 0)                                 // Author exists in the database
-                authorId = Integer.parseInt(cursor.getString(0));
+
+            if (cursor != null && cursor.getCount() > 0 && cursor.moveToFirst())                // Author exists in the database
+                authorId = cursor.getLong(0);
             else
-                authorId = quotesDatabaseHelper.insertAuthor(db, author[0], author[1]); // Create new author
+                authorId = quotesDatabaseHelper.insertAuthor(db, author[0], author[1]);         // Create new author
 
             // Add new quote
             quotesDatabaseHelper.insertQuote(db, authorId, addQuoteContent.getText().toString(), addQuoteFavorite.isChecked());

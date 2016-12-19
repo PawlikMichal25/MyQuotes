@@ -55,11 +55,11 @@ public class QuotesFragment extends Fragment {
         try {
             SQLiteOpenHelper dbHelper = new QuotesDatabaseHelper(getActivity());
             SQLiteDatabase db = dbHelper.getReadableDatabase();
-            Cursor cursor = db.rawQuery("SELECT author_id, content, favorite FROM Quotes", null);
+            Cursor cursor = db.rawQuery("SELECT Author_id, Content, Favorite FROM Quotes", null);
             if (cursor.moveToFirst()){
                 do{
                     int authorID = cursor.getInt(0);
-                    Cursor authorCursor = db.query("Authors", new String[]{"name", "surname"},
+                    Cursor authorCursor = db.query("Authors", new String[]{"FirstName", "LastName"},
                             "_id = ?", new String[]{String.valueOf(authorID)}, null, null, null);
                     if (authorCursor.moveToFirst()){
                         Author author = new Author(authorCursor.getString(0),
