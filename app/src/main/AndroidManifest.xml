@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddQuote"
+            android:name=".AddQuoteActivity"
             android:label="@string/title_activity_add_quote">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

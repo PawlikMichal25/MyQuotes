@@ -1,6 +1,7 @@
 package com.example.quotes;
 
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -10,12 +11,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CursorAdapter;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.example.quotes.model.Author;
@@ -37,6 +35,19 @@ public class QuotesFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initDataSet();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        quotes.clear();
+        initDataSet();
+
+        quotesAdapter = new QuotesAdapter(quotes);
+        recyclerView.setAdapter(quotesAdapter);
+        quotesAdapter.notifyDataSetChanged();
+
     }
 
     private void initDataSet() {

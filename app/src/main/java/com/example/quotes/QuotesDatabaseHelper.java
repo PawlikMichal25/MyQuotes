@@ -38,6 +38,7 @@ public class QuotesDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    // TODO Delete inserting sample data
     private void setUpSampleData(SQLiteDatabase db) {
         long id1 = insertAuthor(db, "Jose", "Mourinho");
         long id2 = insertAuthor(db, "John", "Adams");
@@ -48,20 +49,19 @@ public class QuotesDatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    private long insertAuthor(SQLiteDatabase db, String name, String surname){
+    long insertAuthor(SQLiteDatabase db, String name, String surname){
         ContentValues values = new ContentValues();
         values.put("name", name);
         values.put("surname", surname);
-        long id = db.insert("Authors", null, values);
-        return id;
+        return db.insert("Authors", null, values);
     }
 
-    private void insertQuote(SQLiteDatabase db, long authorID, String content, boolean isFavorite){
+    long insertQuote(SQLiteDatabase db, long authorId, String content, boolean isFavorite){
         ContentValues values = new ContentValues();
-        values.put("author_id", authorID);
+        values.put("author_id", authorId);
         values.put("content", content);
         values.put("favorite", isFavorite);
         values.put("date", String.valueOf(new Date()));
-        db.insert("Quotes", null, values);
+        return db.insert("Quotes", null, values);
     }
 }
