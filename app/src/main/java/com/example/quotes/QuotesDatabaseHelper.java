@@ -21,15 +21,15 @@ public class QuotesDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE Authors (" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "+
-                "name TEXT NOT NULL, "+
-                "surname TEXT NOT NULL);");
+                "FirstName TEXT NOT NULL, "+
+                "LastName TEXT NOT NULL);");
         db.execSQL("CREATE TABLE Quotes (" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "author_id INTEGER NOT NULL, " +
-                "content TEXT NOT NULL, " +
-                "favorite BOOLEAN NOT NULL," +
-                "date DATE, " +
-                "FOREIGN KEY(author_id) REFERENCES Authors(_id));");
+                "Author_id INTEGER NOT NULL, " +
+                "Content TEXT NOT NULL, " +
+                "Favorite BOOLEAN NOT NULL," +
+                "Date DATE, " +
+                "FOREIGN KEY(Author_id) REFERENCES Authors(_id));");
         setUpSampleData(db);
     }
 
@@ -38,6 +38,7 @@ public class QuotesDatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    // TODO Delete inserting sample data
     private void setUpSampleData(SQLiteDatabase db) {
         long id1 = insertAuthor(db, "Jose", "Mourinho");
         long id2 = insertAuthor(db, "John", "Adams");
@@ -48,20 +49,19 @@ public class QuotesDatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    private long insertAuthor(SQLiteDatabase db, String name, String surname){
+    long insertAuthor(SQLiteDatabase db, String firstName, String lastName){
         ContentValues values = new ContentValues();
-        values.put("name", name);
-        values.put("surname", surname);
-        long id = db.insert("Authors", null, values);
-        return id;
+        values.put("FirstName", firstName);
+        values.put("LastName", lastName);
+        return db.insert("Authors", null, values);
     }
 
-    private void insertQuote(SQLiteDatabase db, long authorID, String content, boolean isFavorite){
+    long insertQuote(SQLiteDatabase db, long authorId, String content, boolean isFavorite){
         ContentValues values = new ContentValues();
-        values.put("author_id", authorID);
-        values.put("content", content);
-        values.put("favorite", isFavorite);
-        values.put("date", String.valueOf(new Date()));
-        db.insert("Quotes", null, values);
+        values.put("Author_id", authorId);
+        values.put("Content", content);
+        values.put("Favorite", isFavorite);
+        values.put("Date", String.valueOf(new Date()));
+        return db.insert("Quotes", null, values);
     }
 }
