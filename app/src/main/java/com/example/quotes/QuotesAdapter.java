@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.quotes.model.Quote;
@@ -34,7 +35,10 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHold
         Quote quote = quotes.get(position);
         holder.content.setText("\"" + quote.getContent() + "\"");
         holder.author.setText(quote.getAuthor().getFirstName() + " " + quote.getAuthor().getLastName());
-        holder.favorite.setText("Favorite: " + String.valueOf(quote.isFavorite()));
+        if(quote.isFavorite())
+            holder.favorite.setImageResource(R.drawable.full_star);
+        else
+            holder.favorite.setImageResource(R.drawable.empty_star);
     }
 
     @Override
@@ -46,13 +50,13 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHold
 
         public TextView content;
         public TextView author;
-        public TextView favorite;
+        public ImageView favorite;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             content = (TextView) itemView.findViewById(R.id.quote_content);
             author = (TextView) itemView.findViewById(R.id.author_of_qoute);
-            favorite = (TextView) itemView.findViewById(R.id.is_favorite);
+            favorite = (ImageView) itemView.findViewById(R.id.is_favorite);
         }
     }
 }
