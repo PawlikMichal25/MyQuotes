@@ -20,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
         </android.support.v7.widget.Toolbar>
@@ -29,7 +28,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:id="@+id/tab_layout"/>
+            android:id="@+id/tab_layout"
+            app:tabMaxWidth="0dp"
+            app:tabGravity="fill"/>
 
 
     </android.support.design.widget.AppBarLayout>
@@ -46,7 +47,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@drawable/floating_add_button"
+        android:src="@drawable/plus"
+        app:backgroundTint="#44A013"
         android:layout_gravity="bottom|end" />
 
 

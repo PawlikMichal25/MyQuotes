@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
     private FloatingActionButton floatingAddButton;
-    private int[] tabIcons = {R.drawable.quotes_icon, R.drawable.authors_icon};
+    private int[] tabIcons = {R.drawable.quotes, R.drawable.authors};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,14 +83,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
-        if(currentPosition == 0){
+        if(currentPosition == 0)
             menu.findItem(R.id.search).setVisible(true);
-            menu.findItem(R.id.sort).setVisible(false);
-        }
-        else{
+        else
             menu.findItem(R.id.search).setVisible(false);
-            menu.findItem(R.id.sort).setVisible(true);
-        }
+
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -98,7 +95,9 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        tabLayout.getTabAt(0).setText("");
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+        tabLayout.getTabAt(1).setText("");
     }
 
     @Override
