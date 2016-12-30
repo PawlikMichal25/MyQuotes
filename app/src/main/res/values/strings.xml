@@ -3,6 +3,7 @@
 
     <string name="title_activity_main">Quotes</string>
     <string name="title_activity_add_quote">Add Quote</string>
+    <string name="title_activity_authors">Author</string>
 
     <string name="quotes_tab">Quotes</string>
     <string name="authors_tab">Authors</string>
