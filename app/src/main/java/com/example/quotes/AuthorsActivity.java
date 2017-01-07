@@ -19,8 +19,6 @@ public class AuthorsActivity extends AppCompatActivity {
         QuotesFragment quotesFragment = new QuotesFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, quotesFragment);
-        transaction.addToBackStack(null);
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         transaction.commit();
     }
 }
