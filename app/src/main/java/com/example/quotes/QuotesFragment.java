@@ -30,7 +30,7 @@ public class QuotesFragment extends Fragment {
     private List<Quote> quotes;
     private Cursor quotesCursor;
     private SQLiteDatabase db;
-    private long authorID = -1;
+    private long authorID;
     private Author author;
 
     public QuotesFragment() {}
@@ -38,7 +38,7 @@ public class QuotesFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(authorID != -1)
+        if(author != null)
             initSpecificAuthorDataSet();
         else
             initDataSet();
@@ -50,8 +50,7 @@ public class QuotesFragment extends Fragment {
 
         quotes.clear();
         initDataSet();
-
-        quotesAdapter = new QuotesAdapter(quotes);
+        quotesAdapter = new QuotesAdapter(quotes, author == null);
         recyclerView.setAdapter(quotesAdapter);
         quotesAdapter.notifyDataSetChanged();
 
@@ -106,7 +105,7 @@ public class QuotesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_quotes, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        quotesAdapter = new QuotesAdapter(quotes);
+        quotesAdapter = new QuotesAdapter(quotes, author == null);
         setUpRecyclerView();
         return rootView;
     }
