@@ -1,13 +1,24 @@
 package com.example.quotes;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class AuthorsFragment extends ListFragment {
+
+    private SQLiteDatabase db;
+    private Cursor cursor;
 
     public AuthorsFragment() {}
 
@@ -20,10 +31,49 @@ public class AuthorsFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //TODO Change data source to query
-        String[] datasource={"Piotr", "Michal", "Ela", "Ola", "Ula", "Ala", "Adam", "Juliusz", "Julian", "Tomasz", "Henryk"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, datasource);
+        try {
+            SQLiteOpenHelper databaseHelper = new QuotesDatabaseHelper(getActivity());
+            db = databaseHelper.getReadableDatabase();
 
-        setListAdapter(adapter);
+            cursor = db.query("Authors",
+                    new String[]{"_id", "FirstName", "LastName"},
+                    null, null, null, null, null);
+
+            SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
+                    android.R.layout.simple_list_item_1,
+                    cursor,
+                    new String[]{"FirstName", "LastName"},
+                    new int[]{android.R.id.text1},
+                    0);
+
+            adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+                @Override
+                public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                    TextView name = (TextView)view;
+                    name.setText(cursor.getString(2) + " " + cursor.getString(1));
+                    return true;
+                }
+            });
+
+            setListAdapter(adapter);
+        } catch(SQLiteException e) {
+            Toast toast = Toast.makeText(getActivity(), "Database unavailable", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
+    @Override
+    public void onListItemClick(ListView listView, View itemView, int position, long id){
+        Intent intent = new Intent(getActivity(), AuthorsActivity.class);
+        intent.putExtra(AuthorsActivity.AUTHOR_ID, id);
+        intent.putExtra(AuthorsActivity.AUTHOR_NAME, ((TextView)itemView).getText());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        cursor.close();
+        db.close();
     }
 }
