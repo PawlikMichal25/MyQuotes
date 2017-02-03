@@ -17,9 +17,11 @@ import java.util.List;
 public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
 
     private List<Quote> quotes;
+    private boolean showAuthor;
 
-    public QuotesAdapter(List<Quote> quotes){
+    public QuotesAdapter(List<Quote> quotes, boolean showAuthor) {
         this.quotes = quotes;
+        this.showAuthor = showAuthor;
     }
 
     @Override
@@ -34,7 +36,8 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHold
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Quote quote = quotes.get(position);
         holder.content.setText("\"" + quote.getContent() + "\"");
-        holder.author.setText(quote.getAuthor().getFirstName() + " " + quote.getAuthor().getLastName());
+        if(showAuthor)
+            holder.author.setText(quote.getAuthor().getLastName() + " " + quote.getAuthor().getFirstName());
         if(quote.isFavorite())
             holder.favorite.setImageResource(R.drawable.full_star);
         else
