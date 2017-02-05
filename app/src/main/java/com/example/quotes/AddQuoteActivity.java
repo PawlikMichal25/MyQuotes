@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 public class AddQuoteActivity extends AppCompatActivity {
 
-    public static final int NEW_QUOTE_ADDED = 42;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

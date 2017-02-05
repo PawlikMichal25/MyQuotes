@@ -41,7 +41,6 @@
                 android:layout_gravity="end"/>
 
         </LinearLayout>
-
     </android.support.v7.widget.CardView>
 
 

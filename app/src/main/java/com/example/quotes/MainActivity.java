@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private void setUpFloatingAddButton(){
         floatingAddButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddQuoteActivity.class);
-                startActivityForResult(intent, AddQuoteActivity.NEW_QUOTE_ADDED);
+                Intent intent = new Intent(MainActivity.this, QuotesActivity.class);
+                startActivityForResult(intent, 0);
             }
         });
     }
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_search, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
 
         MenuItem searchItem = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) searchItem.getActionView();
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
