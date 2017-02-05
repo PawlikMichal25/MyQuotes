@@ -111,6 +111,15 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == R.id.about){
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+        }
+        return true;
+    }
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         private Fragment[] fragments = {new QuotesFragment(), new AuthorsFragment()};
