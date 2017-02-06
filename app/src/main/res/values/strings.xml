@@ -19,6 +19,10 @@
     <string name="add_quote_author">Type Author</string>
     <string name="add_quote_button">Add Quote</string>
 
+    <string name="quotes_hint_first_name">Author\'s first name</string>
+    <string name="quotes_hint_last_name">Author\'s last name</string>
+    <string name="quotes_hint_quote">Quote</string>
+
     <string name="production">Production</string>
     <string name="developers">Developers</string>
     <string name="authors_names">Michał Baran, Piotr Przybyło</string>
