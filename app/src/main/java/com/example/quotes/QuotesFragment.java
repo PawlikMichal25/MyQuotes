@@ -32,6 +32,7 @@ public class QuotesFragment extends Fragment {
     private SQLiteDatabase db;
     private long authorID;
     private Author author;
+    private final String allQuotesQuery = "SELECT Author_id, Content, Favorite FROM Quotes ORDER BY Favorite DESC";
 
     public QuotesFragment() {}
 
@@ -41,27 +42,35 @@ public class QuotesFragment extends Fragment {
         if(author != null)
             initSpecificAuthorDataSet();
         else
-            initDataSet();
+            initDataSet(allQuotesQuery);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        initFragment(allQuotesQuery);
+    }
 
+    public void findQuotesFromQuery(String searchQuery){
+        String query = "SELECT Author_id, Content, Favorite FROM Quotes " +
+                "WHERE Content LIKE '%" + searchQuery + "%' ORDER BY Favorite DESC";
+        initFragment(query);
+    }
+
+    private void initFragment(String query) {
         quotes.clear();
-        initDataSet();
+        initDataSet(query);
         quotesAdapter = new QuotesAdapter(quotes, author == null);
         recyclerView.setAdapter(quotesAdapter);
         quotesAdapter.notifyDataSetChanged();
-
     }
 
-    private void initDataSet() {
+    private void initDataSet(String query) {
         quotes = new ArrayList<>();
         try {
             SQLiteOpenHelper dbHelper = new QuotesDatabaseHelper(getActivity());
             db = dbHelper.getReadableDatabase();
-            quotesCursor = db.rawQuery("SELECT Author_id, Content, Favorite FROM Quotes ORDER BY Favorite DESC", null);
+            quotesCursor = db.rawQuery(query, null);
             if (quotesCursor.moveToFirst()){
                 do{
                     authorID = quotesCursor.getInt(0);
@@ -99,6 +108,7 @@ public class QuotesFragment extends Fragment {
             toast.show();
         }
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
