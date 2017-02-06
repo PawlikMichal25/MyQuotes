@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(makeFragmentName(R.id.container, 0)); // TODO Create constant or sth else for fragment's position.
         fragment.onActivityResult(requestCode, resultCode, data);
+        fragment = getSupportFragmentManager().findFragmentByTag(makeFragmentName(R.id.container, 1));
+        fragment.onActivityResult(requestCode, resultCode, data);
     }
 
     private void setUpViewPager(){
