@@ -11,6 +11,7 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +31,15 @@ public class AuthorsFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initDataSet();
+    }
 
+    private void initDataSet() {
+        createCursor();
+        setUpAdapter();
+    }
+
+    private void createCursor() {
         try {
             SQLiteOpenHelper databaseHelper = new QuotesDatabaseHelper(getActivity());
             db = databaseHelper.getReadableDatabase();
@@ -39,27 +48,36 @@ public class AuthorsFragment extends ListFragment {
                     new String[]{"_id", "FirstName", "LastName"},
                     null, null, null, null, null);
 
-            SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
-                    android.R.layout.simple_list_item_1,
-                    cursor,
-                    new String[]{"FirstName", "LastName"},
-                    new int[]{android.R.id.text1},
-                    0);
-
-            adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
-                @Override
-                public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
-                    TextView name = (TextView)view;
-                    name.setText(cursor.getString(2) + " " + cursor.getString(1));
-                    return true;
-                }
-            });
-
-            setListAdapter(adapter);
-        } catch(SQLiteException e) {
+        } catch (SQLiteException e) {
             Toast toast = Toast.makeText(getActivity(), "Database unavailable", Toast.LENGTH_SHORT);
             toast.show();
         }
+    }
+
+    private void setUpAdapter() {
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
+                android.R.layout.simple_list_item_1,
+                cursor,
+                new String[]{"FirstName", "LastName"},
+                new int[]{android.R.id.text1},
+                0);
+
+        adapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                TextView name = (TextView) view;
+                name.setText(cursor.getString(2) + " " + cursor.getString(1));
+                return true;
+            }
+        });
+
+        setListAdapter(adapter);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        initDataSet();
     }
 
     @Override
