@@ -1,4 +1,4 @@
-package com.example.quotes;
+package com.example.quotes.quotes;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,20 +9,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.quotes.R;
 import com.example.quotes.model.Quote;
 
 
 import java.util.List;
 
-import static android.R.attr.author;
 
-
-public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
+class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
 
     private List<Quote> quotes;
     private boolean showAuthor;
 
-    public QuotesAdapter(List<Quote> quotes, boolean showAuthor) {
+    QuotesAdapter(List<Quote> quotes, boolean showAuthor) {
         this.quotes = quotes;
         this.showAuthor = showAuthor;
     }
@@ -48,11 +47,11 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), QuotesActivity.class);
-                intent.putExtra(QuotesActivity.AUTHOR_FIRST_NAME, quote.getAuthor().getFirstName());
-                intent.putExtra(QuotesActivity.AUTHOR_LAST_NAME, quote.getAuthor().getLastName());
-                intent.putExtra(QuotesActivity.IS_FAVORITE, quote.isFavorite());
-                intent.putExtra(QuotesActivity.QUOTE_CONTENT, quote.getContent());
+                Intent intent = new Intent(v.getContext(), EditQuoteActivity.class);
+                intent.putExtra(EditQuoteActivity.AUTHOR_FIRST_NAME, quote.getAuthor().getFirstName());
+                intent.putExtra(EditQuoteActivity.AUTHOR_LAST_NAME, quote.getAuthor().getLastName());
+                intent.putExtra(EditQuoteActivity.IS_FAVORITE, quote.isFavorite());
+                intent.putExtra(EditQuoteActivity.QUOTE_CONTENT, quote.getContent());
 
                 ((AppCompatActivity)v.getContext()).startActivityForResult(intent, 1);
             }
@@ -64,13 +63,13 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHold
         return quotes.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    static class MyViewHolder extends RecyclerView.ViewHolder{
 
         public TextView content;
         public TextView author;
         public ImageView favorite;
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
             content = (TextView) itemView.findViewById(R.id.quote_content);
             author = (TextView) itemView.findViewById(R.id.author_of_qoute);

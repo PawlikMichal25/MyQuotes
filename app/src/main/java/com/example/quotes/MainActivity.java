@@ -16,6 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.quotes.authors.AuthorsFragment;
+import com.example.quotes.quotes.AddQuoteActivity;
+import com.example.quotes.quotes.QuotesFragment;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private void setUpFloatingAddButton(){
         floatingAddButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, QuotesActivity.class);
+                Intent intent = new Intent(MainActivity.this, AddQuoteActivity.class);
                 startActivityForResult(intent, 0);
             }
         });
@@ -160,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         private String[] fragmentTitles = {getString(R.string.quotes_tab),
                 getString(R.string.authors_tab)};
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
