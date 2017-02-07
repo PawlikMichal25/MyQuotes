@@ -1,10 +1,12 @@
-package com.example.quotes;
+package com.example.quotes.authors;
 
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.quotes.R;
 import com.example.quotes.model.Author;
+import com.example.quotes.quotes.QuotesFragment;
 
 public class AuthorsActivity extends AppCompatActivity {
 
