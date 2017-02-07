@@ -114,16 +114,15 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                Log.v("test", s);
-                String fragmentName = makeFragmentName(R.id.container, 0);
-                QuotesFragment fragment = (QuotesFragment) getSupportFragmentManager().
-                        findFragmentByTag(fragmentName);
-                fragment.findQuotesFromQuery(s);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
+                String fragmentName = makeFragmentName(R.id.container, 0);
+                QuotesFragment fragment = (QuotesFragment) getSupportFragmentManager().
+                        findFragmentByTag(fragmentName);
+                fragment.findQuotesFromQuery(s);
                 return false;
             }
         });
