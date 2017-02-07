@@ -11,9 +11,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:focusableInTouchMode="true"
     android:theme="@style/QuotesActivityBody"
-    tools:context="com.example.quotes.QuotesActivity">
+    tools:context="com.example.quotes.quotes.QuotesActivity">
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/quotes_author_first_name_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
@@ -25,6 +26,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/quotes_author_last_name_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
@@ -43,6 +45,7 @@
         android:button="@drawable/favorite_star"/>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/quotes_quote_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText

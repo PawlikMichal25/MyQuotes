@@ -26,15 +26,27 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".AuthorsActivity"
+            android:name=".authors.AuthorsActivity"
             android:label="@string/title_activity_authors">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
 
-        <activity android:name=".QuotesActivity"
+        <activity android:name=".quotes.QuotesActivity"
             android:label="@string/title_activity_quotes_add">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" /></activity>
+
+        <activity android:name=".quotes.AddQuoteActivity"
+            android:label="@string/title_activity_quotes_add">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" /></activity>
+
+        <activity android:name=".quotes.EditQuoteActivity"
+            android:label="@string/title_activity_quotes_edit">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" /></activity>

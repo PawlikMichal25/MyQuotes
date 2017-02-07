@@ -1,4 +1,4 @@
-package com.example.quotes;
+package com.example.quotes.authors;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,10 +11,13 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.quotes.R;
+import com.example.quotes.authors.AuthorsActivity;
+import com.example.quotes.database.DatabaseHelper;
 
 public class AuthorsFragment extends ListFragment {
 
@@ -24,8 +27,7 @@ public class AuthorsFragment extends ListFragment {
     public AuthorsFragment() {}
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_authors, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_authors, container, false);
     }
 
     @Override
@@ -41,7 +43,7 @@ public class AuthorsFragment extends ListFragment {
 
     private void createCursor() {
         try {
-            SQLiteOpenHelper databaseHelper = new QuotesDatabaseHelper(getActivity());
+            SQLiteOpenHelper databaseHelper = new DatabaseHelper(getActivity());
             db = databaseHelper.getReadableDatabase();
 
             cursor = db.query("Authors",
@@ -83,6 +85,7 @@ public class AuthorsFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView listView, View itemView, int position, long id){
         Intent intent = new Intent(getActivity(), AuthorsActivity.class);
+        // TODO Split author's first name and last name in the view.
         intent.putExtra(AuthorsActivity.AUTHOR_ID, id);
         intent.putExtra(AuthorsActivity.AUTHOR_NAME, ((TextView)itemView).getText());
         startActivity(intent);

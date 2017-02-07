@@ -1,4 +1,4 @@
-package com.example.quotes;
+package com.example.quotes.quotes;
 
 
 import android.content.Intent;
@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.quotes.R;
+import com.example.quotes.database.DatabaseHelper;
 import com.example.quotes.model.Author;
 import com.example.quotes.model.Quote;
 
@@ -71,7 +73,7 @@ public class QuotesFragment extends Fragment {
     private void initDataSet(String query) {
         quotes = new ArrayList<>();
         try {
-            SQLiteOpenHelper dbHelper = new QuotesDatabaseHelper(getActivity());
+            SQLiteOpenHelper dbHelper = new DatabaseHelper(getActivity());
             db = dbHelper.getReadableDatabase();
             quotesCursor = db.rawQuery(query, null);
           
@@ -99,7 +101,7 @@ public class QuotesFragment extends Fragment {
     private void initSpecificAuthorDataSet() {
         quotes = new ArrayList<>();
         try {
-            SQLiteOpenHelper dbHelper = new QuotesDatabaseHelper(getActivity());
+            SQLiteOpenHelper dbHelper = new DatabaseHelper(getActivity());
             db = dbHelper.getReadableDatabase();
 
             quotesCursor = db.rawQuery("SELECT Author_id, Content, Favorite FROM Quotes WHERE Author_id = ? ORDER BY Favorite DESC", new String[]{String.valueOf(authorID)});
@@ -118,7 +120,7 @@ public class QuotesFragment extends Fragment {
     public void findQuotesAndAuthorsFromQuery(String searchQuery){
         quotes = new ArrayList<>();
         try {
-            SQLiteOpenHelper dbHelper = new QuotesDatabaseHelper(getActivity());
+            SQLiteOpenHelper dbHelper = new DatabaseHelper(getActivity());
             db = dbHelper.getReadableDatabase();
             Cursor cursor = db.rawQuery("SELECT FirstName, LastName, Content, Favorite " +
                     "FROM Quotes INNER JOIN Authors ON Quotes.Author_id == Authors._id " +
