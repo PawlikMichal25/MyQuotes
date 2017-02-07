@@ -5,6 +5,8 @@
     <string name="title_activity_add_quote">Add Quote</string>
     <string name="title_activity_about">About</string>
     <string name="title_activity_authors">Author</string>
+    <string name="title_activity_quotes_add">Add Quote</string>
+    <string name="title_activity_quotes_edit">Edit Quote</string>
 
     <string name="quotes_tab">Quotes</string>
     <string name="authors_tab">Authors</string>
@@ -17,10 +19,18 @@
     <string name="add_quote_author">Type Author</string>
     <string name="add_quote_button">Add Quote</string>
 
+    <string name="quotes_hint_first_name">Author\'s first name</string>
+    <string name="quotes_hint_last_name">Author\'s last name</string>
+    <string name="quotes_hint_quote">Quote</string>
+
     <string name="production">Production</string>
     <string name="developers">Developers</string>
     <string name="authors_names">Michał Baran, Piotr Przybyło</string>
     <string name="application">Application</string>
     <string name="version">Version: 1.0</string>
     <string name="rate_us">Rate us</string>
+
+    <string name="save">Save</string>
+    <string name="share">Share</string>
+    <string name="delete">Delete</string>
 </resources>
