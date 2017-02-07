@@ -33,4 +33,6 @@
     <string name="save">Save</string>
     <string name="share">Share</string>
     <string name="delete">Delete</string>
+
+    <string name="error_field_empty">Field cannot be empty</string>
 </resources>
