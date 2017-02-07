@@ -19,13 +19,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddQuoteActivity"
-            android:label="@string/title_activity_add_quote">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about">
             <meta-data
