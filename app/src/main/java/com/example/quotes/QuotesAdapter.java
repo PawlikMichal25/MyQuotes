@@ -50,6 +50,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHold
                 Intent intent = new Intent(v.getContext(), QuotesActivity.class);
                 intent.putExtra(QuotesActivity.AUTHOR_FIRST_NAME, quote.getAuthor().getFirstName());
                 intent.putExtra(QuotesActivity.AUTHOR_LAST_NAME, quote.getAuthor().getLastName());
+                intent.putExtra(QuotesActivity.IS_FAVORITE, quote.isFavorite());
                 intent.putExtra(QuotesActivity.QUOTE_CONTENT, quote.getContent());
                 v.getContext().startActivity(intent);
             }
