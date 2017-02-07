@@ -121,7 +121,8 @@ public class QuotesFragment extends Fragment {
             Cursor cursor = db.rawQuery("SELECT FirstName, LastName, Content, Favorite " +
                     "FROM Quotes INNER JOIN Authors ON Quotes.Author_id == Authors._id " +
                     "WHERE Content LIKE '%" + searchQuery + "%' OR FirstName LIKE '%" +
-                    searchQuery + "%' OR LastName LIKE '%" + searchQuery + "%'", null);
+                    searchQuery + "%' OR LastName LIKE '%" + searchQuery + "%' " +
+                    "ORDER BY Favorite DESC", null);
             if (cursor.moveToFirst()){
                 do{
                     Author author = new Author(cursor.getString(0), cursor.getString(1));
