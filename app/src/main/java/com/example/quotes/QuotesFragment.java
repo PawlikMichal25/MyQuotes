@@ -80,8 +80,7 @@ public class QuotesFragment extends Fragment {
                                 authorCursor.getString(1));
                         Quote quote = new Quote(author, quotesCursor.getString(1),
                                 quotesCursor.getInt(2) == 1);
-                        if (!quotes.contains(quote))
-                            quotes.add(quote);
+                        quotes.add(quote);
                     }
                     authorCursor.close();
                 } while(quotesCursor.moveToNext());
