@@ -32,6 +32,8 @@ public class QuotesFragment extends Fragment {
     private SQLiteDatabase db;
     private long authorID;
     private Author author;
+    private final String allQuotesQuery = "SELECT Author_id, Content, Favorite FROM Quotes " +
+            "ORDER BY Favorite DESC";
 
     public QuotesFragment() {}
 
@@ -41,27 +43,38 @@ public class QuotesFragment extends Fragment {
         if(author != null)
             initSpecificAuthorDataSet();
         else
-            initDataSet();
+            initDataSet(allQuotesQuery);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        initFragment(allQuotesQuery);
+    }
 
+    public void initFragment(){
+        initFragment(allQuotesQuery);
+    }
+
+    private void initFragment(String query) {
         quotes.clear();
-        initDataSet();
+        initDataSet(query);
+        refreshQuotesAdapter();
+    }
+
+    private void refreshQuotesAdapter() {
         quotesAdapter = new QuotesAdapter(quotes, author == null);
         recyclerView.setAdapter(quotesAdapter);
         quotesAdapter.notifyDataSetChanged();
-
     }
 
-    private void initDataSet() {
+    private void initDataSet(String query) {
         quotes = new ArrayList<>();
         try {
             SQLiteOpenHelper dbHelper = new QuotesDatabaseHelper(getActivity());
             db = dbHelper.getReadableDatabase();
-            quotesCursor = db.rawQuery("SELECT Author_id, Content, Favorite FROM Quotes", null);
+            quotesCursor = db.rawQuery(query, null);
+          
             if (quotesCursor.moveToFirst()){
                 do{
                     authorID = quotesCursor.getInt(0);
@@ -70,7 +83,8 @@ public class QuotesFragment extends Fragment {
                     if (authorCursor.moveToFirst()){
                         Author author = new Author(authorCursor.getString(0),
                                 authorCursor.getString(1));
-                        Quote quote = new Quote(author, quotesCursor.getString(1), quotesCursor.getInt(2) == 1);
+                        Quote quote = new Quote(author, quotesCursor.getString(1),
+                                quotesCursor.getInt(2) == 1);
                         quotes.add(quote);
                     }
                     authorCursor.close();
@@ -82,22 +96,48 @@ public class QuotesFragment extends Fragment {
         }
     }
 
-    private void initSpecificAuthorDataSet(){
+    private void initSpecificAuthorDataSet() {
         quotes = new ArrayList<>();
         try {
             SQLiteOpenHelper dbHelper = new QuotesDatabaseHelper(getActivity());
             db = dbHelper.getReadableDatabase();
-            quotesCursor = db.rawQuery("SELECT Author_id, Content, Favorite FROM Quotes WHERE Author_id = ?", new String[]{String.valueOf(authorID)});
-            if (quotesCursor.moveToFirst()){
-                do{
+
+            quotesCursor = db.rawQuery("SELECT Author_id, Content, Favorite FROM Quotes WHERE Author_id = ? ORDER BY Favorite DESC", new String[]{String.valueOf(authorID)});
+            if (quotesCursor.moveToFirst()) {
+                do {
                     Quote quote = new Quote(author, quotesCursor.getString(1), quotesCursor.getInt(2) == 1);
                     quotes.add(quote);
-                } while(quotesCursor.moveToNext());
+                } while (quotesCursor.moveToNext());
             }
+        } catch (SQLiteException e) {
+            Toast toast = Toast.makeText(getActivity(), "Database unavailable", Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
+    public void findQuotesAndAuthorsFromQuery(String searchQuery){
+        quotes = new ArrayList<>();
+        try {
+            SQLiteOpenHelper dbHelper = new QuotesDatabaseHelper(getActivity());
+            db = dbHelper.getReadableDatabase();
+            Cursor cursor = db.rawQuery("SELECT FirstName, LastName, Content, Favorite " +
+                    "FROM Quotes INNER JOIN Authors ON Quotes.Author_id == Authors._id " +
+                    "WHERE Content LIKE '%" + searchQuery + "%' OR FirstName LIKE '%" +
+                    searchQuery + "%' OR LastName LIKE '%" + searchQuery + "%' " +
+                    "ORDER BY Favorite DESC", null);
+            if (cursor.moveToFirst()){
+                do{
+                    Author author = new Author(cursor.getString(0), cursor.getString(1));
+                    Quote quote = new Quote(author, cursor.getString(2), cursor.getInt(3) == 1);
+                    quotes.add(quote);
+                } while(cursor.moveToNext());
+            }
+            cursor.close();
         } catch (SQLiteException e){
             Toast toast = Toast.makeText(getActivity(), "Database unavailable", Toast.LENGTH_LONG);
             toast.show();
         }
+        refreshQuotesAdapter();
     }
 
     @Override
