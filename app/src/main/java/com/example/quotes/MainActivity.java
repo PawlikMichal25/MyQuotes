@@ -1,5 +1,6 @@
 package com.example.quotes;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.SearchView;
 import android.view.View;
 
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 String fragmentName = makeFragmentName(R.id.container, 0);
                 QuotesFragment fragment = (QuotesFragment) getSupportFragmentManager().
                         findFragmentByTag(fragmentName);
-                fragment.findQuotesFromQuery(s);
+                fragment.findQuotesAndAuthorsFromQuery(s);
                 return false;
             }
         });
