@@ -66,9 +66,9 @@ public class QuotesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.home:
-                setResult(AppCompatActivity.RESULT_OK);
-                finish();
+                finishActivity();
                 break;
+
             case R.id.save:
                 if(editing){    // Editing existing quote
                     QuotesDatabaseHelper quotesDatabaseHelper = new QuotesDatabaseHelper(this);
@@ -113,8 +113,23 @@ public class QuotesActivity extends AppCompatActivity {
                 }
                 Toast toast = Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT);
                 toast.show();
-                setResult(AppCompatActivity.RESULT_OK);
-                finish();
+                finishActivity();
+                break;
+
+            case R.id.delete:
+                QuotesDatabaseHelper quotesDatabaseHelper = new QuotesDatabaseHelper(this);
+                SQLiteDatabase db = quotesDatabaseHelper.getWritableDatabase();
+
+                long authorId = quotesDatabaseHelper.findAuthorId(db,
+                        authorFirstName,
+                        authorLastName);
+
+                long quoteId = quotesDatabaseHelper.findQuoteId(db,
+                        authorId,
+                        quoteContent,
+                        isFavorite);
+                quotesDatabaseHelper.deleteQuote(db, quoteId);
+                finishActivity();
                 break;
         }
 
@@ -125,4 +140,8 @@ public class QuotesActivity extends AppCompatActivity {
         return intent.hasExtra(AUTHOR_FIRST_NAME) && intent.hasExtra(AUTHOR_LAST_NAME) && intent.hasExtra(QUOTE_CONTENT);
     }
 
+    private void finishActivity(){
+        setResult(AppCompatActivity.RESULT_OK);
+        finish();
+    }
 }

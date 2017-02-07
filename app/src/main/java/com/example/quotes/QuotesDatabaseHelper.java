@@ -103,6 +103,26 @@ public class QuotesDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    int deleteQuote(SQLiteDatabase db, long quoteId){
+
+        Cursor cursor = db.rawQuery(
+                "SELECT Author_id FROM Quotes WHERE _id = ?",
+                new String[]{String.valueOf(quoteId)});
+
+        // Check if this author has other quotes
+        if(cursor.moveToFirst()){
+            long authorId =  cursor.getLong(0);
+            Cursor othersCursor = db.rawQuery(
+                    "SELECT COUNT(_id) AS Ids FROM Quotes WHERE Author_id = ?",
+                    new String[]{String.valueOf(authorId)});
+
+            if(othersCursor.moveToFirst() && othersCursor.getInt(0) < 2)
+                db.delete("Authors", "_id=?", new String[]{String.valueOf(authorId)});
+        }
+
+        return db.delete("Quotes", "_id=?", new String[]{String.valueOf(quoteId)});
+    }
+
     /**
      * Changes existing quote, identified by quoteId with given values.
      */
