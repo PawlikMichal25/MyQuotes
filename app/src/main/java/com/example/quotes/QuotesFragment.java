@@ -52,6 +52,10 @@ public class QuotesFragment extends Fragment {
         initFragment(allQuotesQuery);
     }
 
+    public void initFragment(){
+        initFragment(allQuotesQuery);
+    }
+
     private void initFragment(String query) {
         quotes.clear();
         initDataSet(query);
