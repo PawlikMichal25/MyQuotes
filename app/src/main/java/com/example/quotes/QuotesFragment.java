@@ -74,6 +74,7 @@ public class QuotesFragment extends Fragment {
             SQLiteOpenHelper dbHelper = new QuotesDatabaseHelper(getActivity());
             db = dbHelper.getReadableDatabase();
             quotesCursor = db.rawQuery(query, null);
+          
             if (quotesCursor.moveToFirst()){
                 do{
                     authorID = quotesCursor.getInt(0);
@@ -100,6 +101,7 @@ public class QuotesFragment extends Fragment {
         try {
             SQLiteOpenHelper dbHelper = new QuotesDatabaseHelper(getActivity());
             db = dbHelper.getReadableDatabase();
+
             quotesCursor = db.rawQuery("SELECT Author_id, Content, Favorite FROM Quotes WHERE Author_id = ? ORDER BY Favorite DESC", new String[]{String.valueOf(authorID)});
             if (quotesCursor.moveToFirst()) {
                 do {

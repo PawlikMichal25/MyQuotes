@@ -3,10 +3,9 @@ package com.example.quotes;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import java.util.Date;
 
 public class QuotesDatabaseHelper extends SQLiteOpenHelper {
 
@@ -28,7 +27,6 @@ public class QuotesDatabaseHelper extends SQLiteOpenHelper {
                 "Author_id INTEGER NOT NULL, " +
                 "Content TEXT NOT NULL, " +
                 "Favorite BOOLEAN NOT NULL," +
-                "Date DATE, " +
                 "FOREIGN KEY(Author_id) REFERENCES Authors(_id));");
         setUpSampleData(db);
     }
@@ -49,19 +47,100 @@ public class QuotesDatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    long insertAuthor(SQLiteDatabase db, String firstName, String lastName){
+    private long insertAuthor(SQLiteDatabase db, String firstName, String lastName){
         ContentValues values = new ContentValues();
         values.put("FirstName", firstName);
         values.put("LastName", lastName);
         return db.insert("Authors", null, values);
     }
 
-    long insertQuote(SQLiteDatabase db, long authorId, String content, boolean isFavorite){
+    private long insertQuote(SQLiteDatabase db, long authorId, String content, boolean isFavorite){
         ContentValues values = new ContentValues();
         values.put("Author_id", authorId);
         values.put("Content", content);
         values.put("Favorite", isFavorite);
-        values.put("Date", String.valueOf(new Date()));
         return db.insert("Quotes", null, values);
+    }
+
+    long findAuthorId(SQLiteDatabase db, String authorFirstName, String authorLastName){
+        Cursor cursor = db.rawQuery(
+                "SELECT _id FROM Authors WHERE FirstName = ? AND LastName = ?",
+                new String[]{authorFirstName, authorLastName});
+        if(cursor.moveToFirst())
+            return cursor.getLong(0);
+        return -1;
+    }
+
+    long findQuoteId(SQLiteDatabase db, long authorId, String content, boolean favorite){
+        Cursor cursor = db.rawQuery(
+                "SELECT _id, Content FROM Quotes WHERE Author_id = ? AND Content = ? AND Favorite = ?",
+                new String[]{String.valueOf(authorId), content, String.valueOf(favorite?1:0)});
+        if(cursor.moveToFirst()){
+            return cursor.getLong(0);}
+        return -1;
+    }
+
+    void addQuote(SQLiteDatabase db, String authorFirstName, String authorLastName, String quoteContent, boolean isFavorite){
+
+        long authorId;
+
+        // Check if author already exists:
+        Cursor cursor = db.query("Authors",
+                new String[]{"_id"},
+                "FirstName = ? and LastName = ?",
+                new String[]{authorFirstName, authorLastName},
+                null, null, null);
+
+        if (cursor != null && cursor.getCount() > 0 && cursor.moveToFirst())        // Author exists in the database
+            authorId = cursor.getLong(0);
+        else
+            authorId = insertAuthor(db, authorFirstName, authorLastName);           // Create new author
+        insertQuote(db, authorId, quoteContent, isFavorite);
+
+        if (cursor != null) {
+            cursor.close();
+        }
+        db.close();
+    }
+
+    int deleteQuote(SQLiteDatabase db, long quoteId){
+
+        Cursor cursor = db.rawQuery(
+                "SELECT Author_id FROM Quotes WHERE _id = ?",
+                new String[]{String.valueOf(quoteId)});
+
+        // Check if this author has other quotes
+        if(cursor.moveToFirst()){
+            long authorId =  cursor.getLong(0);
+            Cursor othersCursor = db.rawQuery(
+                    "SELECT COUNT(_id) AS Ids FROM Quotes WHERE Author_id = ?",
+                    new String[]{String.valueOf(authorId)});
+
+            if(othersCursor.moveToFirst() && othersCursor.getInt(0) < 2)
+                db.delete("Authors", "_id=?", new String[]{String.valueOf(authorId)});
+        }
+
+        return db.delete("Quotes", "_id=?", new String[]{String.valueOf(quoteId)});
+    }
+
+    /**
+     * Changes existing quote, identified by quoteId with given values.
+     */
+    int editQuote(SQLiteDatabase db, long quoteId, long authorId, String content, boolean favorite){
+        ContentValues cv = new ContentValues();
+        cv.put("Author_id", authorId);
+        cv.put("Content", content);
+        cv.put("Favorite", favorite);
+        return db.update("Quotes", cv, "_id=" + quoteId, null);
+    }
+
+    /**
+     * Changes existing author, identified by authorId with given values.
+     */
+    int editAuthor(SQLiteDatabase db, long authorId, String firstName, String lastName){
+        ContentValues cv = new ContentValues();
+        cv.put("FirstName", firstName);
+        cv.put("lastName", lastName);
+        return db.update("Authors", cv, "_id=" + authorId, null);
     }
 }
