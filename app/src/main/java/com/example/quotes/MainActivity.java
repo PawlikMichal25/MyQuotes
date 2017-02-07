@@ -3,7 +3,9 @@ package com.example.quotes;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,7 +14,6 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.SearchView;
 import android.view.View;
 
 
@@ -108,7 +109,38 @@ public class MainActivity extends AppCompatActivity {
 
         MenuItem searchItem = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) searchItem.getActionView();
-        // TODO Add TextListener do searchView
+
+        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem menuItem) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+                String fragmentName = makeFragmentName(R.id.container, 0);
+                QuotesFragment fragment = (QuotesFragment) getSupportFragmentManager().
+                        findFragmentByTag(fragmentName);
+                fragment.initFragment();
+                return true;
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                String fragmentName = makeFragmentName(R.id.container, 0);
+                QuotesFragment fragment = (QuotesFragment) getSupportFragmentManager().
+                        findFragmentByTag(fragmentName);
+                fragment.findQuotesAndAuthorsFromQuery(s);
+                return false;
+            }
+        });
 
         return true;
     }
