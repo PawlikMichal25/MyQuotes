@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quotes.R;
@@ -45,6 +46,12 @@ public class QuotesFragment extends Fragment {
             initDataSet(allQuotesQuery);
     }
 
+    private void setUpEmptyQuotesText(View view) {
+        TextView textView = (TextView) view.findViewById(R.id.quotes_empty_text);
+        int visibility = quotes.isEmpty() ? View.VISIBLE : View.INVISIBLE;
+        textView.setVisibility(visibility);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -62,6 +69,7 @@ public class QuotesFragment extends Fragment {
         else
             initDataSet(query);
         refreshQuotesAdapter();
+        setUpEmptyQuotesText(getView());
     }
 
     private void refreshQuotesAdapter() {
@@ -163,6 +171,7 @@ public class QuotesFragment extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         quotesAdapter = new QuotesAdapter(quotes, author == null);
         setUpRecyclerView();
+        setUpEmptyQuotesText(rootView);
         return rootView;
     }
 

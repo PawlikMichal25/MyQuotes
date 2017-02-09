@@ -14,6 +14,7 @@
     <string name="search_title">Type quote\'s fragment</string>
     <string name="about">About</string>
     <string name="authors_empty">No authors in database</string>
+    <string name="quotes_empty">No quotes in database</string>
 
     <string name="add_quote_content">Type Quote</string>
     <string name="add_quote_author">Type Author</string>
