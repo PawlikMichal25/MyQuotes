@@ -11,4 +11,12 @@
         android:scrollbars="vertical"
         android:background="@drawable/background"/>
 
+    <TextView
+        android:id="@+id/quotes_empty_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/quotes_empty"
+        android:visibility="invisible"/>
+
+
 </FrameLayout>
