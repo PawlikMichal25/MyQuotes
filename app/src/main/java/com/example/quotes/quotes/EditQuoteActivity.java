@@ -77,25 +77,7 @@ public class EditQuoteActivity extends QuotesActivity {
                     if (!authorFirstName.equals(firstNameInput) || !authorLastName.equals(lastNameInput)) {
                         if (databaseHelper.countQuotes(db, authorId) > 1){
                             finishActivity = false;
-                            Command changeSingleQuoteCommand = new Command() {
-                                @Override
-                                public void execute() {
-                                    changeSingleQuote(databaseHelper, db, firstNameInput, lastNameInput, authorId,
-                                            quoteId);
-                                    finishEditing("Saved!");
-                                }
-                            };
-                            Command changeAllQuotesCommand = new Command() {
-                                @Override
-                                public void execute() {
-                                    changeAllQuotes(databaseHelper, db, firstNameInput, lastNameInput, authorId);
-                                    finishEditing("Saved!");
-                                }
-                            };
-                            Command emptyCommand = new Command() { @Override public void execute() {} };
-                            AlertDialog dialog = createEditAuthorDialog(changeAllQuotesCommand, emptyCommand,
-                                    changeSingleQuoteCommand);
-                            dialog.show();
+                            createAndShowDialog(databaseHelper, db, firstNameInput, lastNameInput, authorId, quoteId);
                         }
                         else changeAllQuotes(databaseHelper, db, firstNameInput, lastNameInput, authorId);
                     }
@@ -111,6 +93,28 @@ public class EditQuoteActivity extends QuotesActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void createAndShowDialog(final DatabaseHelper databaseHelper, final SQLiteDatabase db,
+                                     final String firstNameInput, final String lastNameInput, final long authorId,
+                                     final long quoteId) {
+        Command changeSingleQuoteCommand = new Command() {
+            @Override
+            public void execute() {
+                changeSingleQuote(databaseHelper, db, firstNameInput, lastNameInput, authorId, quoteId);
+                finishEditing("Saved!");
+            }
+        };
+        Command changeAllQuotesCommand = new Command() {
+            @Override
+            public void execute() {
+                changeAllQuotes(databaseHelper, db, firstNameInput, lastNameInput, authorId);
+                finishEditing("Saved!");
+            }
+        };
+        Command emptyCommand = Command.NO_OPERATION;
+        AlertDialog dialog = createEditAuthorDialog(changeAllQuotesCommand, emptyCommand, changeSingleQuoteCommand);
+        dialog.show();
     }
 
     private void finishEditing(String message){
