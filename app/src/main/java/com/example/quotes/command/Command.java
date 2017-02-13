@@ -2,5 +2,7 @@ package com.example.quotes.command;
 
 
 public interface Command {
-    public void execute();
+    void execute();
+
+    Command NO_OPERATION = new Command() {@Override public void execute() {} };
 }
