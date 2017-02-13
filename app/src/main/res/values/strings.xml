@@ -34,6 +34,12 @@
     <string name="save">Save</string>
     <string name="share">Share</string>
     <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="edit_author_dialog_title">Author has changed</string>
+    <string name="edit_author_dialog_message">What do you want to do?</string>
+    <string name="only_this_quote">Edit this quote only</string>
+    <string name="all_quotes">Edit all quotes with old author</string>
 
     <string name="error_field_empty">Field cannot be empty</string>
 </resources>

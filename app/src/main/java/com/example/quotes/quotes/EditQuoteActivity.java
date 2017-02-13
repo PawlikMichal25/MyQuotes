@@ -1,14 +1,18 @@
 package com.example.quotes.quotes;
 
+
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.quotes.R;
 import com.example.quotes.database.DatabaseHelper;
+import com.example.quotes.command.Command;
+import com.example.quotes.command.CommandWrapper;
 
 public class EditQuoteActivity extends QuotesActivity {
 
@@ -47,6 +51,11 @@ public class EditQuoteActivity extends QuotesActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
+        final DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        final SQLiteDatabase db = databaseHelper.getWritableDatabase();
+        final long authorId = databaseHelper.findAuthorId(db, authorFirstName, authorLastName);
+        final long quoteId = databaseHelper.findQuoteId(db, authorId, quoteContent, isFavorite);
+
         switch(item.getItemId()){
             case R.id.save:
 
@@ -54,57 +63,92 @@ public class EditQuoteActivity extends QuotesActivity {
                 boolean fn = validateFieldNotEmpty(authorFirstNameInputLayout, authorFirstNameInput);
                 boolean qc = validateFieldNotEmpty(quoteContentInputLayout, quoteContentInput);
                 if(fn && qc) {
-                    DatabaseHelper databaseHelper = new DatabaseHelper(this);
-                    SQLiteDatabase db = databaseHelper.getWritableDatabase();
+                    final String firstNameInput = authorFirstNameInput.getText().toString();
+                    final String lastNameInput = authorLastNameInput.getText().toString();
+                    final String contentInput = quoteContentInput.getText().toString();
 
-                    long authorId = databaseHelper.findAuthorId(db,
-                            authorFirstName,
-                            authorLastName);
+                    // Quote's content or Favorite field have changed
+                    if (!quoteContent.equals(contentInput) || isFavorite != isFavoriteBox.isChecked()) {
+                        databaseHelper.editQuote(db, quoteId, authorId, contentInput, isFavoriteBox.isChecked());
+                    }
 
+                    boolean finishActivity = true;
                     // Author has changed
-                    if (!authorFirstName.equals(authorFirstNameInput.getText().toString()) || !authorLastName.equals(authorLastNameInput.getText().toString())) {
-                        databaseHelper.editAuthor(db,
-                                authorId,
-                                authorFirstNameInput.getText().toString(),
-                                authorLastNameInput.getText().toString());
-
-                        authorId = databaseHelper.findAuthorId(db,
-                                authorFirstNameInput.getText().toString(),
-                                authorLastNameInput.getText().toString());
+                    if (!authorFirstName.equals(firstNameInput) || !authorLastName.equals(lastNameInput)) {
+                        if (databaseHelper.countQuotes(db, authorId) > 1){
+                            finishActivity = false;
+                            Command changeSingleQuoteCommand = new Command() {
+                                @Override
+                                public void execute() {
+                                    changeSingleQuote(databaseHelper, db, firstNameInput, lastNameInput, authorId,
+                                            quoteId);
+                                    finishEditing("Saved!");
+                                }
+                            };
+                            Command changeAllQuotesCommand = new Command() {
+                                @Override
+                                public void execute() {
+                                    changeAllQuotes(databaseHelper, db, firstNameInput, lastNameInput, authorId);
+                                    finishEditing("Saved!");
+                                }
+                            };
+                            Command emptyCommand = new Command() { @Override public void execute() {} };
+                            AlertDialog dialog = createEditAuthorDialog(changeAllQuotesCommand, emptyCommand,
+                                    changeSingleQuoteCommand);
+                            dialog.show();
+                        }
+                        else changeAllQuotes(databaseHelper, db, firstNameInput, lastNameInput, authorId);
                     }
 
-                    // Quote or Favorite field have changed
-                    if (!quoteContent.equals(quoteContentInput.getText().toString()) || isFavorite != isFavoriteBox.isChecked()) {
-                        long quoteId = databaseHelper.findQuoteId(db,
-                                authorId,
-                                quoteContent,
-                                isFavorite);
-
-                        databaseHelper.editQuote(db, quoteId, authorId, quoteContentInput.getText().toString(), isFavoriteBox.isChecked());
-                    }
-                    Toast toast = Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT);
-                    toast.show();
-                    finishActivityWithResult();
+                    if(finishActivity) finishEditing("Saved!");
                 }
                 break;
 
             case R.id.delete:
-                DatabaseHelper databaseHelper = new DatabaseHelper(this);
-                SQLiteDatabase db = databaseHelper.getWritableDatabase();
-
-                long authorId = databaseHelper.findAuthorId(db,
-                        authorFirstName,
-                        authorLastName);
-
-                long quoteId = databaseHelper.findQuoteId(db,
-                        authorId,
-                        quoteContent,
-                        isFavorite);
                 databaseHelper.deleteQuote(db, quoteId);
-                finishActivityWithResult();
+                finishEditing("Deleted!");
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void finishEditing(String message){
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast.show();
+        finishActivityWithResult();
+    }
+
+    private void changeSingleQuote(DatabaseHelper databaseHelper, SQLiteDatabase db, String firstNameInput,
+                                   String lastNameInput, long authorId, long quoteId) {
+        long newAuthorId = databaseHelper.findAuthorId(db, firstNameInput, lastNameInput);
+        if (newAuthorId == -1){   // quote's new author doesn't exist in database
+            newAuthorId = databaseHelper.insertAuthor(db, firstNameInput, lastNameInput);
+        }
+        databaseHelper.editSingleQuotesAuthor(db, quoteId, newAuthorId);
+        if (databaseHelper.countQuotes(db, authorId) == 0){  // delete old author if there are no quotes by him/her
+            databaseHelper.deleteAuthor(db, authorId);
+        }
+    }
+
+    private void changeAllQuotes(DatabaseHelper databaseHelper, SQLiteDatabase db, String firstNameInput,
+                                 String lastNameInput, long authorId) {
+        long newAuthorId = databaseHelper.findAuthorId(db, firstNameInput, lastNameInput);
+        if (newAuthorId == -1)  // if new author doesn't exist in database, edit existing author's first name and last name
+            databaseHelper.editAuthor(db, authorId, firstNameInput, lastNameInput);
+        else {
+            databaseHelper.editQuotesAuthor(db, authorId, newAuthorId);
+        }
+    }
+
+    private AlertDialog createEditAuthorDialog(Command allQuotesCommand, Command cancelCommand,
+                                               Command singleQuoteCommand){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.edit_author_dialog_title)
+                .setMessage(R.string.edit_author_dialog_message)
+                .setPositiveButton(R.string.all_quotes, new CommandWrapper(allQuotesCommand))
+                .setNeutralButton(R.string.cancel, new CommandWrapper(cancelCommand))
+                .setNegativeButton(R.string.only_this_quote, new CommandWrapper(singleQuoteCommand));
+        return builder.create();
     }
 }

@@ -46,12 +46,6 @@ public class QuotesFragment extends Fragment {
             initDataSet(allQuotesQuery);
     }
 
-    private void setUpEmptyQuotesText(View view) {
-        TextView textView = (TextView) view.findViewById(R.id.quotes_empty_text);
-        int visibility = quotes.isEmpty() ? View.VISIBLE : View.INVISIBLE;
-        textView.setVisibility(visibility);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -70,6 +64,12 @@ public class QuotesFragment extends Fragment {
             initDataSet(query);
         refreshQuotesAdapter();
         setUpEmptyQuotesText(getView());
+    }
+
+    private void setUpEmptyQuotesText(View view) {
+        TextView textView = (TextView) view.findViewById(R.id.quotes_empty_text);
+        int visibility = quotes.isEmpty() ? View.VISIBLE : View.INVISIBLE;
+        textView.setVisibility(visibility);
     }
 
     private void refreshQuotesAdapter() {
@@ -116,12 +116,15 @@ public class QuotesFragment extends Fragment {
             SQLiteOpenHelper dbHelper = new DatabaseHelper(getActivity());
             SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-            Cursor authorCursor = db.rawQuery("SELECT FirstName, LastName FROM Authors WHERE _id = ?", new String[]{String.valueOf(authorId)});
+            Cursor authorCursor = db.rawQuery("SELECT FirstName, LastName FROM Authors WHERE _id = ?",
+                    new String[]{String.valueOf(authorId)});
             if(authorCursor.moveToFirst()){
                 author = new Author(authorCursor.getString(0), authorCursor.getString(1));
             }
 
-            Cursor quotesCursor = db.rawQuery("SELECT Author_id, Content, Favorite FROM Quotes WHERE Author_id = ? ORDER BY Favorite DESC", new String[]{String.valueOf(authorId)});
+            Cursor quotesCursor = db.rawQuery(
+                    "SELECT Author_id, Content, Favorite FROM Quotes WHERE Author_id = ? ORDER BY Favorite DESC",
+                    new String[]{String.valueOf(authorId)});
             if (quotesCursor.moveToFirst()) {
                 do {
                     Quote quote = new Quote(author, quotesCursor.getString(1), quotesCursor.getInt(2) == 1);
