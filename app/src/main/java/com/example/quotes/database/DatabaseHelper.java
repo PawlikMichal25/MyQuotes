@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "Quotes";
@@ -47,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    private long insertAuthor(SQLiteDatabase db, String firstName, String lastName){
+    public long insertAuthor(SQLiteDatabase db, String firstName, String lastName){
         ContentValues values = new ContentValues();
         values.put("FirstName", firstName);
         values.put("LastName", lastName);
@@ -86,7 +87,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return -1;
     }
 
-    public void addQuote(SQLiteDatabase db, String authorFirstName, String authorLastName, String quoteContent, boolean isFavorite){
+    /**
+     * Returns number of quotes with given Author_id
+     */
+    public int countQuotes(SQLiteDatabase db, long authorId){
+        Cursor cursor = db.rawQuery(
+                "SELECT COUNT(_id) FROM Quotes WHERE Author_id = ?",
+                new String[]{String.valueOf(authorId)});
+        if(cursor.moveToFirst()){
+            int result =  cursor.getInt(0);
+            cursor.close();
+            return result;
+        }
+        return 0;
+    }
+
+    public void addQuote(SQLiteDatabase db, String authorFirstName, String authorLastName, String quoteContent,
+                         boolean isFavorite){
 
         long authorId;
 
@@ -142,6 +159,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Changes Author_id of quote with given quoteId
+     */
+    public void editSingleQuotesAuthor(SQLiteDatabase db, long quoteId, long authorId){
+        ContentValues cv = new ContentValues();
+        cv.put("Author_id", authorId);
+        db.update("Quotes", cv, "_id=" + quoteId, null);
+    }
+
+    /**
+     * Changes Author_id of quotes with given oldAuthorId to newAuthorId and deletes author with oldAuthorId if there
+     * are no remaining quotes by him/her.
+     */
+    public void editQuotesAuthor(SQLiteDatabase db, long oldAuthorId, long newAuthorId){
+        ContentValues cv = new ContentValues();
+        cv.put("Author_id", newAuthorId);
+        db.update("Quotes", cv, "Author_id=" + oldAuthorId, null);
+        if (countQuotes(db, oldAuthorId) == 0) deleteAuthor(db, oldAuthorId);
+    }
+
+    /**
      * Changes existing author, identified by authorId with given values.
      */
     public int editAuthor(SQLiteDatabase db, long authorId, String firstName, String lastName){
@@ -149,5 +186,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put("FirstName", firstName);
         cv.put("lastName", lastName);
         return db.update("Authors", cv, "_id=" + authorId, null);
+    }
+
+    public int deleteAuthor(SQLiteDatabase db, long authorId){
+        return db.delete("Authors", "_id=?", new String[]{String.valueOf(authorId)});
     }
 }
