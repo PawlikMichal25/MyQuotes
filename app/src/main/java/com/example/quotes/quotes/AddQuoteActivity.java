@@ -20,11 +20,9 @@ public class AddQuoteActivity extends QuotesActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.save:
-
                 // Tmp variables, because if they were both in IF the second one might not be invoked
                 boolean fn = validateFieldNotEmpty(authorFirstNameInputLayout, authorFirstNameInput);
                 boolean qc = validateFieldNotEmpty(quoteContentInputLayout, quoteContentInput);
-
                 if (fn && qc) {
                     DatabaseHelper databaseHelper = new DatabaseHelper(this);
                     SQLiteDatabase db = databaseHelper.getWritableDatabase();
@@ -36,12 +34,10 @@ public class AddQuoteActivity extends QuotesActivity {
 
                     Toast toast = Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT);
                     toast.show();
-
                     finishActivityWithResult();
                 }
                 break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

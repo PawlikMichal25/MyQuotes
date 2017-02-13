@@ -16,8 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quotes.R;
-import com.example.quotes.authors.AuthorsActivity;
 import com.example.quotes.database.DatabaseHelper;
+import com.example.quotes.model.Author;
 
 public class AuthorsFragment extends ListFragment {
 
@@ -46,8 +46,8 @@ public class AuthorsFragment extends ListFragment {
             SQLiteOpenHelper databaseHelper = new DatabaseHelper(getActivity());
             db = databaseHelper.getReadableDatabase();
 
-            cursor = db.query("Authors",
-                    new String[]{"_id", "FirstName", "LastName"},
+            cursor = db.query(Author.TABLE_NAME,
+                    new String[]{Author.Columns.ID, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME},
                     null, null, null, null, null);
 
         } catch (SQLiteException e) {
@@ -60,7 +60,7 @@ public class AuthorsFragment extends ListFragment {
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
                 android.R.layout.simple_list_item_1,
                 cursor,
-                new String[]{"FirstName", "LastName"},
+                new String[]{Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME},
                 new int[]{android.R.id.text1},
                 0);
 
