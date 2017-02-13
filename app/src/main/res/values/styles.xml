@@ -6,6 +6,7 @@
         <item name="colorAccent">@android:color/white</item>
         <item name="android:textColorPrimary">@android:color/white</item>
         <item name="android:textColor">#6C6C6C</item>
+        <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
