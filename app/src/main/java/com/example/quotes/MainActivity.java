@@ -122,10 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-                String fragmentName = makeFragmentName(R.id.container, 0);
-                QuotesFragment fragment = (QuotesFragment) getSupportFragmentManager().
-                        findFragmentByTag(fragmentName);
-                fragment.initFragment();
+                getQuotesFragment().initFragment();
                 return true;
             }
         });
@@ -138,15 +135,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                String fragmentName = makeFragmentName(R.id.container, 0);
-                QuotesFragment fragment = (QuotesFragment) getSupportFragmentManager().
-                        findFragmentByTag(fragmentName);
-                fragment.findQuotesAndAuthorsFromQuery(s);
+                getQuotesFragment().findQuotesAndAuthorsFromQuery(s);
                 return false;
             }
         });
 
         return true;
+    }
+
+    private QuotesFragment getQuotesFragment(){
+        String fragmentName = makeFragmentName(R.id.container, 0);
+        return (QuotesFragment) getSupportFragmentManager().findFragmentByTag(fragmentName);
     }
 
     @Override
@@ -161,8 +160,7 @@ public class MainActivity extends AppCompatActivity {
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         private Fragment[] fragments = {new QuotesFragment(), new AuthorsFragment()};
-        private String[] fragmentTitles = {getString(R.string.quotes_tab),
-                getString(R.string.authors_tab)};
+        private String[] fragmentTitles = {getString(R.string.quotes_tab), getString(R.string.authors_tab)};
 
         SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
