@@ -51,6 +51,11 @@ public class EditQuoteActivity extends QuotesActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
+        final DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        final SQLiteDatabase db = databaseHelper.getWritableDatabase();
+        final long authorId = databaseHelper.findAuthorId(db, authorFirstName, authorLastName);
+        final long quoteId = databaseHelper.findQuoteId(db, authorId, quoteContent, isFavorite);
+
         switch(item.getItemId()){
             case R.id.save:
 
@@ -61,10 +66,6 @@ public class EditQuoteActivity extends QuotesActivity {
                     final String firstNameInput = authorFirstNameInput.getText().toString();
                     final String lastNameInput = authorLastNameInput.getText().toString();
                     final String contentInput = quoteContentInput.getText().toString();
-                    final DatabaseHelper databaseHelper = new DatabaseHelper(this);
-                    final SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                    final long authorId = databaseHelper.findAuthorId(db, authorFirstName, authorLastName);
-                    final long quoteId = databaseHelper.findQuoteId(db, authorId, quoteContent, isFavorite);
 
                     // Quote's content or Favorite field have changed
                     if (!quoteContent.equals(contentInput) || isFavorite != isFavoriteBox.isChecked()) {
@@ -81,14 +82,14 @@ public class EditQuoteActivity extends QuotesActivity {
                                 public void execute() {
                                     changeSingleQuote(databaseHelper, db, firstNameInput, lastNameInput, authorId,
                                             quoteId);
-                                    finishSaving();
+                                    finishEditing("Saved!");
                                 }
                             };
                             Command changeAllQuotesCommand = new Command() {
                                 @Override
                                 public void execute() {
                                     changeAllQuotes(databaseHelper, db, firstNameInput, lastNameInput, authorId);
-                                    finishSaving();
+                                    finishEditing("Saved!");
                                 }
                             };
                             Command emptyCommand = new Command() { @Override public void execute() {} };
@@ -99,25 +100,21 @@ public class EditQuoteActivity extends QuotesActivity {
                         else changeAllQuotes(databaseHelper, db, firstNameInput, lastNameInput, authorId);
                     }
 
-                    if(finishActivity) finishSaving();
+                    if(finishActivity) finishEditing("Saved!");
                 }
                 break;
 
             case R.id.delete:
-                DatabaseHelper databaseHelper = new DatabaseHelper(this);
-                SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                long authorId = databaseHelper.findAuthorId(db, authorFirstName, authorLastName);
-                long quoteId = databaseHelper.findQuoteId(db, authorId, quoteContent, isFavorite);
                 databaseHelper.deleteQuote(db, quoteId);
-                finishActivityWithResult();
+                finishEditing("Deleted!");
                 break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void finishSaving(){
-        Toast toast = Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT);
+    private void finishEditing(String message){
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         toast.show();
         finishActivityWithResult();
     }
