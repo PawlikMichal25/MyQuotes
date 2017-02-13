@@ -2,6 +2,7 @@ package com.example.quotes.model;
 
 public class Author {
 
+    public static final String TABLE_NAME = "Authors";
     private String firstName;
     private String lastName;
 
@@ -29,5 +30,11 @@ public class Author {
     @Override
     public String toString(){
         return new StringBuilder().append(lastName).append(" ").append(firstName).toString();
+    }
+
+    public static class Columns {
+        public static final String ID = "_id";
+        public static final String FIRST_NAME = "FirstName";
+        public static final String LAST_NAME = "LastName";
     }
 }
