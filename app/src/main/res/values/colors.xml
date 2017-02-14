@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="indigo200">#9FA8DA</color>
+    <color name="indigo700">#303F9F</color>
+    <color name="indigo900">#1A237E</color>
+
+    <color name="blue200">#90CAF9</color>
+    <color name="blue700">#1976D2</color>
+    <color name="blue900">#0D47A1</color>
+
+    <color name="green200">#A5D6A7</color>
+    <color name="green700">#388E3C</color>
+    <color name="green900">#1B5E20</color>
+
+    <color name="lightGreen200">#C5E1A5</color>
+    <color name="lightGreen700">#689F38</color>
+    <color name="lightGreen900">#33691E</color>
+
+    <color name="brown200">#BCAAA4</color>
+    <color name="brown700">#5D4037</color>
+    <color name="brown900">#3E2723</color>
+
+    <color name="deepOrange200">#FFAB91</color>
+    <color name="deepOrange700">#E64A19</color>
+    <color name="deepOrange900">#BF360C</color>
+
+    <!-- For some reason it won't work if I use eg @color/green500 -->
+    <string-array name="color_choices">
+        <item>#303F9F</item>
+        <item>#388E3C</item>
+        <item>#5D4037</item>
+        <item>#1976D2</item>
+        <item>#689F38</item>
+        <item>#E64A19</item>
+    </string-array>
 </resources>
