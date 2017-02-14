@@ -1,20 +1,89 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#35850A</item>
-        <item name="colorPrimaryDark">#225C03</item>
-        <item name="colorAccent">@android:color/white</item>
-        <item name="android:textColorPrimary">@android:color/white</item>
-        <item name="android:textColor">#6C6C6C</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="QuotesActivityBody" parent="Theme.AppCompat.Light.DarkActionBar"/>
+
+    <style name="EditTextTheme">
+    </style>
+
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorAccent">@android:color/white</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+    </style>
+    
+    <style name="Indigo" parent="BaseTheme">
+        <item name="colorPrimary">@color/indigo700</item>
+        <item name="colorPrimaryDark">@color/indigo900</item>
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+        <item name="android:textColorHighlight">@color/indigo200</item>
+    </style>
+
+    <style name="Blue" parent="BaseTheme">
+        <item name="colorPrimary">@color/blue700</item>
+        <item name="colorPrimaryDark">@color/blue900</item>
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+        <item name="android:textColorHighlight">@color/blue200</item>
+    </style>
+
+    <style name="Green" parent="BaseTheme">
+        <item name="colorPrimary">@color/green700</item>
+        <item name="colorPrimaryDark">@color/green900</item>
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+        <item name="android:textColorHighlight">@color/green200</item>
+    </style>
+
+    <style name="LightGreen" parent="BaseTheme">
+        <item name="colorPrimary">@color/lightGreen700</item>
+        <item name="colorPrimaryDark">@color/lightGreen900</item>
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+        <item name="android:textColorHighlight">@color/lightGreen200</item>
+    </style>
+
+    <style name="Brown" parent="BaseTheme">
+        <item name="colorPrimary">@color/brown700</item>
+        <item name="colorPrimaryDark">@color/brown900</item>
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+        <item name="android:textColorHighlight">@color/brown200</item>
+    </style>
+
+    <style name="DeepOrange" parent="BaseTheme">
+        <item name="colorPrimary">@color/deepOrange700</item>
+        <item name="colorPrimaryDark">@color/deepOrange900</item>
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+        <item name="android:textColorHighlight">@color/deepOrange200</item>
+    </style>
+
+    <style name="Indigo.NoActionBar" parent="Indigo">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Blue.NoActionBar" parent="Blue">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Green.NoActionBar" parent="Green">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="LightGreen.NoActionBar" parent="LightGreen">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Brown.NoActionBar" parent="Brown">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="DeepOrange.NoActionBar" parent="DeepOrange">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
 </resources>

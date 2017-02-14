@@ -48,7 +48,7 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:src="@drawable/plus"
-        app:backgroundTint="#44A013"
+        app:backgroundTint="?attr/colorPrimary"
         android:layout_gravity="bottom|end" />
 
 
