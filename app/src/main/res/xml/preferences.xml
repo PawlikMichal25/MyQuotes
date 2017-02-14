@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.preference.PreferenceCategory
+        android:title="@string/preferences_style"
+        android:key="pref_cat_style">
+
+        <com.kizitonwose.colorpreferencecompat.ColorPreferenceCompat
+            android:title="@string/preferences_choose_theme"
+            android:key="@string/pref_style_color"
+            android:defaultValue="@color/originalGreen"
+            app:numColumns="3"
+            app:colorChoices="@array/color_choices"/>
+    </android.support.v7.preference.PreferenceCategory>
+
+</android.support.v7.preference.PreferenceScreen>

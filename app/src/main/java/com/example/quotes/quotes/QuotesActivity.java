@@ -9,9 +9,10 @@ import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.example.quotes.BaseActivity;
 import com.example.quotes.R;
 
-public class QuotesActivity extends AppCompatActivity {
+public class QuotesActivity extends BaseActivity {
 
     EditText authorFirstNameInput;
     EditText authorLastNameInput;

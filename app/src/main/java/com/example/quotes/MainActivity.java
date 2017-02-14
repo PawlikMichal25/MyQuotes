@@ -19,9 +19,10 @@ import android.view.View;
 import com.example.quotes.authors.AuthorsFragment;
 import com.example.quotes.quotes.AddQuoteActivity;
 import com.example.quotes.quotes.QuotesFragment;
+import com.example.quotes.settings.SettingsActivity;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private int currentPosition = 0;
     private SectionsPagerAdapter sectionsPagerAdapter;
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -43,6 +43,12 @@ public class MainActivity extends AppCompatActivity {
         setUpFloatingAddButton();
         setUpViewPager();
         setUpTabLayout();
+    }
+
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        AppUtils.updateTheme(this);
     }
 
     private void setUpFloatingAddButton(){
@@ -151,9 +157,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        if(item.getItemId() == R.id.about){
-            Intent intent = new Intent(this, AboutActivity.class);
-            startActivity(intent);
+        switch(item.getItemId()){
+            case R.id.settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                break;
+            case R.id.about:
+                startActivity(new Intent(this, AboutActivity.class));
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
