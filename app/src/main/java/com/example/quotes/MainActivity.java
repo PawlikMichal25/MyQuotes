@@ -202,4 +202,5 @@ public class MainActivity extends BaseActivity {
     private static String makeFragmentName(int viewPagerId, int index) {
         return "android:switcher:" + viewPagerId + ":" + index;
     }
+
 }

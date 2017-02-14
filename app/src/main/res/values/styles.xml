@@ -5,12 +5,10 @@
 
     <style name="QuotesActivityBody" parent="Theme.AppCompat.Light.DarkActionBar"/>
 
-    <style name="EditTextTheme">
-    </style>
-
     <style name="BaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorAccent">@android:color/white</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+        <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert</item>
     </style>
     
     <style name="Indigo" parent="BaseTheme">
