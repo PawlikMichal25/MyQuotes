@@ -33,17 +33,39 @@ public class QuotesFragment extends Fragment {
     private List<Quote> quotes;
     private long authorId;
     private Author author;
-    private final String allQuotesQuery = "SELECT Author_id, Content, Favorite FROM Quotes ORDER BY Favorite DESC";
+    private final String allQuotesQuery = String.format("SELECT %s, %s, %s FROM %s ORDER BY %s DESC",
+            Quote.Columns.AUTHOR_ID, Quote.Columns.CONTENT, Quote.Columns.FAVORITE, Quote.TABLE_NAME,
+            Quote.Columns.FAVORITE);
 
     public QuotesFragment() {}
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(author != null)
-            initSpecificAuthorDataSet();
-        else
-            initDataSet(allQuotesQuery);
+        initData(allQuotesQuery);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_quotes, container, false);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        quotesAdapter = new QuotesAdapter(quotes, author == null);
+        setUpRecyclerView();
+        setUpEmptyQuotesText(rootView);
+        return rootView;
+    }
+
+    private void setUpRecyclerView() {
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(quotesAdapter);
+    }
+
+    private void setUpEmptyQuotesText(View view) {
+        TextView textView = (TextView) view.findViewById(R.id.quotes_empty_text);
+        int visibility = quotes.isEmpty() ? View.VISIBLE : View.INVISIBLE;
+        textView.setVisibility(visibility);
     }
 
     @Override
@@ -52,24 +74,22 @@ public class QuotesFragment extends Fragment {
         initFragment(allQuotesQuery);
     }
 
-    public void initFragment(){
-        initFragment(allQuotesQuery);
-    }
-
-    private void initFragment(String query) {
-        quotes.clear();
+    private void initData(String query) {
         if(author != null)
             initSpecificAuthorDataSet();
         else
             initDataSet(query);
+    }
+
+    private void initFragment(String query) {
+        quotes.clear();
+        initData(query);
         refreshQuotesAdapter();
         setUpEmptyQuotesText(getView());
     }
 
-    private void setUpEmptyQuotesText(View view) {
-        TextView textView = (TextView) view.findViewById(R.id.quotes_empty_text);
-        int visibility = quotes.isEmpty() ? View.VISIBLE : View.INVISIBLE;
-        textView.setVisibility(visibility);
+    public void initFragment(){
+        initFragment(allQuotesQuery);
     }
 
     private void refreshQuotesAdapter() {
@@ -88,8 +108,11 @@ public class QuotesFragment extends Fragment {
             if (quotesCursor.moveToFirst()){
                 do{
                     authorId = quotesCursor.getInt(0);
-                    Cursor authorCursor = db.query("Authors", new String[]{"FirstName", "LastName"},
-                            "_id = ?", new String[]{String.valueOf(authorId)}, null, null, null);
+                    Cursor authorCursor = db.query(Author.TABLE_NAME,
+                            new String[]{Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME},
+                            Author.Columns.ID + " = ?",
+                            new String[]{String.valueOf(authorId)},
+                            null, null, null);
                     if (authorCursor.moveToFirst()){
                         Author author = new Author(authorCursor.getString(0),
                                 authorCursor.getString(1));
@@ -103,7 +126,6 @@ public class QuotesFragment extends Fragment {
 
             quotesCursor.close();
             db.close();
-
         } catch (SQLiteException e){
             Toast toast = Toast.makeText(getActivity(), "Database unavailable", Toast.LENGTH_LONG);
             toast.show();
@@ -115,16 +137,17 @@ public class QuotesFragment extends Fragment {
         try {
             SQLiteOpenHelper dbHelper = new DatabaseHelper(getActivity());
             SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-            Cursor authorCursor = db.rawQuery("SELECT FirstName, LastName FROM Authors WHERE _id = ?",
-                    new String[]{String.valueOf(authorId)});
+            String authorsQuery = String.format("SELECT %s, %s FROM %s WHERE %s = ?",
+                    Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME, Author.TABLE_NAME, Author.Columns.ID);
+            Cursor authorCursor = db.rawQuery(authorsQuery, new String[]{String.valueOf(authorId)});
             if(authorCursor.moveToFirst()){
                 author = new Author(authorCursor.getString(0), authorCursor.getString(1));
             }
 
-            Cursor quotesCursor = db.rawQuery(
-                    "SELECT Author_id, Content, Favorite FROM Quotes WHERE Author_id = ? ORDER BY Favorite DESC",
-                    new String[]{String.valueOf(authorId)});
+            String quotesQuery = String.format("SELECT %s, %s, %s FROM %s WHERE %s = ? ORDER BY %s DESC",
+                    Quote.Columns.AUTHOR_ID, Quote.Columns.CONTENT, Quote.Columns.FAVORITE, Quote.TABLE_NAME,
+                    Quote.Columns.AUTHOR_ID, Quote.Columns.FAVORITE);
+            Cursor quotesCursor = db.rawQuery(quotesQuery, new String[]{String.valueOf(authorId)});
             if (quotesCursor.moveToFirst()) {
                 do {
                     Quote quote = new Quote(author, quotesCursor.getString(1), quotesCursor.getInt(2) == 1);
@@ -135,7 +158,6 @@ public class QuotesFragment extends Fragment {
             quotesCursor.close();
             authorCursor.close();
             db.close();
-
         } catch (SQLiteException e) {
             Toast toast = Toast.makeText(getActivity(), "Database unavailable", Toast.LENGTH_LONG);
             toast.show();
@@ -147,11 +169,14 @@ public class QuotesFragment extends Fragment {
         try {
             SQLiteOpenHelper dbHelper = new DatabaseHelper(getActivity());
             SQLiteDatabase db = dbHelper.getReadableDatabase();
-            Cursor cursor = db.rawQuery("SELECT FirstName, LastName, Content, Favorite " +
-                    "FROM Quotes INNER JOIN Authors ON Quotes.Author_id == Authors._id " +
-                    "WHERE Content LIKE '%" + searchQuery + "%' OR FirstName LIKE '%" +
-                    searchQuery + "%' OR LastName LIKE '%" + searchQuery + "%' " +
-                    "ORDER BY Favorite DESC", null);
+            String query = String.format("SELECT %s, %s, %s, %s " +
+                    "FROM %s as Q INNER JOIN %s as A ON Q.%s == A.%s " +
+                    "WHERE %s LIKE '%%%s%%' OR %s LIKE '%%%s%%' OR %s LIKE '%%%s%%' ORDER BY %s DESC",
+                    Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME, Quote.Columns.CONTENT, Quote.Columns.FAVORITE,
+                    Quote.TABLE_NAME, Author.TABLE_NAME, Quote.Columns.AUTHOR_ID, Author.Columns.ID,
+                    Quote.Columns.CONTENT, searchQuery, Author.Columns.FIRST_NAME, searchQuery,
+                    Author.Columns.LAST_NAME, searchQuery, Quote.Columns.FAVORITE);
+            Cursor cursor = db.rawQuery(query, null);
             if (cursor.moveToFirst()){
                 do{
                     Author author = new Author(cursor.getString(0), cursor.getString(1));
@@ -160,28 +185,12 @@ public class QuotesFragment extends Fragment {
                 } while(cursor.moveToNext());
             }
             cursor.close();
+            db.close();
         } catch (SQLiteException e){
             Toast toast = Toast.makeText(getActivity(), "Database unavailable", Toast.LENGTH_LONG);
             toast.show();
         }
         refreshQuotesAdapter();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_quotes, container, false);
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        quotesAdapter = new QuotesAdapter(quotes, author == null);
-        setUpRecyclerView();
-        setUpEmptyQuotesText(rootView);
-        return rootView;
-    }
-
-    private void setUpRecyclerView() {
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(quotesAdapter);
     }
 
     public Author getAuthor() {
