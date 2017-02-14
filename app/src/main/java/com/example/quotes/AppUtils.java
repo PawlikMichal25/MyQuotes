@@ -31,7 +31,7 @@ public class AppUtils {
                     activity.setTheme(R.style.Indigo_NoActionBar);
                 } else if (color == ContextCompat.getColor(ctx, R.color.blue700)) {
                     activity.setTheme(R.style.Blue_NoActionBar);
-                } else if (color == ContextCompat.getColor(ctx, R.color.originalGreen)) {
+                } else if (color == ContextCompat.getColor(ctx, R.color.green700)) {
                     activity.setTheme(R.style.Green_NoActionBar);
                 } else if (color == ContextCompat.getColor(ctx, R.color.lightGreen700)) {
                     activity.setTheme(R.style.LightGreen_NoActionBar);
@@ -46,7 +46,7 @@ public class AppUtils {
                     activity.setTheme(R.style.Indigo);
                 } else if (color == ContextCompat.getColor(ctx, R.color.blue700)) {
                     activity.setTheme(R.style.Blue);
-                } else if (color == ContextCompat.getColor(ctx, R.color.originalGreen)) {
+                } else if (color == ContextCompat.getColor(ctx, R.color.green700)) {
                     activity.setTheme(R.style.Green);
                 } else if (color == ContextCompat.getColor(ctx, R.color.lightGreen700)) {
                     activity.setTheme(R.style.LightGreen);
