@@ -29,7 +29,7 @@ public class AuthorsActivity extends BaseActivity {
         String [] authorNames = ((String)getIntent().getExtras().get(AUTHOR_NAME)).split(" ", 2);
 
         if(authorNames.length == 1)
-            quotesFragment.setAuthor(new Author(authorNames[1], ""));
+            quotesFragment.setAuthor(new Author(authorNames[0], ""));
         else
             quotesFragment.setAuthor(new Author(authorNames[1], authorNames[0]));
         quotesFragment.setAuthorId((long)getIntent().getExtras().get(AUTHOR_ID));

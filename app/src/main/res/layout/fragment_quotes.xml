@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
+        android:paddingBottom="56dp"
+        android:clipToPadding="false"
         android:background="@drawable/background"/>
 
     <TextView
@@ -17,6 +19,4 @@
         android:layout_height="wrap_content"
         android:text="@string/quotes_empty"
         android:visibility="invisible"/>
-
-
 </FrameLayout>
