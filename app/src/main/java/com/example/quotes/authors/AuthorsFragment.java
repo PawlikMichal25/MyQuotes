@@ -68,7 +68,10 @@ public class AuthorsFragment extends ListFragment {
             @Override
             public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
                 TextView name = (TextView) view;
-                name.setText(cursor.getString(2) + " " + cursor.getString(1));
+                if(cursor.getString(2).isEmpty())
+                    name.setText(cursor.getString(1));
+                else
+                    name.setText(cursor.getString(2) + " " + cursor.getString(1));
                 return true;
             }
         });

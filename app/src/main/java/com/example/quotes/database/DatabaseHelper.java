@@ -51,6 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long id4 = insertAuthor(db, "Ravulagaluhabudaba", "Ravindrababu");
         long id5 = insertAuthor(db, "Sokrates", "");
         long id6 = insertAuthor(db, "C2C", "Netik");
+        long id7 = insertAuthor(db, "John", "F. Kennedy");
 
         insertQuote(db, id1, "I think I'm a special one", true);
 
@@ -67,6 +68,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertQuote(db, id5, "The only true wisdom is in knowing you know nothing.", true);
 
         insertQuote(db, id6, "Some people see things how they are and ask why, I dream things that never were and ask why not?", true);
+
+        insertQuote(db, id7, "Forget your enemies, but remember their names.", true);
     }
 
     public long insertAuthor(SQLiteDatabase db, String firstName, String lastName){
