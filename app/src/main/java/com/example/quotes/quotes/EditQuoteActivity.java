@@ -37,9 +37,16 @@ public class EditQuoteActivity extends QuotesActivity {
         isFavorite = intent.getBooleanExtra(IS_FAVORITE, false);
         quoteContent = intent.getStringExtra(QUOTE_CONTENT);
 
+        authorFirstNameInputLayout.setHintAnimationEnabled(false);
         authorFirstNameInput.setText(authorFirstName);
+
+        authorLastNameInputLayout.setHintAnimationEnabled(false);   //Heh https://code.google.com/p/android/issues/detail?id=178168&thanks=178168&ts=1435254358
         authorLastNameInput.setText(authorLastName);
+        authorLastNameInputLayout.setHintAnimationEnabled(true);
+
         isFavoriteBox.setChecked(isFavorite);
+
+        quoteContentInputLayout.setHintAnimationEnabled(false);
         quoteContentInput.setText(quoteContent);
     }
 

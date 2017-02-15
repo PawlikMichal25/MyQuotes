@@ -20,6 +20,7 @@ public class QuotesActivity extends BaseActivity {
     EditText quoteContentInput;
 
     TextInputLayout authorFirstNameInputLayout;
+    TextInputLayout authorLastNameInputLayout;
     TextInputLayout quoteContentInputLayout;
 
     @Override
@@ -33,6 +34,7 @@ public class QuotesActivity extends BaseActivity {
         quoteContentInput = (EditText) findViewById(R.id.quotes_quote);
 
         authorFirstNameInputLayout = (TextInputLayout) findViewById(R.id.quotes_author_first_name_layout);
+        authorLastNameInputLayout = (TextInputLayout) findViewById(R.id.quotes_author_last_name_layout);
         quoteContentInputLayout = (TextInputLayout) findViewById(R.id.quotes_quote_layout);
 
         authorFirstNameInput.addTextChangedListener(new MyTextWatcher(authorFirstNameInputLayout, authorFirstNameInput));
