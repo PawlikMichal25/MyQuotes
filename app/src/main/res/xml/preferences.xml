@@ -8,7 +8,7 @@
         <com.kizitonwose.colorpreferencecompat.ColorPreferenceCompat
             android:title="@string/preferences_choose_theme"
             android:key="@string/pref_style_color"
-            android:defaultValue="@color/green700"
+            android:defaultValue="@color/blue700"
             app:numColumns="3"
             app:colorChoices="@array/color_choices"/>
     </android.support.v7.preference.PreferenceCategory>

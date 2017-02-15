@@ -29,6 +29,8 @@
     <string name="production">Production</string>
     <string name="developers">Developers</string>
     <string name="authors_names">Michał Baran, Piotr Przybyło</string>
+    <string name="logo_designer">Logo Designer</string>
+    <string name="logo_designer_name">Adrian Baran</string>
     <string name="application">Application</string>
     <string name="version">Version: 1.0</string>
     <string name="rate_us">Rate us</string>

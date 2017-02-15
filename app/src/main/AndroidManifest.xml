@@ -4,14 +4,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Green">
+        android:theme="@style/Blue">
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/Green.NoActionBar">
+            android:theme="@style/Blue.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
