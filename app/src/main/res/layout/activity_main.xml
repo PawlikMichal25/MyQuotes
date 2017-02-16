@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@drawable/plus"
+        android:src="@drawable/add"
         app:backgroundTint="?attr/colorPrimary"
         android:layout_gravity="bottom|end" />
 
