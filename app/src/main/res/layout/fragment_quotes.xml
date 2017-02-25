@@ -10,8 +10,7 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         android:paddingBottom="56dp"
-        android:clipToPadding="false"
-        android:background="@drawable/background"/>
+        android:clipToPadding="false"/>
 
     <TextView
         android:id="@+id/quotes_empty_text"

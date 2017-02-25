@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.quotes.R;
 import com.example.quotes.model.Quote;
@@ -37,13 +38,14 @@ class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final Quote quote = quotes.get(position);
-        holder.content.setText("\"" + quote.getContent() + "\"");
+        holder.content.setText(quote.getContent());
         if(showAuthor)
             holder.author.setText(quote.getAuthor().getLastName() + " " + quote.getAuthor().getFirstName());
         if(quote.isFavorite())
             holder.favorite.setImageResource(R.drawable.full_star);
         else
             holder.favorite.setImageResource(R.drawable.empty_star);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +56,15 @@ class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
                 intent.putExtra(EditQuoteActivity.QUOTE_CONTENT, quote.getContent());
 
                 ((AppCompatActivity)v.getContext()).startActivityForResult(intent, 1);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View v){
+                // TODO Implement Share and Copy
+                Toast.makeText(v.getContext(), "Focused", Toast.LENGTH_SHORT).show();
+                return true;
             }
         });
     }
