@@ -1,6 +1,8 @@
 package com.example.quotes.quotes;
 
+import android.content.Context;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -43,12 +45,17 @@ class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
             holder.author.setText(quote.getAuthor().getLastName() + " " + quote.getAuthor().getFirstName());
         else
             holder.author.setVisibility(View.GONE);
-        
-        if(quote.isFavorite())
-            holder.favorite.setImageResource(R.drawable.full_star);
-        else
-            holder.favorite.setImageResource(R.drawable.empty_star);
 
+        Context ctx = holder.content.getContext();
+        if(PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(ctx.getString(R.string.pref_show_star), true)){
+            if(quote.isFavorite())
+                holder.favorite.setImageResource(R.drawable.full_star);
+            else
+                holder.favorite.setImageResource(R.drawable.empty_star);
+        }
+        else
+            holder.favorite.setVisibility(View.GONE);
+        
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

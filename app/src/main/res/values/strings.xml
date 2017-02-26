@@ -54,4 +54,6 @@
     <string name="preferences_style">Style</string>
     <string name="preferences_choose_theme">Choose a theme</string>
     <string name="pref_style_color">pref_style_color</string>
+    <string name="preferences_show_star">Show favorite star</string>
+    <string name="pref_show_star">pref_show_star</string>
 </resources>
