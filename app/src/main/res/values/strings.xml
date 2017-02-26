@@ -32,8 +32,11 @@
     <string name="authors_names">Michał Baran, Piotr Przybyło</string>
     <string name="logo_designer">Logo Designer</string>
     <string name="logo_designer_name">Adrian Baran</string>
+    <string name="source_code">Source code</string>
+    <string name="source_code_url">https://github.com/NobleAries/Quotes</string>
     <string name="application">Application</string>
-    <string name="version">Version: 1.0</string>
+    <string name="version">Version</string>
+    <string name="version_number">1.0</string>
     <string name="rate_us">Rate us</string>
 
     <string name="save">Save</string>

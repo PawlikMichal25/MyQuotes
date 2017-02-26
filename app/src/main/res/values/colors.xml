@@ -33,4 +33,6 @@
         <item>#689F38</item>
         <item>#E64A19</item>
     </string-array>
+
+    <color name="hyperlink_color">#0000EE</color>
 </resources>
