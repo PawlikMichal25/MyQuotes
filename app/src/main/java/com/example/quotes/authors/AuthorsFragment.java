@@ -33,10 +33,10 @@ public class AuthorsFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initDataSet();
+        initFragment();
     }
 
-    private void initDataSet() {
+    public void initFragment() {
         createCursor();
         setUpAdapter();
     }
@@ -77,12 +77,6 @@ public class AuthorsFragment extends ListFragment {
         });
 
         setListAdapter(adapter);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        initDataSet();
     }
 
     @Override

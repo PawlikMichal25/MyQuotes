@@ -15,7 +15,7 @@ public class AuthorsActivity extends BaseActivity {
     public static final String AUTHOR_ID = "authorId";
     public static final String AUTHOR_NAME = "authorName";
 
-    private QuotesFragment quotesFragment;  // For onActivityResult, alternatively we could add a tag during committing
+    private QuotesFragment quotesFragment;  // For retrieving current author
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +40,9 @@ public class AuthorsActivity extends BaseActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        quotesFragment.onActivityResult(requestCode, resultCode, data);
+    public void onRestart(){
+        super.onRestart();
+        quotesFragment.initFragment();
         getSupportActionBar().setTitle(quotesFragment.getAuthor().toString());
     }
 }

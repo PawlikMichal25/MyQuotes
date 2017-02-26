@@ -34,7 +34,7 @@ public class AddQuoteActivity extends QuotesActivity {
 
                     Toast toast = Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT);
                     toast.show();
-                    finishActivityWithResult();
+                    finish();
                 }
                 break;
         }

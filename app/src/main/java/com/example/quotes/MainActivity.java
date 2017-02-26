@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
@@ -47,25 +46,19 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void onRestart(){
-        super.onRestart();
+        super.onStart();
         AppUtils.updateTheme(this);
+        ((QuotesFragment)getFragment(0)).initFragment();
+        ((AuthorsFragment)getFragment(1)).initFragment();
     }
 
     private void setUpFloatingAddButton(){
         floatingAddButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddQuoteActivity.class);
-                startActivityForResult(intent, 0);
+                startActivity(intent);
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag(makeFragmentName(R.id.container, 0)); // TODO Create constant or sth else for fragment's position.
-        fragment.onActivityResult(requestCode, resultCode, data);
-        fragment = getSupportFragmentManager().findFragmentByTag(makeFragmentName(R.id.container, 1));
-        fragment.onActivityResult(requestCode, resultCode, data);
     }
 
     private void setUpViewPager(){
@@ -128,7 +121,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-                getQuotesFragment().initFragment();
+                ((QuotesFragment)getFragment(0)).initFragment();
                 return true;
             }
         });
@@ -141,7 +134,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                getQuotesFragment().findQuotesAndAuthorsFromQuery(s);
+                ((QuotesFragment)getFragment(0)).findQuotesAndAuthorsFromQuery(s);
                 return false;
             }
         });
@@ -149,9 +142,9 @@ public class MainActivity extends BaseActivity {
         return true;
     }
 
-    private QuotesFragment getQuotesFragment(){
-        String fragmentName = makeFragmentName(R.id.container, 0);
-        return (QuotesFragment) getSupportFragmentManager().findFragmentByTag(fragmentName);
+    private Fragment getFragment(int i){
+        String fragmentName = makeFragmentName(R.id.container, i);
+        return getSupportFragmentManager().findFragmentByTag(fragmentName);
     }
 
     @Override

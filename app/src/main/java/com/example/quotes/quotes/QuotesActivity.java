@@ -41,20 +41,6 @@ public class QuotesActivity extends BaseActivity {
         quoteContentInput.addTextChangedListener(new MyTextWatcher(quoteContentInputLayout, quoteContentInput));
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if(item.getItemId() == R.id.home)
-            finishActivityWithResult();
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    // Finishing with result is important, since we want to refresh fragments immediately.
-    void finishActivityWithResult(){
-        setResult(AppCompatActivity.RESULT_OK);
-        finish();
-    }
-
     boolean validateFieldNotEmpty(TextInputLayout textInputLayout, EditText editText){
         if (editText.getText().toString().trim().isEmpty()) {
             textInputLayout.setError(getString(R.string.error_field_empty));

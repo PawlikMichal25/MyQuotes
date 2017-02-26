@@ -1,7 +1,6 @@
 package com.example.quotes.quotes;
 
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -66,12 +65,6 @@ public class QuotesFragment extends Fragment {
         TextView textView = (TextView) view.findViewById(R.id.quotes_empty_text);
         int visibility = quotes.isEmpty() ? View.VISIBLE : View.INVISIBLE;
         textView.setVisibility(visibility);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        initFragment(allQuotesQuery);
     }
 
     private void initData(String query) {

@@ -127,7 +127,7 @@ public class EditQuoteActivity extends QuotesActivity {
     private void finishEditing(String message){
         Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         toast.show();
-        finishActivityWithResult();
+        finish();
     }
 
     private void changeSingleQuote(DatabaseHelper databaseHelper, SQLiteDatabase db, String firstNameInput,
