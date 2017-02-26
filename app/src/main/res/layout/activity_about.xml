@@ -75,6 +75,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:onClick="onRateUsClick"
+        android:theme="@style/CustomButton"
         android:text="@string/rate_us"/>
 
 </RelativeLayout>

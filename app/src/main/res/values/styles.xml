@@ -5,6 +5,11 @@
 
     <style name="QuotesActivityBody" parent="Theme.AppCompat.Light.DarkActionBar"/>
 
+    <style name="CustomButton">
+        <item name="colorButtonNormal">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorAccent</item>
+    </style>
+
     <style name="BaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorAccent">@android:color/white</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
