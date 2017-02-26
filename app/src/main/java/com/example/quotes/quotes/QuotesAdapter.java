@@ -41,6 +41,9 @@ class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
         holder.content.setText(quote.getContent());
         if(showAuthor)
             holder.author.setText(quote.getAuthor().getLastName() + " " + quote.getAuthor().getFirstName());
+        else
+            holder.author.setVisibility(View.GONE);
+        
         if(quote.isFavorite())
             holder.favorite.setImageResource(R.drawable.full_star);
         else
