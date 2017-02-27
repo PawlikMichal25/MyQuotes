@@ -45,8 +45,8 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void onRestart(){
-        super.onStart();
+    protected void onRestart(){
+        super.onRestart();
         AppUtils.updateTheme(this);
         ((QuotesFragment)getFragment(0)).initFragment();
         ((AuthorsFragment)getFragment(1)).initFragment();
