@@ -1,11 +1,12 @@
 package com.example.quotes.authors;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.quotes.BaseActivity;
+import com.example.quotes.MainActivity;
 import com.example.quotes.R;
 import com.example.quotes.model.Author;
 import com.example.quotes.quotes.QuotesFragment;
@@ -44,5 +45,13 @@ public class AuthorsActivity extends BaseActivity {
         super.onRestart();
         quotesFragment.initFragment();
         getSupportActionBar().setTitle(quotesFragment.getAuthor().toString());
+    }
+
+    @Nullable
+    @Override
+    public Intent getSupportParentActivityIntent() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(MainActivity.CHANGE_TAB, 1);
+        return intent;
     }
 }
