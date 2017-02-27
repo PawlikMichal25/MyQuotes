@@ -1,18 +1,16 @@
 package com.example.quotes.quotes;
 
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.example.quotes.BaseActivity;
+import com.example.quotes.ThemedActivity;
 import com.example.quotes.R;
 
-public class QuotesActivity extends BaseActivity {
+public class QuotesActivity extends ThemedActivity {
 
     EditText authorFirstNameInput;
     EditText authorLastNameInput;

@@ -5,13 +5,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 
-import com.example.quotes.BaseActivity;
+import com.example.quotes.ThemedActivity;
 import com.example.quotes.MainActivity;
 import com.example.quotes.R;
 import com.example.quotes.model.Author;
 import com.example.quotes.quotes.QuotesFragment;
 
-public class AuthorsActivity extends BaseActivity {
+public class AuthorsActivity extends ThemedActivity {
 
     public static final String AUTHOR_ID = "authorId";
     public static final String AUTHOR_NAME = "authorName";
