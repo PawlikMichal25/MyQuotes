@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.quotes.R;
@@ -122,6 +125,7 @@ public class EditQuoteActivity extends QuotesActivity {
         Command emptyCommand = Command.NO_OPERATION;
         AlertDialog dialog = createEditAuthorDialog(changeAllQuotesCommand, emptyCommand, changeSingleQuoteCommand);
         dialog.show();
+        centerDialogButtons(dialog);
     }
 
     private void finishEditing(String message){
@@ -161,5 +165,20 @@ public class EditQuoteActivity extends QuotesActivity {
                 .setNeutralButton(R.string.cancel, new CommandWrapper(cancelCommand))
                 .setNegativeButton(R.string.only_this_quote, new CommandWrapper(singleQuoteCommand));
         return builder.create();
+    }
+
+    private void centerDialogButtons(AlertDialog dialog) {
+        Button[] buttons = {dialog.getButton(AlertDialog.BUTTON_POSITIVE), dialog.getButton(AlertDialog.BUTTON_NEUTRAL),
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE)};
+
+        for (Button button : buttons){
+            centerButton(button);
+        }
+    }
+
+    private void centerButton(Button button){
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) button.getLayoutParams();
+        layoutParams.gravity = Gravity.CENTER;
+        button.setLayoutParams(layoutParams);
     }
 }
