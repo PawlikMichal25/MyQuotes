@@ -28,7 +28,6 @@ public class MainActivity extends BaseActivity {
     private ViewPager viewPager;
     private FloatingActionButton floatingAddButton;
     private int[] tabIcons = {R.drawable.quotes, R.drawable.authors};
-    public static final String CHANGE_TAB = "CHANGE_TAB";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +42,6 @@ public class MainActivity extends BaseActivity {
         setUpFloatingAddButton();
         setUpViewPager();
         setUpTabLayout();
-
-        Intent intent = getIntent();
-        if (intent.hasExtra(CHANGE_TAB)) {
-            int tabNumber = intent.getIntExtra(CHANGE_TAB, 0);
-            switchTab(tabNumber);
-        }
     }
 
     @Override
@@ -111,12 +104,6 @@ public class MainActivity extends BaseActivity {
         tabLayout.getTabAt(0).setText("");
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
         tabLayout.getTabAt(1).setText("");
-    }
-
-    private void switchTab(int tabNumber) {
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        TabLayout.Tab tab = tabLayout.getTabAt(tabNumber);
-        tab.select();
     }
 
     @Override
