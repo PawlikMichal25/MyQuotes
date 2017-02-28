@@ -2,11 +2,10 @@ package com.example.quotes.settings;
 
 import android.os.Bundle;
 
-import com.example.quotes.AppUtils;
-import com.example.quotes.BaseActivity;
+import com.example.quotes.ThemedActivity;
 import com.example.quotes.R;
 
-public class SettingsActivity extends BaseActivity {
+public class SettingsActivity extends ThemedActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState){

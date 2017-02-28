@@ -2,23 +2,11 @@ package com.example.quotes;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
 
 public class AppUtils {
-    public static boolean colorChanged = false;
-
-    public static void updateTheme(Activity activity){
-        if(colorChanged){
-            setTheme(activity);
-            activity.finish();
-            Intent intent = activity.getIntent();
-            activity.startActivity(intent);
-            colorChanged = false;
-        }
-    }
 
     public static void setTheme(Activity activity){
         Context ctx = activity.getApplicationContext();

@@ -21,7 +21,7 @@ import com.example.quotes.quotes.QuotesFragment;
 import com.example.quotes.settings.SettingsActivity;
 
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends ThemedActivity {
 
     private int currentPosition = 0;
     private SectionsPagerAdapter sectionsPagerAdapter;
@@ -47,7 +47,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
-        AppUtils.updateTheme(this);
         ((QuotesFragment)getFragment(0)).initFragment();
         ((AuthorsFragment)getFragment(1)).initFragment();
     }
