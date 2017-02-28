@@ -27,16 +27,13 @@
 
     <string name="production">Produkcja</string>
     <string name="developers">Developerzy</string>
-
     <string name="source_code">Kod źródłowy</string>
-
     <string name="application">Aplikacja</string>
     <string name="version">Wersja</string>
-
     <string name="rate_us">Oceń nas</string>
 
     <string name="save">Zapisz</string>
-    <string name="share">Podziel się</string>
+    <string name="share">Udostępnij</string>
     <string name="delete">Usuń</string>
     <string name="cancel">Anuluj</string>
 
@@ -49,7 +46,6 @@
 
     <string name="preferences_style">Styl</string>
     <string name="preferences_choose_theme">Wybierz motyw</string>
-
     <string name="preferences_show_star">Pokaż gwiazdkę ulubionych</string>
 
 </resources>
