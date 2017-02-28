@@ -1,0 +1,51 @@
+<resources>
+
+    <string name="title_activity_add_quote">Dodaj cytat</string>
+    <string name="title_activity_settings">Ustawienia</string>
+    <string name="title_activity_about">O aplikacji</string>
+    <string name="title_activity_authors">Autor</string>
+    <string name="title_activity_quotes_add">Dodaj cytat</string>
+    <string name="title_activity_quotes_edit">Edytuj cytat</string>
+
+    <string name="quotes_tab">Cytaty</string>
+    <string name="authors_tab">Autorzy</string>
+
+    <string name="search_title">Wprowadź fragment cytatu</string>
+    <string name="settings">Ustawienia</string>
+    <string name="about">O aplikacji</string>
+    <string name="authors_empty">Brak autorów w bazie danych</string>
+    <string name="quotes_empty">Brak cytatów w bazie danych</string>
+    <string name="favorite_star">Ulubiony</string>
+
+    <string name="add_quote_content">Wprowadź cytat</string>
+    <string name="add_quote_author">Wprowadź autora</string>
+    <string name="add_quote_button">Dodaj cytat</string>
+
+    <string name="quotes_hint_first_name">Imię autora</string>
+    <string name="quotes_hint_last_name">Nazwisko autora</string>
+    <string name="quotes_hint_quote">Cytat</string>
+
+    <string name="production">Produkcja</string>
+    <string name="developers">Developerzy</string>
+    <string name="source_code">Kod źródłowy</string>
+    <string name="application">Aplikacja</string>
+    <string name="version">Wersja</string>
+    <string name="rate_us">Oceń nas</string>
+
+    <string name="save">Zapisz</string>
+    <string name="share">Udostępnij</string>
+    <string name="delete">Usuń</string>
+    <string name="cancel">Anuluj</string>
+
+    <string name="edit_author_dialog_title">Autor został zmieniony</string>
+    <string name="edit_author_dialog_message">Co chcesz zrobić?</string>
+    <string name="only_this_quote">Edytuj tylko ten cytat</string>
+    <string name="all_quotes">Edytuj wszystkie cytaty tego autora</string>
+
+    <string name="error_field_empty">Pole nie może być puste</string>
+
+    <string name="preferences_style">Styl</string>
+    <string name="preferences_choose_theme">Wybierz motyw</string>
+    <string name="preferences_show_star">Pokaż gwiazdkę ulubionych</string>
+
+</resources>
