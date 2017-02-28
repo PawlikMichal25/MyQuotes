@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Quotes</string>
+    <string name="app_name" translatable="false">Quotes</string>
 
     <string name="title_activity_main">Quotes</string>
     <string name="title_activity_add_quote">Add Quote</string>
@@ -29,20 +29,27 @@
 
     <string name="production">Production</string>
     <string name="developers">Developers</string>
-    <string name="authors_names">Michał Baran, Piotr Przybyło</string>
-    <string name="logo_designer">Logo Designer</string>
-    <string name="logo_designer_name">Adrian Baran</string>
+    <string name="authors_names" translatable="false">Michał Baran, Piotr Przybyło</string>
+    <string name="logo_designer" translatable="false">Logo Designer</string>
+    <string name="logo_designer_name" translatable="false">Adrian Baran</string>
     <string name="source_code">Source code</string>
-    <string name="source_code_url">https://github.com/NobleAries/Quotes</string>
+    <string name="source_code_url" translatable="false">https://github.com/NobleAries/Quotes</string>
     <string name="application">Application</string>
     <string name="version">Version</string>
-    <string name="version_number">1.0</string>
+    <string name="version_number" translatable="false">1.0</string>
     <string name="rate_us">Rate us</string>
 
+    <string name="copy">Copy</string>
+    <string name="clipboard_copied">Quote copied to Clipboard</string>
     <string name="save">Save</string>
     <string name="share">Share</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
+    <string name="share_quote">Share quote…</string>
+    <string-array name="share_copy">
+        <item>@string/share</item>
+        <item>@string/copy</item>
+    </string-array>
 
     <string name="edit_author_dialog_title">Author has changed</string>
     <string name="edit_author_dialog_message">What do you want to do?</string>
@@ -53,7 +60,7 @@
 
     <string name="preferences_style">Style</string>
     <string name="preferences_choose_theme">Choose a theme</string>
-    <string name="pref_style_color">pref_style_color</string>
+    <string name="pref_style_color" translatable="false">pref_style_color</string>
     <string name="preferences_show_star">Show favorite star</string>
-    <string name="pref_show_star">pref_show_star</string>
+    <string name="pref_show_star" translatable="false">pref_show_star</string>
 </resources>

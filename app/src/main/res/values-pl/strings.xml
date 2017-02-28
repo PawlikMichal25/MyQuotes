@@ -1,5 +1,6 @@
 <resources>
 
+    <string name="title_activity_main">Cytaty</string>
     <string name="title_activity_add_quote">Dodaj cytat</string>
     <string name="title_activity_settings">Ustawienia</string>
     <string name="title_activity_about">O aplikacji</string>
@@ -32,10 +33,13 @@
     <string name="version">Wersja</string>
     <string name="rate_us">Oceń nas</string>
 
+    <string name="copy">Kopiuj</string>
+    <string name="clipboard_copied">Cytat skopiowano do schowka</string>
     <string name="save">Zapisz</string>
     <string name="share">Udostępnij</string>
     <string name="delete">Usuń</string>
     <string name="cancel">Anuluj</string>
+    <string name="share_quote">Udostępnij cytat…</string>
 
     <string name="edit_author_dialog_title">Autor został zmieniony</string>
     <string name="edit_author_dialog_message">Co chcesz zrobić?</string>
@@ -47,5 +51,4 @@
     <string name="preferences_style">Styl</string>
     <string name="preferences_choose_theme">Wybierz motyw</string>
     <string name="preferences_show_star">Pokaż gwiazdkę ulubionych</string>
-
 </resources>

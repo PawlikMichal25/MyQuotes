@@ -1,8 +1,13 @@
 package com.example.quotes.quotes;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -46,7 +51,7 @@ class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
         else
             holder.author.setVisibility(View.GONE);
 
-        Context ctx = holder.content.getContext();
+        final Context ctx = holder.content.getContext();
         if(PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(ctx.getString(R.string.pref_show_star), true)){
             if(quote.isFavorite())
                 holder.favorite.setImageResource(R.drawable.full_star);
@@ -72,11 +77,52 @@ class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View v){
-                // TODO Implement Share and Copy
-                Toast.makeText(v.getContext(), "Focused", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+                builder.setTitle(quote.getContent())
+                        .setItems(R.array.share_copy, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch(which){
+                                    case 0:
+                                        sharePlainText(ctx, prepareFullQuote(quote));
+                                        break;
+                                    case 1:
+                                        copyToClipboard(ctx, prepareFullQuote(quote));
+                                        break;
+                                }
+                            }
+                        });
+                builder.create().show();
+
                 return true;
             }
         });
+    }
+
+    private void sharePlainText(Context ctx, String messageText){
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, messageText);
+        Intent chosenIntent = Intent.createChooser(intent, ctx.getString(R.string.share_quote));
+        ctx.startActivity(chosenIntent);
+    }
+
+    private void copyToClipboard(Context ctx, String messageText){
+        ClipboardManager clipboard = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(ctx.getString(R.string.clipboard_copied), messageText);
+        clipboard.setPrimaryClip(clip);
+        Toast.makeText(ctx, ctx.getString(R.string.clipboard_copied), Toast.LENGTH_SHORT).show();
+    }
+
+    private String prepareFullQuote(Quote quote){
+        return new StringBuilder()
+                .append("\"")
+                .append(quote.getContent())
+                .append("\"")
+                .append(" ")
+                .append(quote.getAuthor().getLastName())
+                .append(" ")
+                .append(quote.getAuthor().getFirstName())
+                .toString();
     }
 
     @Override
