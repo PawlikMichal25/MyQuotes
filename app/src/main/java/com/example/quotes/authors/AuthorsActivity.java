@@ -13,25 +13,27 @@ import com.example.quotes.quotes.QuotesFragment;
 public class AuthorsActivity extends ThemedActivity {
 
     public static final String AUTHOR_ID = "authorId";
-    public static final String AUTHOR_NAME = "authorName";
+    public static final String AUTHOR_FIRST_NAME = "authorFirstName";
+    public static final String AUTHOR_LAST_NAME = "authorLastName";
 
-    private QuotesFragment quotesFragment;  // For retrieving current author
+    private QuotesFragment quotesFragment;
+    private Author author;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authors);
 
-        getSupportActionBar().setTitle((String)getIntent().getExtras().get(AUTHOR_NAME));
+        if(getIntent().hasExtra(AUTHOR_LAST_NAME))
+            author = new Author((String)getIntent().getExtras().get(AUTHOR_FIRST_NAME),
+                    (String)getIntent().getExtras().get(AUTHOR_LAST_NAME));
+        else
+            author = new Author((String)getIntent().getExtras().get(AUTHOR_FIRST_NAME));
+
+        getSupportActionBar().setTitle(author.toString());
 
         quotesFragment = new QuotesFragment();
-
-        String [] authorNames = ((String)getIntent().getExtras().get(AUTHOR_NAME)).split(" ", 2);
-
-        if(authorNames.length == 1)
-            quotesFragment.setAuthor(new Author(authorNames[0], ""));
-        else
-            quotesFragment.setAuthor(new Author(authorNames[1], authorNames[0]));
+        quotesFragment.setAuthor(author);
         quotesFragment.setAuthorId((long)getIntent().getExtras().get(AUTHOR_ID));
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -43,7 +45,8 @@ public class AuthorsActivity extends ThemedActivity {
     public void onRestart(){
         super.onRestart();
         quotesFragment.initFragment();
-        getSupportActionBar().setTitle(quotesFragment.getAuthor().toString());
+        author = quotesFragment.getAuthor();
+        getSupportActionBar().setTitle(author.toString());  // Author could have changed
     }
 
     @Override

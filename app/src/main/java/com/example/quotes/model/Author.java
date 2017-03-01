@@ -3,12 +3,17 @@ package com.example.quotes.model;
 public class Author {
 
     public static final String TABLE_NAME = "Authors";
+    private static final String EMPTY_STRING = "";
     private String firstName;
     private String lastName;
 
     public Author(String firstName, String lastName){
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Author(String firstName){
+        this(firstName, EMPTY_STRING);
     }
 
     public String getFirstName() {
