@@ -100,6 +100,10 @@ public class EditQuoteActivity extends QuotesActivity {
                 databaseHelper.deleteQuote(db, quoteId);
                 finishEditing("Deleted!");
                 break;
+
+            case android.R.id.home:
+                finish();
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
