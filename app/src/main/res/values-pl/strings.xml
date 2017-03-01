@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">Cytaty</string>
 
     <string name="title_activity_main">Cytaty</string>
     <string name="title_activity_add_quote">Dodaj cytat</string>

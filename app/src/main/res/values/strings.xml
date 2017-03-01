@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Quotes</string>
+    <string name="app_name">Quotes</string>
 
     <string name="title_activity_main">Quotes</string>
     <string name="title_activity_add_quote">Add Quote</string>
