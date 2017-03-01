@@ -3,7 +3,6 @@ package com.example.quotes.authors;
 
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.example.quotes.ThemedActivity;
 import com.example.quotes.R;
@@ -47,14 +46,5 @@ public class AuthorsActivity extends ThemedActivity {
         quotesFragment.initFragment();
         author = quotesFragment.getAuthor();
         getSupportActionBar().setTitle(author.toString());  // Author could have changed
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-        }
-        return true;
     }
 }
