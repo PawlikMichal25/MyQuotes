@@ -70,7 +70,7 @@ class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
                 intent.putExtra(EditQuoteActivity.IS_FAVORITE, quote.isFavorite());
                 intent.putExtra(EditQuoteActivity.QUOTE_CONTENT, quote.getContent());
 
-                ((AppCompatActivity)v.getContext()).startActivityForResult(intent, 1);
+                v.getContext().startActivity(intent);
             }
         });
 
