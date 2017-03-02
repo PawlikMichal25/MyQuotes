@@ -1,9 +1,13 @@
 package com.example.quotes;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.Fragment;
@@ -98,11 +102,42 @@ public class MainActivity extends ThemedActivity {
 
     private void setUpTabLayout() {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        final int darkColor = ContextCompat.getColor(this, R.color.color_control_white_dark);
+
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
-        tabLayout.getTabAt(0).setText("");
-        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
-        tabLayout.getTabAt(1).setText("");
+        TabLayout.Tab quotesTab = tabLayout.getTabAt(0);
+        if(quotesTab != null) {
+            quotesTab.setIcon(tabIcons[0]);
+            quotesTab.setText("");
+        }
+
+        TabLayout.Tab authorsTab = tabLayout.getTabAt(1);
+        if(authorsTab != null){
+            Drawable shadowedAuthors = AppCompatResources.getDrawable(this, tabIcons[1]);
+            if(shadowedAuthors != null)
+                shadowedAuthors.setColorFilter(darkColor, PorterDuff.Mode.SRC_IN);
+            authorsTab.setIcon(shadowedAuthors);
+            authorsTab.setText("");
+        }
+
+        tabLayout.addOnTabSelectedListener(
+                new TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
+
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        super.onTabSelected(tab);
+                        if(tab.getIcon() != null)
+                            tab.getIcon().clearColorFilter();
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+                        super.onTabUnselected(tab);
+                        if(tab.getIcon() != null)
+                            tab.getIcon().setColorFilter(darkColor, PorterDuff.Mode.SRC_IN);
+                    }
+                }
+        );
     }
 
     @Override
@@ -186,7 +221,8 @@ public class MainActivity extends ThemedActivity {
 
     private void setActionBarTitle(){
         String title = sectionsPagerAdapter.fragmentTitles[currentPosition];
-        getSupportActionBar().setTitle(title);
+        if(getSupportActionBar() != null)
+            getSupportActionBar().setTitle(title);
     }
 
     private static String makeFragmentName(int viewPagerId, int index) {

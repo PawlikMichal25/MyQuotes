@@ -35,5 +35,5 @@
     </string-array>
 
     <color name="hyperlink_color">#0000EE</color>
-    <color name="toolbar_highlight">#DCDCDC</color>
+    <color name="color_control_white_dark">#DCDCDC</color>
 </resources>
