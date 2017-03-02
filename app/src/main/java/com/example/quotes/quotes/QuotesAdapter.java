@@ -78,7 +78,7 @@ class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
             @Override
             public boolean onLongClick(View v){
                 AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-                builder.setTitle(quote.getContent())
+                builder.setTitle(prepareFullQuote(quote))
                         .setItems(R.array.share_copy, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 switch(which){
