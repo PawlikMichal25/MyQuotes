@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class AboutActivity extends ThemedActivity {
 
@@ -13,6 +14,8 @@ public class AboutActivity extends ThemedActivity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        TextView versionView = (TextView)findViewById(R.id.version_number);
+        versionView.setText(BuildConfig.VERSION_NAME);
     }
 
     public void onRateUsClick(View view){

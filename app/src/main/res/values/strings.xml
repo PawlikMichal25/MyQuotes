@@ -36,7 +36,6 @@
     <string name="source_code_url" translatable="false">https://github.com/NobleAries/Quotes</string>
     <string name="application">Application</string>
     <string name="version">Version</string>
-    <string name="version_number" translatable="false">1.0</string>
     <string name="rate_us">Rate us</string>
 
     <string name="copy">Copy</string>

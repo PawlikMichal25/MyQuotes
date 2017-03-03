@@ -89,8 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/version"
-        android:textStyle="bold"
-        android:text="@string/version_number"/>
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/rate_us"
