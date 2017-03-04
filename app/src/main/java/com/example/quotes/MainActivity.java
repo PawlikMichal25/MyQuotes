@@ -27,7 +27,8 @@ import com.example.quotes.settings.SettingsActivity;
 
 public class MainActivity extends ThemedActivity {
 
-    private int currentPosition = 0;
+    private int currentTab = 0;
+    private static final String CURRENT_TAB = "CURRENT_TAB";
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
     private FloatingActionButton floatingAddButton;
@@ -49,10 +50,33 @@ public class MainActivity extends ThemedActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if(getIntent().hasExtra(CURRENT_TAB)){
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+            TabLayout.Tab tab = tabLayout.getTabAt(getIntent().getIntExtra(CURRENT_TAB, 0));
+            getIntent().removeExtra(CURRENT_TAB);
+            if(tab != null)
+                tab.select();
+        }
+    }
+
+    @Override
     protected void onRestart(){
         super.onRestart();
         ((QuotesFragment)getFragment(0)).initFragment();
         ((AuthorsFragment)getFragment(1)).initFragment();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == SettingsActivity.THEME_CHANGED){
+            // Using recreate() leaded to Exception: Performing pause of activity that is not resumed
+            finish();
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            startActivity(getIntent().putExtra(CURRENT_TAB, currentTab));
+        }
     }
 
     private void setUpFloatingAddButton(){
@@ -72,7 +96,7 @@ public class MainActivity extends ThemedActivity {
 
             @Override
             public void onPageSelected(int position) {
-                currentPosition = position;
+                currentTab = position;
                 if (position == 0){
                     floatingAddButton.show();
                 }
@@ -92,7 +116,7 @@ public class MainActivity extends ThemedActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
-        if(currentPosition == 0)
+        if(currentTab == 0)
             menu.findItem(R.id.search).setVisible(true);
         else
             menu.findItem(R.id.search).setVisible(false);
@@ -185,7 +209,7 @@ public class MainActivity extends ThemedActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.settings:
-                startActivity(new Intent(this, SettingsActivity.class));
+                startActivityForResult(new Intent(this, SettingsActivity.class), 1);
                 break;
             case R.id.about:
                 startActivity(new Intent(this, AboutActivity.class));
@@ -220,7 +244,7 @@ public class MainActivity extends ThemedActivity {
     }
 
     private void setActionBarTitle(){
-        String title = sectionsPagerAdapter.fragmentTitles[currentPosition];
+        String title = sectionsPagerAdapter.fragmentTitles[currentTab];
         if(getSupportActionBar() != null)
             getSupportActionBar().setTitle(title);
     }

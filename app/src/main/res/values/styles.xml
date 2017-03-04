@@ -68,6 +68,11 @@
         <item name="android:textColorHighlight">@color/deepOrange200</item>
     </style>
 
+    <style name="Black" parent="BaseTheme">
+        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimaryDark">#000000</item>
+    </style>
+
     <style name="Indigo.NoActionBar" parent="Indigo">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -98,5 +103,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-
+    <style name="Black.NoActionBar" parent="Black">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

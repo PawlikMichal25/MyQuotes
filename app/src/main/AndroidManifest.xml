@@ -7,12 +7,12 @@
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Blue">
+        android:theme="@style/Black">
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:launchMode="singleTop"
-            android:theme="@style/Blue.NoActionBar">
+            android:theme="@style/Black.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
