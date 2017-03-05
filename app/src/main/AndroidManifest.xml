@@ -42,19 +42,19 @@
         </activity>
 
         <activity android:name=".quotes.QuotesActivity"
-            android:label="@string/title_activity_quotes_add">
+            android:label="@string/title_activity_add_quote">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" /></activity>
 
         <activity android:name=".quotes.AddQuoteActivity"
-            android:label="@string/title_activity_quotes_add">
+            android:label="@string/title_activity_add_quote">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" /></activity>
 
         <activity android:name=".quotes.EditQuoteActivity"
-            android:label="@string/title_activity_quotes_edit">
+            android:label="@string/title_activity_edit_quote">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" /></activity>

@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Zitate</string>
+
+    <string name="title_activity_main">Zitate</string>
+    <string name="title_activity_settings">Einstellungen</string>
+    <string name="title_activity_about">Über das App</string>
+    <string name="title_activity_authors">Autor</string>
+    <string name="title_activity_add_quote">Zitat hinzufügen</string>
+    <string name="title_activity_edit_quote">Zitat bearbeiten</string>
+
+    <string name="quotes_tab">Zitate</string>
+    <string name="authors_tab">Autoren</string>
+
+    <string name="search_title">Typ Zitat Fragment</string>
+    <string name="settings">Einstellungen</string>
+    <string name="about">Über das App</string>
+    <string name="authors_empty">Keine Autoren</string>
+    <string name="quotes_empty">Keine Zitate</string>
+    <string name="favorite_star">Favorit</string>
+
+    <string name="quotes_hint_first_name">Autor Vorname</string>
+    <string name="quotes_hint_last_name">Autor Nachname</string>
+    <string name="quotes_hint_quote">Zitat</string>
+
+    <string name="production">Produktion</string>
+    <string name="developers">Entwickler</string>
+    <string name="source_code">Quelltext</string>
+    <string name="application">Applikation</string>
+    <string name="version">Version</string>
+    <string name="rate_us">Bewerten Sie unsere Anwendungs</string>
+
+    <string name="copy">Kopie</string>
+    <string name="clipboard_copied">In Zwischenablage kopiert</string>
+    <string name="save">Speichern</string>
+    <string name="share">Aktie</string>
+    <string name="delete">Löschen</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="share_quote">Teilen Zitat…</string>
+
+    <string name="edit_author_dialog_title">Autor hat sich geändert</string>
+    <string name="edit_author_dialog_message">Was möchten Sie tun?</string>
+    <string name="only_this_quote">Bearbeiten Sie nur dieses Zitat</string>
+    <string name="all_quotes">Bearbeiten Sie alle Zitate mit diesem Autor</string>
+
+    <string name="error_field_empty">Feld kann nicht leer sein</string>
+
+    <string name="preferences_style">Design</string>
+    <string name="preferences_choose_theme">Design auswählen</string>
+    <string name="preferences_show_star">Lieblingsstern Zeigen</string>
+</resources>
