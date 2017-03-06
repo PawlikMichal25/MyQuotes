@@ -2,17 +2,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    tools:context="com.example.quotes.authors.AuthorsFragment"
+    android:orientation="horizontal" >
 
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 
     <TextView
-        android:id="@android:id/empty"
+        android:id="@+id/authors_empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:drawablePadding="15dp"
+        android:drawableTop="@drawable/authors_empty"
+        android:textColor="@color/dark_gray"
         android:text="@string/authors_empty"/>
 
 </LinearLayout>

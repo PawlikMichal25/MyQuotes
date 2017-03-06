@@ -14,7 +14,7 @@
     <string name="search_title">Wprowadź fragment cytatu</string>
     <string name="settings">Ustawienia</string>
     <string name="about">O aplikacji</string>
-    <string name="authors_empty">Brak autorów</string>
+    <string name="authors_empty">Tutaj pojawią się autorzy, gdy dodasz nowe cytaty</string>
     <string name="quotes_empty">Brak cytatów</string>
     <string name="favorite_star">Ulubiony</string>
 

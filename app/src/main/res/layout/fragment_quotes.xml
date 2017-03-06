@@ -9,13 +9,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:paddingBottom="56dp"
+        android:paddingBottom="72dp"
         android:clipToPadding="false"/>
 
     <TextView
-        android:id="@+id/quotes_empty_text"
-        android:layout_width="match_parent"
+        android:id="@+id/quotes_empty"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/quotes_empty"
-        android:visibility="invisible"/>
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/dark_gray"
+        android:drawableTop="@drawable/quotes_empty"
+        android:drawablePadding="15dp"
+        android:text="@string/quotes_empty"/>
+
 </FrameLayout>

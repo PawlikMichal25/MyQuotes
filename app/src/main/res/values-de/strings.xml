@@ -14,7 +14,7 @@
     <string name="search_title">Typ Zitat Fragment</string>
     <string name="settings">Einstellungen</string>
     <string name="about">Über das App</string>
-    <string name="authors_empty">Keine Autoren</string>
+    <string name="authors_empty">Hier werden die Autoren erscheinen, wenn Sie neue Zitate hinzufügen</string>
     <string name="quotes_empty">Keine Zitate</string>
     <string name="favorite_star">Favorit</string>
 

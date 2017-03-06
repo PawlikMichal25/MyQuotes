@@ -62,7 +62,7 @@ public class QuotesFragment extends Fragment {
     }
 
     private void setUpEmptyQuotesText(View view) {
-        TextView textView = (TextView) view.findViewById(R.id.quotes_empty_text);
+        TextView textView = (TextView) view.findViewById(R.id.quotes_empty);
         int visibility = quotes.isEmpty() ? View.VISIBLE : View.INVISIBLE;
         textView.setVisibility(visibility);
     }

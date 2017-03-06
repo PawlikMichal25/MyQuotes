@@ -36,4 +36,5 @@
 
     <color name="hyperlink_color">#0000EE</color>
     <color name="color_control_white_dark">#DCDCDC</color>
+    <color name="dark_gray">#9A9A9A</color>
 </resources>
