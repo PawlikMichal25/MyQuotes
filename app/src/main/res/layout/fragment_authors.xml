@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
+        android:padding="10dp"
         android:drawablePadding="15dp"
         android:drawableTop="@drawable/authors_empty"
         android:textColor="@color/dark_gray"
