@@ -32,7 +32,7 @@ public class AddQuoteActivity extends QuotesActivity {
                             quoteContentInput.getText().toString(),
                             isFavoriteBox.isChecked());
 
-                    Toast toast = Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(this, getString(R.string.saved), Toast.LENGTH_SHORT);
                     toast.show();
                     finish();
                 }

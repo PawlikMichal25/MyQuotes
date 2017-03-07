@@ -32,8 +32,10 @@
     <string name="copy">Kopiuj</string>
     <string name="clipboard_copied">Cytat skopiowano do schowka</string>
     <string name="save">Zapisz</string>
+    <string name="saved">Zapisano</string>
     <string name="share">Udostępnij</string>
     <string name="delete">Usuń</string>
+    <string name="deleted">Usunięto</string>
     <string name="cancel">Anuluj</string>
     <string name="share_quote">Udostępnij cytat…</string>
 

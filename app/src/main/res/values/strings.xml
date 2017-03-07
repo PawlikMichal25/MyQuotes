@@ -36,8 +36,10 @@
     <string name="copy">Copy</string>
     <string name="clipboard_copied">Quote copied to Clipboard</string>
     <string name="save">Save</string>
+    <string name="saved">Saved</string>
     <string name="share">Share</string>
     <string name="delete">Delete</string>
+    <string name="deleted">Deleted</string>
     <string name="cancel">Cancel</string>
     <string name="share_quote">Share quote…</string>
     <string-array name="share_copy">

@@ -92,13 +92,13 @@ public class EditQuoteActivity extends QuotesActivity {
                         else changeAllQuotes(databaseHelper, db, firstNameInput, lastNameInput, authorId);
                     }
 
-                    if(finishActivity) finishEditing("Saved!");
+                    if(finishActivity) finishEditing(getString(R.string.saved));
                 }
                 break;
 
             case R.id.delete:
                 databaseHelper.deleteQuote(db, quoteId);
-                finishEditing("Deleted!");
+                finishEditing(getString(R.string.deleted));
                 break;
 
             case android.R.id.home:
@@ -116,14 +116,14 @@ public class EditQuoteActivity extends QuotesActivity {
             @Override
             public void execute() {
                 changeSingleQuote(databaseHelper, db, firstNameInput, lastNameInput, authorId, quoteId);
-                finishEditing("Saved!");
+                finishEditing(getString(R.string.saved));
             }
         };
         Command changeAllQuotesCommand = new Command() {
             @Override
             public void execute() {
                 changeAllQuotes(databaseHelper, db, firstNameInput, lastNameInput, authorId);
-                finishEditing("Saved!");
+                finishEditing(getString(R.string.saved));
             }
         };
         Command emptyCommand = Command.NO_OPERATION;
