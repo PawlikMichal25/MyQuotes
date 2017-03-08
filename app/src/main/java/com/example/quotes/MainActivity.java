@@ -31,6 +31,7 @@ public class MainActivity extends ThemedActivity {
     private static final String CURRENT_TAB = "CURRENT_TAB";
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
+    private Fragment[] fragments = {new QuotesFragment(), new AuthorsFragment()};
     private FloatingActionButton floatingAddButton;
     private int[] tabIcons = {R.drawable.quotes, R.drawable.authors};
 
@@ -64,8 +65,8 @@ public class MainActivity extends ThemedActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
-        ((QuotesFragment)getFragment(0)).initFragment();
-        ((AuthorsFragment)getFragment(1)).initFragment();
+        ((QuotesFragment)fragments[0]).initFragment();
+        ((AuthorsFragment)fragments[1]).initFragment();
     }
 
     @Override
@@ -179,7 +180,7 @@ public class MainActivity extends ThemedActivity {
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-                ((QuotesFragment)getFragment(0)).initFragment();
+                ((QuotesFragment)fragments[0]).initFragment();
                 return true;
             }
         });
@@ -192,17 +193,12 @@ public class MainActivity extends ThemedActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                ((QuotesFragment)getFragment(0)).findQuotesAndAuthorsFromQuery(s);
+                ((QuotesFragment)fragments[0]).findQuotesAndAuthorsFromQuery(s);
                 return false;
             }
         });
 
         return true;
-    }
-
-    private Fragment getFragment(int i){
-        String fragmentName = makeFragmentName(R.id.container, i);
-        return getSupportFragmentManager().findFragmentByTag(fragmentName);
     }
 
     @Override
@@ -220,7 +216,6 @@ public class MainActivity extends ThemedActivity {
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        private Fragment[] fragments = {new QuotesFragment(), new AuthorsFragment()};
         private String[] fragmentTitles = {getString(R.string.quotes_tab), getString(R.string.authors_tab)};
 
         SectionsPagerAdapter(FragmentManager fm) {
@@ -248,9 +243,4 @@ public class MainActivity extends ThemedActivity {
         if(getSupportActionBar() != null)
             getSupportActionBar().setTitle(title);
     }
-
-    private static String makeFragmentName(int viewPagerId, int index) {
-        return "android:switcher:" + viewPagerId + ":" + index;
-    }
-
 }

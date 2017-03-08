@@ -20,14 +20,14 @@ public class AboutActivity extends ThemedActivity {
 
     public void onRateUsClick(View view){
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://details?id=com.google.android.apps.maps"));  // TODO this.getPackageName()
+        intent.setData(Uri.parse("market://details?id=" + this.getPackageName()));
 
         try{
             startActivity(intent);
         }
         catch (ActivityNotFoundException e) {
             startActivity(new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://play.google.com/store/apps/details?id=" + "com.google.android.apps.maps")));  // TODO this.getPackageName()
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + this.getPackageName())));
         }
     }
 }

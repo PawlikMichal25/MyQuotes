@@ -35,42 +35,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(%s) REFERENCES %s(%s));",
                 Quote.TABLE_NAME, Quote.Columns.ID, Quote.Columns.AUTHOR_ID, Quote.Columns.CONTENT,
                 Quote.Columns.FAVORITE, Quote.Columns.AUTHOR_ID, Author.TABLE_NAME, Author.Columns.ID));
-        setUpSampleData(db);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-    }
-
-    // TODO Delete inserting sample data
-    private void setUpSampleData(SQLiteDatabase db) {
-        long id1 = insertAuthor(db, "Jose", "Mourinho");
-        long id2 = insertAuthor(db, "John", "Adams");
-        long id3 = insertAuthor(db, "Peter", "Richards");
-        long id4 = insertAuthor(db, "Ravulagaluhabudaba", "Ravindrababu");
-        long id5 = insertAuthor(db, "Sokrates", "");
-        long id6 = insertAuthor(db, "C2C", "Netik");
-        long id7 = insertAuthor(db, "John", "F. Kennedy");
-
-        insertQuote(db, id1, "I think I'm a special one", true);
-
-        insertQuote(db, id2, "Be happy", false);
-
-        insertQuote(db, id3, "Have a hobby", false);
-        insertQuote(db, id3, "Have a hobby", false);
-        insertQuote(db, id3, "Have a hobby", true);
-
-        insertQuote(db, id4, "Long author, short quote", true);
-        insertQuote(db, id4, "Long author and very, absolutely overwhelming quote, with best greetings to all night owls. " +
-                "To be perfectly honest with you, it\'s not that late yet.", false);
-
-        insertQuote(db, id5, "The only true wisdom is in knowing you know nothing.", true);
-
-        insertQuote(db, id6, "Some people see things how they are and ask why, I dream things that never were and ask why not?", true);
-
-        insertQuote(db, id7, "Forget your enemies, but remember their names.", true);
-    }
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
     public long insertAuthor(SQLiteDatabase db, String firstName, String lastName){
         ContentValues values = new ContentValues();

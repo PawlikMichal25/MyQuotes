@@ -12,15 +12,27 @@
         android:paddingBottom="72dp"
         android:clipToPadding="false"/>
 
-    <TextView
+    <LinearLayout
         android:id="@+id/quotes_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/dark_gray"
-        android:drawableTop="@drawable/quotes_empty"
-        android:drawablePadding="15dp"
-        android:text="@string/quotes_empty"/>
+        android:orientation="vertical"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/quotes_empty"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/dark_gray"
+            android:drawablePadding="15dp"
+            android:text="@string/quotes_empty"/>
+    </LinearLayout>
 
 </FrameLayout>

@@ -37,10 +37,12 @@ public class Quote {
         this.content = content;
     }
 
-    public static class Columns {
+    public static final class Columns {
         public static final String ID = "_id";
         public static final String AUTHOR_ID = "Author_Id";
         public static final String CONTENT = "Content";
         public static final String FAVORITE = "Favorite";
+
+        private Columns(){ }
     }
 }

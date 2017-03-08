@@ -62,9 +62,9 @@ public class QuotesFragment extends Fragment {
     }
 
     private void setUpEmptyQuotesText(View view) {
-        TextView textView = (TextView) view.findViewById(R.id.quotes_empty);
+        View quotesEmpty = view.findViewById(R.id.quotes_empty);
         int visibility = quotes.isEmpty() ? View.VISIBLE : View.INVISIBLE;
-        textView.setVisibility(visibility);
+        quotesEmpty.setVisibility(visibility);
     }
 
     private void initData(String query) {
@@ -75,7 +75,8 @@ public class QuotesFragment extends Fragment {
     }
 
     private void initFragment(String query) {
-        quotes.clear();
+        if(quotes != null)
+            quotes.clear();
         initData(query);
         refreshQuotesAdapter();
         setUpEmptyQuotesText(getView());

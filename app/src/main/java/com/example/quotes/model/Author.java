@@ -37,9 +37,11 @@ public class Author {
         return new StringBuilder().append(lastName).append(" ").append(firstName).toString();
     }
 
-    public static class Columns {
+    public static final class Columns {
         public static final String ID = "_id";
         public static final String FIRST_NAME = "FirstName";
         public static final String LAST_NAME = "LastName";
+
+        private Columns(){ }
     }
 }
