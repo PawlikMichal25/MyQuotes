@@ -4,6 +4,7 @@
     <string name="title_activity_main">Zitate</string>
     <string name="title_activity_settings">Einstellungen</string>
     <string name="title_activity_about">Über das App</string>
+    <string name="title_activity_licenses">Open-Source-Lizenzen</string>
     <string name="title_activity_authors">Autor</string>
     <string name="title_activity_add_quote">Zitat hinzufügen</string>
     <string name="title_activity_edit_quote">Zitat bearbeiten</string>
