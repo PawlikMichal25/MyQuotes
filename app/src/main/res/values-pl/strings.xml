@@ -12,7 +12,7 @@
     <string name="quotes_tab">Cytaty</string>
     <string name="authors_tab">Autorzy</string>
 
-    <string name="search_title">Wprowadź fragment cytatu</string>
+    <string name="search_title">Szukaj</string>
     <string name="settings">Ustawienia</string>
     <string name="about">O aplikacji</string>
     <string name="authors_empty">Tutaj pojawią się autorzy, gdy dodasz nowe cytaty</string>

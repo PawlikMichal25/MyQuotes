@@ -12,10 +12,10 @@
     <string name="quotes_tab">Zitate</string>
     <string name="authors_tab">Autoren</string>
 
-    <string name="search_title">Typ Zitat Fragment</string>
+    <string name="search_title">Suchen</string>
     <string name="settings">Einstellungen</string>
     <string name="about">Über das App</string>
-    <string name="authors_empty">Hier werden die Autoren erscheinen, wenn Sie neue Zitate hinzufügen</string>
+    <string name="authors_empty">Hier erscheinen die Autoren, wenn Sie neue Zitate hinzufügen</string>
     <string name="quotes_empty">Keine Zitate</string>
     <string name="favorite_star">Favorit</string>
 
@@ -42,12 +42,12 @@
 
     <string name="edit_author_dialog_title">Autor hat sich geändert</string>
     <string name="edit_author_dialog_message">Was möchten Sie tun?</string>
-    <string name="only_this_quote">Bearbeiten Sie nur dieses Zitat</string>
-    <string name="all_quotes">Bearbeiten Sie alle Zitate mit diesem Autor</string>
+    <string name="only_this_quote">Editieren Sie nur dieses Zitat</string>
+    <string name="all_quotes">Editieren Sie alle Zitate von diesem Autor</string>
 
     <string name="error_field_empty">Feld kann nicht leer sein</string>
 
-    <string name="preferences_style">Design</string>
+    <string name="preferences_style">Stil</string>
     <string name="preferences_choose_theme">Design auswählen</string>
     <string name="preferences_show_star">Lieblingsstern Zeigen</string>
 </resources>

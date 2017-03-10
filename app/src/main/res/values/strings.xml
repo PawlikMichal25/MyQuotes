@@ -12,7 +12,7 @@
     <string name="quotes_tab">Quotes</string>
     <string name="authors_tab">Authors</string>
 
-    <string name="search_title">Type quote\'s fragment</string>
+    <string name="search_title">Search</string>
     <string name="settings">Settings</string>
     <string name="about">About</string>
     <string name="authors_empty">Once you add a new quote, you\'ll see it\'s author listed here</string>
@@ -63,6 +63,6 @@
 
 
     <!-- Licenses -->
-    <string name="colorpreference">Color Preference</string>
+    <string name="colorpreference" translatable="false">Color Preference</string>
     <string name="colorpreference_license" translatable="false">Copyright (C) 2016 Kizito Nwose\nCopyright (C) 2016 Roman Nurik\n\nLicensed under the Apache License, Version 2.0 (the "License");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n\thttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an "AS IS" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.</string>
 </resources>
