@@ -1,6 +1,7 @@
 package com.example.quotes.quotes;
 
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -95,7 +96,7 @@ public class QuotesFragment extends Fragment {
     private void initDataSet(String query) {
         quotes = new ArrayList<>();
         try {
-            SQLiteOpenHelper dbHelper = new DatabaseHelper(getActivity());
+            SQLiteOpenHelper dbHelper = new DatabaseHelper(getContext());
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             Cursor quotesCursor = db.rawQuery(query, null);
           
@@ -129,7 +130,7 @@ public class QuotesFragment extends Fragment {
     private void initSpecificAuthorDataSet() {
         quotes = new ArrayList<>();
         try {
-            SQLiteOpenHelper dbHelper = new DatabaseHelper(getActivity());
+            SQLiteOpenHelper dbHelper = new DatabaseHelper(getContext());
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             String authorsQuery = String.format("SELECT %s, %s FROM %s WHERE %s = ?",
                     Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME, Author.TABLE_NAME, Author.Columns.ID);
@@ -161,7 +162,7 @@ public class QuotesFragment extends Fragment {
     public void findQuotesAndAuthorsFromQuery(String searchQuery){
         quotes = new ArrayList<>();
         try {
-            SQLiteOpenHelper dbHelper = new DatabaseHelper(getActivity());
+            SQLiteOpenHelper dbHelper = new DatabaseHelper(getContext());
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             String query = String.format("SELECT %s, %s, %s, %s " +
                     "FROM %s as Q INNER JOIN %s as A ON Q.%s == A.%s " +
