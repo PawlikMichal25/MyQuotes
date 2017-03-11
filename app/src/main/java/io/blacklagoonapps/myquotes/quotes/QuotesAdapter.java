@@ -26,10 +26,16 @@ class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
 
     private List<Quote> quotes;
     private boolean showAuthor;
+    private boolean firstNameFirst;
+    private boolean showFavorite;
 
-    QuotesAdapter(List<Quote> quotes, boolean showAuthor) {
+    QuotesAdapter(Context ctx, List<Quote> quotes, boolean showAuthor) {
         this.quotes = quotes;
         this.showAuthor = showAuthor;
+        this.firstNameFirst = PreferenceManager.getDefaultSharedPreferences(ctx).
+                getBoolean(ctx.getString(R.string.pref_names_display), true);
+        this.showFavorite = PreferenceManager.getDefaultSharedPreferences(ctx).
+                getBoolean(ctx.getString(R.string.pref_show_star), true);
     }
 
     @Override
@@ -44,13 +50,17 @@ class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.MyViewHolder> {
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final Quote quote = quotes.get(position);
         holder.content.setText(quote.getContent());
-        if(showAuthor)
-            holder.author.setText(quote.getAuthor().getLastName() + " " + quote.getAuthor().getFirstName());
+        if(showAuthor) {
+            if (firstNameFirst)
+                holder.author.setText(quote.getAuthor().getFirstName() + " " + quote.getAuthor().getLastName());
+            else
+                holder.author.setText(quote.getAuthor().getLastName() + " " + quote.getAuthor().getFirstName());
+        }
         else
             holder.author.setVisibility(View.GONE);
 
         final Context ctx = holder.content.getContext();
-        if(PreferenceManager.getDefaultSharedPreferences(ctx).getBoolean(ctx.getString(R.string.pref_show_star), true)){
+        if(showFavorite){
             if(quote.isFavorite())
                 holder.favorite.setImageResource(R.drawable.full_star);
             else

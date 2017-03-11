@@ -48,7 +48,7 @@ public class QuotesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_quotes, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        quotesAdapter = new QuotesAdapter(quotes, author == null);
+        quotesAdapter = new QuotesAdapter(getContext(), quotes, author == null);
         setUpRecyclerView();
         setUpEmptyQuotesText(rootView);
         return rootView;
@@ -86,7 +86,7 @@ public class QuotesFragment extends Fragment {
     }
 
     private void refreshQuotesAdapter() {
-        quotesAdapter = new QuotesAdapter(quotes, author == null);
+        quotesAdapter = new QuotesAdapter(getContext(), quotes, author == null);
         recyclerView.setAdapter(quotesAdapter);
         quotesAdapter.notifyDataSetChanged();
     }

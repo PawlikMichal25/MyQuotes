@@ -73,9 +73,9 @@ public class EditQuoteActivity extends QuotesActivity {
                 boolean fn = validateFieldNotEmpty(authorFirstNameInputLayout, authorFirstNameInput);
                 boolean qc = validateFieldNotEmpty(quoteContentInputLayout, quoteContentInput);
                 if(fn && qc) {
-                    final String firstNameInput = authorFirstNameInput.getText().toString();
-                    final String lastNameInput = authorLastNameInput.getText().toString();
-                    final String contentInput = quoteContentInput.getText().toString();
+                    final String firstNameInput = authorFirstNameInput.getText().toString().trim();
+                    final String lastNameInput = authorLastNameInput.getText().toString().trim();
+                    final String contentInput = quoteContentInput.getText().toString().trim();
 
                     // Quote's content or Favorite field have changed
                     if (!quoteContent.equals(contentInput) || isFavorite != isFavoriteBox.isChecked()) {
