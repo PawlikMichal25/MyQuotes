@@ -25,7 +25,7 @@
     <color name="deepOrange900">#BF360C</color>
 
     <!-- For some reason it won't work if I use eg @color/green500 -->
-    <string-array name="color_choices">
+    <string-array name="color_choices" translatable="false">
         <item>#303F9F</item>
         <item>#388E3C</item>
         <item>#5D4037</item>
