@@ -1,9 +1,7 @@
-package com.example.quotes.command;
+package io.blacklagoonapps.myquotes.command;
 
 
 import android.content.DialogInterface;
-
-import com.example.quotes.command.Command;
 
 public class CommandWrapper implements DialogInterface.OnClickListener {
 

@@ -1,4 +1,4 @@
-package com.example.quotes.command;
+package io.blacklagoonapps.myquotes.command;
 
 
 public interface Command {

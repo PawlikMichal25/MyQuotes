@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Quotes</string>
+    <string name="app_name">My Quotes</string>
 
     <string name="title_activity_main">Quotes</string>
     <string name="title_activity_settings">Settings</string>
@@ -29,7 +29,7 @@
     <string name="logo_designer" translatable="false">Logo Designer</string>
     <string name="logo_designer_name" translatable="false">Adrian Baran</string>
     <string name="source_code">Source code</string>
-    <string name="source_code_url" translatable="false">https://github.com/NobleAries/Quotes</string>
+    <string name="source_code_url" translatable="false">https://github.com/NobleAries/MyQuotes</string>
     <string name="application">Application</string>
     <string name="version">Version</string>
     <string name="rate_us">Rate us</string>

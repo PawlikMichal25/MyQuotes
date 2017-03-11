@@ -1,4 +1,4 @@
-package com.example.quotes.quotes;
+package io.blacklagoonapps.myquotes.quotes;
 
 import android.support.design.widget.TextInputLayout;
 import android.os.Bundle;
@@ -7,8 +7,8 @@ import android.text.TextWatcher;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.example.quotes.ThemedActivity;
-import com.example.quotes.R;
+import io.blacklagoonapps.myquotes.ThemedActivity;
+import io.blacklagoonapps.myquotes.R;
 
 public class QuotesActivity extends ThemedActivity {
 

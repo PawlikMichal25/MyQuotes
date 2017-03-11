@@ -1,4 +1,4 @@
-package com.example.quotes.authors;
+package io.blacklagoonapps.myquotes.authors;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,9 +15,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.quotes.R;
-import com.example.quotes.database.DatabaseHelper;
-import com.example.quotes.model.Author;
+import io.blacklagoonapps.myquotes.R;
+import io.blacklagoonapps.myquotes.database.DatabaseHelper;
+import io.blacklagoonapps.myquotes.model.Author;
 
 public class AuthorsFragment extends ListFragment {
 

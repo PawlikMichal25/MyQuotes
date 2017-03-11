@@ -1,7 +1,6 @@
-package com.example.quotes.quotes;
+package io.blacklagoonapps.myquotes.quotes;
 
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -14,13 +13,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.quotes.R;
-import com.example.quotes.database.DatabaseHelper;
-import com.example.quotes.model.Author;
-import com.example.quotes.model.Quote;
+import io.blacklagoonapps.myquotes.R;
+import io.blacklagoonapps.myquotes.database.DatabaseHelper;
+import io.blacklagoonapps.myquotes.model.Author;
+import io.blacklagoonapps.myquotes.model.Quote;
 
 import java.util.ArrayList;
 import java.util.List;

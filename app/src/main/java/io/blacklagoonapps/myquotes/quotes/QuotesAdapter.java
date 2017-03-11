@@ -1,4 +1,4 @@
-package com.example.quotes.quotes;
+package io.blacklagoonapps.myquotes.quotes;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -6,9 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.preference.PreferenceManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.quotes.R;
-import com.example.quotes.model.Quote;
+import io.blacklagoonapps.myquotes.R;
+import io.blacklagoonapps.myquotes.model.Quote;
 
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.quotes;
+package io.blacklagoonapps.myquotes;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
+
+import io.blacklagoonapps.myquotes.R;
 
 
 public class ThemedActivity extends AppCompatActivity{

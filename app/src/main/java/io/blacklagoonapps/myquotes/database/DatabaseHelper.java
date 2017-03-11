@@ -1,4 +1,4 @@
-package com.example.quotes.database;
+package io.blacklagoonapps.myquotes.database;
 
 
 import android.content.ContentValues;
@@ -7,8 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.quotes.model.Author;
-import com.example.quotes.model.Quote;
+import io.blacklagoonapps.myquotes.model.Author;
+import io.blacklagoonapps.myquotes.model.Quote;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {

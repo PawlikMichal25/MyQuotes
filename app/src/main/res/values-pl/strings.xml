@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cytaty</string>
+    <string name="app_name">Moje Cytaty</string>
 
     <string name="title_activity_main">Cytaty</string>
     <string name="title_activity_settings">Ustawienia</string>

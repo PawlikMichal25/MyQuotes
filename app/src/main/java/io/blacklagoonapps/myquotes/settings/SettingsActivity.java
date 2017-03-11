@@ -1,11 +1,11 @@
-package com.example.quotes.settings;
+package io.blacklagoonapps.myquotes.settings;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
 
-import com.example.quotes.ThemedActivity;
-import com.example.quotes.R;
+import io.blacklagoonapps.myquotes.ThemedActivity;
+import io.blacklagoonapps.myquotes.R;
 
 public class SettingsActivity extends ThemedActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
 

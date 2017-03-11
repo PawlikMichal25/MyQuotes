@@ -1,4 +1,4 @@
-package com.example.quotes.model;
+package io.blacklagoonapps.myquotes.model;
 
 public class Author {
 

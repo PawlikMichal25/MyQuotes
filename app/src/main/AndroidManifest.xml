@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.quotes">
+    package="io.blacklagoonapps.myquotes">
 
     <application
         android:allowBackup="true"
@@ -9,8 +9,8 @@
         android:supportsRtl="true"
         android:theme="@style/Black">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
+            android:name="io.blacklagoonapps.myquotes.MainActivity"
+            android:label="@string/app_name"
             android:launchMode="singleTop"
             android:theme="@style/Black.NoActionBar">
             <intent-filter>
@@ -20,51 +20,51 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AboutActivity"
+            android:name="io.blacklagoonapps.myquotes.AboutActivity"
             android:label="@string/title_activity_about">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="io.blacklagoonapps.myquotes.MainActivity" />
         </activity>
         <activity
-            android:name=".LicensesActivity"
+            android:name="io.blacklagoonapps.myquotes.LicensesActivity"
             android:label="@string/title_activity_licenses">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AboutActivity" />
+                android:value="io.blacklagoonapps.myquotes.AboutActivity" />
         </activity>
         <activity
-            android:name=".settings.SettingsActivity"
+            android:name="io.blacklagoonapps.myquotes.settings.SettingsActivity"
             android:label="@string/title_activity_settings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="io.blacklagoonapps.myquotes.MainActivity" />
         </activity>
         <activity
-            android:name=".authors.AuthorsActivity"
+            android:name="io.blacklagoonapps.myquotes.authors.AuthorsActivity"
             android:label="@string/title_activity_authors">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="io.blacklagoonapps.myquotes.MainActivity" />
         </activity>
 
-        <activity android:name=".quotes.QuotesActivity"
+        <activity android:name="io.blacklagoonapps.myquotes.quotes.QuotesActivity"
             android:label="@string/title_activity_add_quote">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" /></activity>
+                android:value="io.blacklagoonapps.myquotes.MainActivity" /></activity>
 
-        <activity android:name=".quotes.AddQuoteActivity"
+        <activity android:name="io.blacklagoonapps.myquotes.quotes.AddQuoteActivity"
             android:label="@string/title_activity_add_quote">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" /></activity>
+                android:value="io.blacklagoonapps.myquotes.MainActivity" /></activity>
 
-        <activity android:name=".quotes.EditQuoteActivity"
+        <activity android:name="io.blacklagoonapps.myquotes.quotes.EditQuoteActivity"
             android:label="@string/title_activity_edit_quote">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" /></activity>
+                android:value="io.blacklagoonapps.myquotes.MainActivity" /></activity>
     </application>
 
 </manifest>

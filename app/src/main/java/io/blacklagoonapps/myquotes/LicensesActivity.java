@@ -1,6 +1,8 @@
-package com.example.quotes;
+package io.blacklagoonapps.myquotes;
 
 import android.os.Bundle;
+
+import io.blacklagoonapps.myquotes.R;
 
 public class LicensesActivity extends ThemedActivity {
 

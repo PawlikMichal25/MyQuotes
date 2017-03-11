@@ -1,13 +1,13 @@
-package com.example.quotes.authors;
+package io.blacklagoonapps.myquotes.authors;
 
 
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 
-import com.example.quotes.ThemedActivity;
-import com.example.quotes.R;
-import com.example.quotes.model.Author;
-import com.example.quotes.quotes.QuotesFragment;
+import io.blacklagoonapps.myquotes.ThemedActivity;
+import io.blacklagoonapps.myquotes.R;
+import io.blacklagoonapps.myquotes.model.Author;
+import io.blacklagoonapps.myquotes.quotes.QuotesFragment;
 
 public class AuthorsActivity extends ThemedActivity {
 

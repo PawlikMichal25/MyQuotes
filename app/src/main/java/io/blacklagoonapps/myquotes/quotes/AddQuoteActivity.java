@@ -1,12 +1,12 @@
-package com.example.quotes.quotes;
+package io.blacklagoonapps.myquotes.quotes;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.quotes.R;
-import com.example.quotes.database.DatabaseHelper;
+import io.blacklagoonapps.myquotes.R;
+import io.blacklagoonapps.myquotes.database.DatabaseHelper;
 
 public class AddQuoteActivity extends QuotesActivity {
 

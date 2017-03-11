@@ -1,4 +1,4 @@
-package com.example.quotes;
+package io.blacklagoonapps.myquotes;
 
 
 import android.content.ActivityNotFoundException;
@@ -8,6 +8,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import io.blacklagoonapps.myquotes.BuildConfig;
+import io.blacklagoonapps.myquotes.R;
 
 public class AboutActivity extends ThemedActivity {
 

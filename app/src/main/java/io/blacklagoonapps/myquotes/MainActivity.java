@@ -1,4 +1,4 @@
-package com.example.quotes;
+package io.blacklagoonapps.myquotes;
 
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -19,10 +19,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.quotes.authors.AuthorsFragment;
-import com.example.quotes.quotes.AddQuoteActivity;
-import com.example.quotes.quotes.QuotesFragment;
-import com.example.quotes.settings.SettingsActivity;
+import io.blacklagoonapps.myquotes.authors.AuthorsFragment;
+import io.blacklagoonapps.myquotes.quotes.AddQuoteActivity;
+import io.blacklagoonapps.myquotes.quotes.QuotesFragment;
+import io.blacklagoonapps.myquotes.settings.SettingsActivity;
 
 
 public class MainActivity extends ThemedActivity {
@@ -45,6 +45,7 @@ public class MainActivity extends ThemedActivity {
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         floatingAddButton = (FloatingActionButton) findViewById(R.id.fab);
 
+        setActionBarTitle();
         setUpFloatingAddButton();
         setUpViewPager();
         setUpTabLayout();

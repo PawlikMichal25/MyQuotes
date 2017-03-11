@@ -1,4 +1,4 @@
-package com.example.quotes.quotes;
+package io.blacklagoonapps.myquotes.quotes;
 
 
 import android.content.Intent;
@@ -12,10 +12,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.quotes.R;
-import com.example.quotes.database.DatabaseHelper;
-import com.example.quotes.command.Command;
-import com.example.quotes.command.CommandWrapper;
+import io.blacklagoonapps.myquotes.R;
+import io.blacklagoonapps.myquotes.database.DatabaseHelper;
+import io.blacklagoonapps.myquotes.command.Command;
+import io.blacklagoonapps.myquotes.command.CommandWrapper;
 
 public class EditQuoteActivity extends QuotesActivity {
 
