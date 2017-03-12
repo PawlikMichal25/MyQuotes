@@ -17,6 +17,7 @@
     <string name="about">O aplikacji</string>
     <string name="authors_empty">Tutaj pojawią się autorzy, gdy dodasz nowe cytaty</string>
     <string name="quotes_empty">Brak cytatów</string>
+    <string name="quotes_empty_add_quote">DODAJ CYTAT</string>
     <string name="favorite_star">Ulubiony</string>
 
     <string name="quotes_hint_first_name">Imię autora</string>

@@ -1,6 +1,7 @@
 package io.blacklagoonapps.myquotes.quotes;
 
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -13,8 +14,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import io.blacklagoonapps.myquotes.MainActivity;
 import io.blacklagoonapps.myquotes.R;
 import io.blacklagoonapps.myquotes.database.DatabaseHelper;
 import io.blacklagoonapps.myquotes.model.Author;
@@ -49,6 +52,7 @@ public class QuotesFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_quotes, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         quotesAdapter = new QuotesAdapter(getContext(), quotes, author == null);
+
         setUpRecyclerView();
         setUpEmptyQuotesText(rootView);
         return rootView;
@@ -60,10 +64,31 @@ public class QuotesFragment extends Fragment {
         recyclerView.setAdapter(quotesAdapter);
     }
 
-    private void setUpEmptyQuotesText(View view) {
-        View quotesEmpty = view.findViewById(R.id.quotes_empty);
-        int visibility = quotes.isEmpty() ? View.VISIBLE : View.INVISIBLE;
+    private void setUpEmptyQuotesText(View rootView) {
+        View quotesEmpty = rootView.findViewById(R.id.quotes_empty);
+        int visibility;
+
+        if(quotes.isEmpty()){
+            visibility = View.VISIBLE;
+            setUpAddQuote(rootView);
+        }
+        else
+            visibility = View.INVISIBLE;
         quotesEmpty.setVisibility(visibility);
+    }
+
+    private void setUpAddQuote(View rootView){
+        TextView addQuote = (TextView)rootView.findViewById(R.id.quotes_empty_add_quote);
+        if(author == null)
+            addQuote.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), AddQuoteActivity.class);
+                    startActivity(intent);
+                }
+            });
+        else
+            addQuote.setVisibility(View.GONE);
     }
 
     private void initData(String query) {
@@ -97,7 +122,7 @@ public class QuotesFragment extends Fragment {
             SQLiteOpenHelper dbHelper = new DatabaseHelper(getContext());
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             Cursor quotesCursor = db.rawQuery(query, null);
-          
+
             if (quotesCursor.moveToFirst()){
                 do{
                     authorId = quotesCursor.getInt(0);

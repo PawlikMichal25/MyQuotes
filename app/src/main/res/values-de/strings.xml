@@ -17,6 +17,7 @@
     <string name="about">Über das App</string>
     <string name="authors_empty">Hier erscheinen die Autoren, wenn Sie neue Zitate hinzufügen</string>
     <string name="quotes_empty">Keine Zitate</string>
+    <string name="quotes_empty_add_quote">ZITAT HINZUFÜGEN</string>
     <string name="favorite_star">Favorit</string>
 
     <string name="quotes_hint_first_name">Autor Vorname</string>

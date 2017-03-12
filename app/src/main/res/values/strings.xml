@@ -17,6 +17,7 @@
     <string name="about">About</string>
     <string name="authors_empty">Once you add a new quote, you\'ll see it\'s author listed here</string>
     <string name="quotes_empty">No quotes</string>
+    <string name="quotes_empty_add_quote">ADD QUOTE</string>
     <string name="favorite_star">Favorite star</string>
 
     <string name="quotes_hint_first_name">Author\'s first name</string>
