@@ -58,10 +58,15 @@ public class AuthorsFragment extends ListFragment {
         try {
             SQLiteOpenHelper databaseHelper = new DatabaseHelper(getActivity());
             db = databaseHelper.getReadableDatabase();
+            String orderBy;
+            if(firstNameFirst)
+                orderBy = Author.Columns.FIRST_NAME + " || " + Author.Columns.LAST_NAME + " COLLATE NOCASE";
+            else
+                orderBy = Author.Columns.LAST_NAME + " || " + Author.Columns.FIRST_NAME + " COLLATE NOCASE";
 
             cursor = db.query(Author.TABLE_NAME,
                     new String[]{Author.Columns.ID, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME},
-                    null, null, null, null, Author.Columns.LAST_NAME + " || " + Author.Columns.FIRST_NAME + " COLLATE NOCASE");
+                    null, null, null, null, orderBy);
 
         } catch (SQLiteException e) {
             Toast toast = Toast.makeText(getActivity(), "Database unavailable", Toast.LENGTH_SHORT);
