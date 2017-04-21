@@ -13,16 +13,17 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import io.blacklagoonapps.myquotes.R;
+import io.blacklagoonapps.myquotes.authors.AuthorsActivity;
 import io.blacklagoonapps.myquotes.database.DatabaseHelper;
 import io.blacklagoonapps.myquotes.command.Command;
 import io.blacklagoonapps.myquotes.command.CommandWrapper;
 
 public class EditQuoteActivity extends QuotesActivity {
 
+    public static final String QUOTE_CONTENT = "QUOTE_CONTENT";
+    public static final String IS_FAVORITE = "IS_FAVORITE";
     public static final String AUTHOR_FIRST_NAME = "AUTHOR_FIRST_NAME";
     public static final String AUTHOR_LAST_NAME = "AUTHOR_LAST_NAME";
-    public static final String IS_FAVORITE = "IS_FAVORITE";
-    public static final String QUOTE_CONTENT = "QUOTE_CONTENT";
 
     private String authorFirstName;
     private String authorLastName;
@@ -82,23 +83,23 @@ public class EditQuoteActivity extends QuotesActivity {
                         databaseHelper.editQuote(db, quoteId, authorId, contentInput, isFavoriteBox.isChecked());
                     }
 
-                    boolean finishActivity = true;
+                    long newAuthorId = -1;
                     // Author has changed
                     if (!authorFirstName.equals(firstNameInput) || !authorLastName.equals(lastNameInput)) {
-                        if (databaseHelper.countQuotes(db, authorId) > 1){
-                            finishActivity = false;
+                        if (databaseHelper.countQuotes(db, authorId) > 1)
                             createAndShowDialog(databaseHelper, db, firstNameInput, lastNameInput, authorId, quoteId);
-                        }
-                        else changeAllQuotes(databaseHelper, db, firstNameInput, lastNameInput, authorId);
+                        else
+                            newAuthorId = changeAllQuotes(databaseHelper, db, firstNameInput, lastNameInput, authorId);
                     }
 
-                    if(finishActivity) finishEditing(getString(R.string.saved));
+                    if(newAuthorId != -1)
+                        finishWithToastAndResult(getString(R.string.saved), newAuthorId);
                 }
                 break;
 
             case R.id.delete:
                 databaseHelper.deleteQuote(db, quoteId);
-                finishEditing(getString(R.string.deleted));
+                finishWithToast(getString(R.string.deleted));
                 break;
 
             case android.R.id.home:
@@ -115,15 +116,15 @@ public class EditQuoteActivity extends QuotesActivity {
         Command changeSingleQuoteCommand = new Command() {
             @Override
             public void execute() {
-                changeSingleQuote(databaseHelper, db, firstNameInput, lastNameInput, authorId, quoteId);
-                finishEditing(getString(R.string.saved));
+                long newAuthorId = changeSingleQuote(databaseHelper, db, firstNameInput, lastNameInput, authorId, quoteId);
+                finishWithToastAndResult(getString(R.string.saved), newAuthorId);
             }
         };
         Command changeAllQuotesCommand = new Command() {
             @Override
             public void execute() {
-                changeAllQuotes(databaseHelper, db, firstNameInput, lastNameInput, authorId);
-                finishEditing(getString(R.string.saved));
+                long newAuthorId = changeAllQuotes(databaseHelper, db, firstNameInput, lastNameInput, authorId);
+                finishWithToastAndResult(getString(R.string.saved), newAuthorId);
             }
         };
         Command emptyCommand = Command.NO_OPERATION;
@@ -132,13 +133,19 @@ public class EditQuoteActivity extends QuotesActivity {
         centerDialogButtons(dialog);
     }
 
-    private void finishEditing(String message){
-        Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
-        toast.show();
+    private void finishWithToastAndResult(String message, long authorId){
+        Intent intent = new Intent();
+        intent.putExtra(AuthorsActivity.AUTHOR_ID, authorId);
+        setResult(AuthorsActivity.NEW_AUTHOR_ID, intent);
+        finishWithToast(message);
+    }
+
+    private void finishWithToast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         finish();
     }
 
-    private void changeSingleQuote(DatabaseHelper databaseHelper, SQLiteDatabase db, String firstNameInput,
+    private long changeSingleQuote(DatabaseHelper databaseHelper, SQLiteDatabase db, String firstNameInput,
                                    String lastNameInput, long authorId, long quoteId) {
         long newAuthorId = databaseHelper.findAuthorId(db, firstNameInput, lastNameInput);
         if (newAuthorId == -1){   // quote's new author doesn't exist in database
@@ -148,15 +155,19 @@ public class EditQuoteActivity extends QuotesActivity {
         if (databaseHelper.countQuotes(db, authorId) == 0){  // delete old author if there are no quotes by him/her
             databaseHelper.deleteAuthor(db, authorId);
         }
+
+        return newAuthorId;
     }
 
-    private void changeAllQuotes(DatabaseHelper databaseHelper, SQLiteDatabase db, String firstNameInput,
+    private long changeAllQuotes(DatabaseHelper databaseHelper, SQLiteDatabase db, String firstNameInput,
                                  String lastNameInput, long authorId) {
         long newAuthorId = databaseHelper.findAuthorId(db, firstNameInput, lastNameInput);
-        if (newAuthorId == -1)  // if new author doesn't exist in database, edit existing author's first name and last name
+        if (newAuthorId == -1){ // if new author doesn't exist in database, edit existing author's first name and last name
             databaseHelper.editAuthor(db, authorId, firstNameInput, lastNameInput);
-        else {
+            return authorId;
+        } else {
             databaseHelper.editQuotesAuthor(db, authorId, newAuthorId);
+            return newAuthorId;
         }
     }
 

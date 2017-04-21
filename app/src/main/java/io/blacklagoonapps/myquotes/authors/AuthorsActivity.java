@@ -1,6 +1,7 @@
 package io.blacklagoonapps.myquotes.authors;
 
 
+import android.content.Intent;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -13,8 +14,7 @@ import io.blacklagoonapps.myquotes.quotes.QuotesFragment;
 public class AuthorsActivity extends ThemedActivity {
 
     public static final String AUTHOR_ID = "authorId";
-    public static final String AUTHOR_FIRST_NAME = "authorFirstName";
-    public static final String AUTHOR_LAST_NAME = "authorLastName";
+    public static final int NEW_AUTHOR_ID = 2510;
 
     private QuotesFragment quotesFragment;
     private Author author;
@@ -24,16 +24,7 @@ public class AuthorsActivity extends ThemedActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authors);
 
-        if(getIntent().hasExtra(AUTHOR_LAST_NAME))
-            author = new Author((String)getIntent().getExtras().get(AUTHOR_FIRST_NAME),
-                    (String)getIntent().getExtras().get(AUTHOR_LAST_NAME));
-        else
-            author = new Author((String)getIntent().getExtras().get(AUTHOR_FIRST_NAME));
-
-        setTitle();
-
         quotesFragment = new QuotesFragment();
-        quotesFragment.setAuthor(author);
         quotesFragment.setAuthorId((long)getIntent().getExtras().get(AUTHOR_ID));
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -42,11 +33,16 @@ public class AuthorsActivity extends ThemedActivity {
     }
 
     @Override
-    public void onRestart(){
-        super.onRestart();
-        quotesFragment.initFragment();
-        author = quotesFragment.getAuthor();
-        setTitle();  // Author could have changed
+    protected void onStart() {
+        super.onStart();
+        setUpAuthor();
+        setTitle();
+    }
+
+    private void setUpAuthor(){
+        Author newAuthor = quotesFragment.getAuthorAt(0);
+        if(newAuthor != null)
+            this.author = newAuthor;
     }
 
     private void setTitle(){
@@ -54,5 +50,20 @@ public class AuthorsActivity extends ThemedActivity {
             getSupportActionBar().setTitle(author.getFirstName() + " " + author.getLastName());
         else
             getSupportActionBar().setTitle(author.getLastName() + " " + author.getFirstName());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == NEW_AUTHOR_ID){
+            setIntent(data);
+        }
+    }
+
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        quotesFragment.setAuthorId((long)getIntent().getExtras().get(AUTHOR_ID));
+        quotesFragment.restart();
     }
 }

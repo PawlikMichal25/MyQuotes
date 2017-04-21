@@ -66,7 +66,7 @@ public class MainActivity extends ThemedActivity {
     @Override
     protected void onRestart(){
         super.onRestart();
-        ((QuotesFragment)fragments[0]).initFragment();
+        ((QuotesFragment)fragments[0]).restart();
         ((AuthorsFragment)fragments[1]).initFragment();
     }
 
@@ -181,7 +181,7 @@ public class MainActivity extends ThemedActivity {
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-                ((QuotesFragment)fragments[0]).initFragment();
+                ((QuotesFragment)fragments[0]).restart();
                 return true;
             }
         });
@@ -194,7 +194,7 @@ public class MainActivity extends ThemedActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                ((QuotesFragment)fragments[0]).findQuotesAndAuthorsFromQuery(s);
+                ((QuotesFragment)fragments[0]).findQuotesWithAuthorsContainingWords(s);
                 return false;
             }
         });

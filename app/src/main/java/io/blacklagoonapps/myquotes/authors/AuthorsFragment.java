@@ -105,21 +105,6 @@ public class AuthorsFragment extends ListFragment {
     public void onListItemClick(ListView listView, View itemView, int position, long id){
         Intent intent = new Intent(getActivity(), AuthorsActivity.class);
         intent.putExtra(AuthorsActivity.AUTHOR_ID, id);
-
-        // Instead of one TextView and split there could be used eg. custom view with 2 TextViews, but I found it less handy nor convenient.
-        String [] authorNames = ((TextView)itemView).getText().toString().split(" ", 2);
-
-        if(firstNameFirst){
-            intent.putExtra(AuthorsActivity.AUTHOR_FIRST_NAME, authorNames[0]);
-            if(authorNames.length == 2)
-                intent.putExtra(AuthorsActivity.AUTHOR_LAST_NAME, authorNames[1]);
-        }
-        else{
-            intent.putExtra(AuthorsActivity.AUTHOR_FIRST_NAME, authorNames[1]);
-            if(authorNames.length == 2)
-                intent.putExtra(AuthorsActivity.AUTHOR_LAST_NAME, authorNames[0]);
-        }
-
         startActivity(intent);
     }
 
