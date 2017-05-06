@@ -232,9 +232,9 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
 
     static class Holder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.quote_content) TextView content;
-        @BindView(R.id.author_of_quote) TextView author;
-        @BindView(R.id.is_favorite) ImageView favorite;
+        @BindView(R.id.textview_quote_content) TextView content;
+        @BindView(R.id.textview_quote_author) TextView author;
+        @BindView(R.id.imageview_quote_favorite) ImageView favorite;
 
         Holder(View itemView) {
             super(itemView);

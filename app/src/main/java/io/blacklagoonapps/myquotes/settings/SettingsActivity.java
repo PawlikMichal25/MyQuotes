@@ -18,7 +18,7 @@ public class SettingsActivity extends ThemedActivity implements SharedPreference
         setContentView(R.layout.activity_settings);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.settings_fragment_container, new SettingsFragment())
+                .replace(R.id.framelayout_settings, new SettingsFragment())
                 .commit();
     }
 

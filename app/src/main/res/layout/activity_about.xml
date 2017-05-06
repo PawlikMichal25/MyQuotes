@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_about"
     android:layout_width="match_parent"
@@ -11,7 +12,7 @@
     tools:context="io.blacklagoonapps.myquotes.AboutActivity">
 
     <TextView
-        android:id="@+id/production"
+        android:id="@+id/textview_about_production"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -20,89 +21,89 @@
         android:text="@string/production"/>
 
     <TextView
-        android:id="@+id/developers"
+        android:id="@+id/textview_about_developers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/production"
+        android:layout_below="@+id/textview_about_production"
         android:paddingTop="5dp"
         android:text="@string/developers"/>
 
     <TextView
-        android:id="@+id/authors_names"
+        android:id="@+id/textview_about_developers_names"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/developers"
+        android:layout_below="@+id/textview_about_developers"
         android:textStyle="bold"
         android:text="@string/app_authors"/>
 
     <TextView
-        android:id="@+id/logo_designer"
+        android:id="@+id/textview_about_logo_designer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/authors_names"
+        android:layout_below="@+id/textview_about_developers_names"
         android:paddingTop="10dp"
         android:text="@string/logo_designer"/>
 
     <TextView
-        android:id="@+id/logo_designer_name"
+        android:id="@+id/textview_about_logo_designer_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/logo_designer"
+        android:layout_below="@+id/textview_about_logo_designer"
         android:textStyle="bold"
         android:text="@string/logo_designer_name"/>
 
     <TextView
-        android:id="@+id/application"
+        android:id="@+id/textview_about_application"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/logo_designer_name"
+        android:layout_below="@+id/textview_about_logo_designer_name"
         android:paddingTop="20dp"
         android:textAppearance="@android:style/TextAppearance.Medium"
         android:text="@string/application"/>
 
     <TextView
-        android:id="@+id/source_code"
+        android:id="@+id/textview_about_source_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/application"
+        android:layout_below="@+id/textview_about_application"
         android:paddingTop="10dp"
         android:text="@string/source_code"/>
 
     <TextView
-        android:id="@+id/source_code_url"
+        android:id="@+id/textview_about_source_code_url"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/source_code"
+        android:layout_below="@+id/textview_about_source_code"
         android:autoLink="web"
         android:text="@string/source_code_url"/>
 
     <TextView
-        android:id="@+id/open_source_licenses"
+        android:id="@+id/textview_about_licenses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/source_code_url"
+        android:layout_below="@+id/textview_about_source_code_url"
         android:paddingTop="5dp"
         android:textColor="?android:attr/textColorLink"
         android:onClick="onOpenSourceLicensesClick"
         android:text="@string/licenses_title"/>
 
     <TextView
-        android:id="@+id/version"
+        android:id="@+id/textview_about_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/open_source_licenses"
+        android:layout_below="@+id/textview_about_licenses"
         android:paddingTop="5dp"
         android:text="@string/version"/>
 
     <TextView
-        android:id="@+id/version_number"
+        android:id="@+id/textview_about_version_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/version"
+        android:layout_below="@+id/textview_about_version"
         android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/rate_us"
+        android:id="@+id/button_about_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

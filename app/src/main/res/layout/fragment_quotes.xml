@@ -5,7 +5,7 @@
     tools:context="io.blacklagoonapps.myquotes.quotes.QuotesFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recyclerview_quotes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
@@ -13,7 +13,7 @@
         android:clipToPadding="false"/>
 
     <LinearLayout
-        android:id="@+id/quotes_empty"
+        android:id="@+id/linearlayout_quotes_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -36,7 +36,7 @@
             android:text="@string/quotes_empty"/>
 
         <TextView
-            android:id="@+id/quotes_empty_add_quote"
+            android:id="@+id/textview_quotes_add_quote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

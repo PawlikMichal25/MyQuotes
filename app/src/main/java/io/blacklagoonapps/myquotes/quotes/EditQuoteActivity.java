@@ -68,7 +68,7 @@ public class EditQuoteActivity extends QuotesActivity {
         final long quoteId = databaseHelper.findQuoteId(db, authorId, quoteContent, isFavorite);
 
         switch(item.getItemId()){
-            case R.id.save:
+            case R.id.item_editquotes_save:
 
                 // Tmp variables, because if they were both in IF the second one might not be invoked
                 boolean fn = validateFieldNotEmpty(authorFirstNameInputLayout, authorFirstNameInput);
@@ -97,7 +97,7 @@ public class EditQuoteActivity extends QuotesActivity {
                 }
                 break;
 
-            case R.id.delete:
+            case R.id.item_editquotes_delete:
                 databaseHelper.deleteQuote(db, quoteId);
                 finishWithToast(getString(R.string.deleted));
                 break;

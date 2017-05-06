@@ -28,7 +28,7 @@ public class AuthorsActivity extends ThemedActivity {
         quotesFragment.setAuthorId((long)getIntent().getExtras().get(AUTHOR_ID));
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, quotesFragment);
+        transaction.replace(R.id.framelayout_authors, quotesFragment);
         transaction.commit();
     }
 

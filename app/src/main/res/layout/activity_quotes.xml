@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_quotes"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -13,43 +13,43 @@
     tools:context="io.blacklagoonapps.myquotes.quotes.QuotesActivity">
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/quotes_author_first_name_layout"
+        android:id="@+id/textinputlayout_quotes_first_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/quotes_hint_first_name">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/quotes_author_first_name"
+            android:id="@+id/textinputedittext_quotes_first_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapWords|textPersonName"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/quotes_author_last_name_layout"
+        android:id="@+id/textinputlayout_quotes_last_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/quotes_hint_last_name">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/quotes_author_last_name"
+            android:id="@+id/textinputedittext_quotes_last_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapWords|textPersonName"/>
     </android.support.design.widget.TextInputLayout>
 
     <CheckBox
-        android:id="@+id/quotes_is_favorite"
+        android:id="@+id/checkbox_quotes_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:button="@drawable/favorite_star"/>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/quotes_quote_layout"
+        android:id="@+id/textinputlayout_quotes_quote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/quotes_hint_quote">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/quotes_quote"
+            android:id="@+id/textinputedittext_quotes_quote"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textCapSentences|textMultiLine"/>

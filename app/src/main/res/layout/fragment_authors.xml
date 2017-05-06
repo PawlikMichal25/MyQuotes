@@ -1,9 +1,10 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.blacklagoonapps.myquotes.authors.AuthorsFragment"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    tools:context="io.blacklagoonapps.myquotes.authors.AuthorsFragment">
 
     <ListView
         android:id="@android:id/list"
@@ -11,7 +12,7 @@
         android:layout_height="wrap_content"/>
 
     <LinearLayout
-        android:id="@+id/authors_empty"
+        android:id="@+id/linearlayout_authors_empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

@@ -26,14 +26,14 @@ public class QuotesActivity extends ThemedActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quotes);
 
-        authorFirstNameInput = (EditText) findViewById(R.id.quotes_author_first_name);
-        authorLastNameInput = (EditText) findViewById(R.id.quotes_author_last_name);
-        isFavoriteBox = (CheckBox) findViewById(R.id.quotes_is_favorite);
-        quoteContentInput = (EditText) findViewById(R.id.quotes_quote);
+        authorFirstNameInput = (EditText) findViewById(R.id.textinputedittext_quotes_first_name);
+        authorLastNameInput = (EditText) findViewById(R.id.textinputedittext_quotes_last_name);
+        isFavoriteBox = (CheckBox) findViewById(R.id.checkbox_quotes_favorite);
+        quoteContentInput = (EditText) findViewById(R.id.textinputedittext_quotes_quote);
 
-        authorFirstNameInputLayout = (TextInputLayout) findViewById(R.id.quotes_author_first_name_layout);
-        authorLastNameInputLayout = (TextInputLayout) findViewById(R.id.quotes_author_last_name_layout);
-        quoteContentInputLayout = (TextInputLayout) findViewById(R.id.quotes_quote_layout);
+        authorFirstNameInputLayout = (TextInputLayout) findViewById(R.id.textinputlayout_quotes_first_name);
+        authorLastNameInputLayout = (TextInputLayout) findViewById(R.id.textinputlayout_quotes_last_name);
+        quoteContentInputLayout = (TextInputLayout) findViewById(R.id.textinputlayout_quotes_quote);
 
         authorFirstNameInput.addTextChangedListener(new MyTextWatcher(authorFirstNameInputLayout, authorFirstNameInput));
         quoteContentInput.addTextChangedListener(new MyTextWatcher(quoteContentInputLayout, quoteContentInput));

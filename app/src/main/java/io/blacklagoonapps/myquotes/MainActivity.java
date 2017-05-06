@@ -39,11 +39,11 @@ public class MainActivity extends ThemedActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
 
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        floatingAddButton = (FloatingActionButton) findViewById(R.id.fab);
+        floatingAddButton = (FloatingActionButton) findViewById(R.id.fab_main);
 
         setActionBarTitle();
         setUpFloatingAddButton();
@@ -55,7 +55,7 @@ public class MainActivity extends ThemedActivity {
     protected void onStart() {
         super.onStart();
         if(getIntent().hasExtra(CURRENT_TAB)){
-            TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout_main);
             TabLayout.Tab tab = tabLayout.getTabAt(getIntent().getIntExtra(CURRENT_TAB, 0));
             getIntent().removeExtra(CURRENT_TAB);
             if(tab != null)
@@ -91,7 +91,7 @@ public class MainActivity extends ThemedActivity {
     }
 
     private void setUpViewPager(){
-        viewPager = (ViewPager) findViewById(R.id.container);
+        viewPager = (ViewPager) findViewById(R.id.viewpager_main);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
@@ -119,15 +119,15 @@ public class MainActivity extends ThemedActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
         if(currentTab == 0)
-            menu.findItem(R.id.search).setVisible(true);
+            menu.findItem(R.id.item_main_search).setVisible(true);
         else
-            menu.findItem(R.id.search).setVisible(false);
+            menu.findItem(R.id.item_main_search).setVisible(false);
 
         return super.onPrepareOptionsMenu(menu);
     }
 
     private void setUpTabLayout() {
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout_main);
         final int darkColor = ContextCompat.getColor(this, R.color.color_control_white_dark);
 
         tabLayout.setupWithViewPager(viewPager);
@@ -170,7 +170,7 @@ public class MainActivity extends ThemedActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
 
-        MenuItem searchItem = menu.findItem(R.id.search);
+        MenuItem searchItem = menu.findItem(R.id.item_main_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
 
         MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
@@ -205,10 +205,10 @@ public class MainActivity extends ThemedActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
-            case R.id.settings:
+            case R.id.item_main_settings:
                 startActivityForResult(new Intent(this, SettingsActivity.class), 1);
                 break;
-            case R.id.about:
+            case R.id.item_main_about:
                 startActivity(new Intent(this, AboutActivity.class));
                 break;
         }

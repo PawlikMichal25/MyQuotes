@@ -34,7 +34,7 @@ public class QuotesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_quotes, container, false);
-        recyclerView = findById(rootView, R.id.recycler_view);
+        recyclerView = findById(rootView, R.id.recyclerview_quotes);
 
         setUpQuotesAdapter();
         setUpRecyclerView();
@@ -65,7 +65,7 @@ public class QuotesFragment extends Fragment {
     }
 
     private void setUpEmptyQuotesView(View rootView) {
-        View quotesEmpty = findById(rootView, R.id.quotes_empty);
+        View quotesEmpty = findById(rootView, R.id.linearlayout_quotes_empty);
         int visibility;
 
         if(quotesAdapter.getItemCount() == 0){
@@ -78,7 +78,7 @@ public class QuotesFragment extends Fragment {
     }
 
     private void setUpAddQuoteText(View rootView){
-        TextView addQuote = findById(rootView, R.id.quotes_empty_add_quote);
+        TextView addQuote = findById(rootView, R.id.textview_quotes_add_quote);
         if(authorId == -1)
             addQuote.setOnClickListener(new View.OnClickListener() {
                 @Override

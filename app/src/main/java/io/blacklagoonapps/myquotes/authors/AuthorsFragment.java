@@ -37,14 +37,14 @@ public class AuthorsFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getView().findViewById(R.id.authors_empty).setVisibility(View.GONE);
+        getView().findViewById(R.id.linearlayout_authors_empty).setVisibility(View.GONE);
         initFragment();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        getListView().setEmptyView(getView().findViewById(R.id.authors_empty));
+        getListView().setEmptyView(getView().findViewById(R.id.linearlayout_authors_empty));
     }
 
     public void initFragment() {

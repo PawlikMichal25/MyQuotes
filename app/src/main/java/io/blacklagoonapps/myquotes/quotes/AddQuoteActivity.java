@@ -19,7 +19,7 @@ public class AddQuoteActivity extends QuotesActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.save:
+            case R.id.item_addquotes_save:
                 // Tmp variables, because if they were both in IF the second one might not be invoked
                 boolean fn = validateFieldNotEmpty(authorFirstNameInputLayout, authorFirstNameInput);
                 boolean qc = validateFieldNotEmpty(quoteContentInputLayout, quoteContentInput);

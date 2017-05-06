@@ -9,9 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import io.blacklagoonapps.myquotes.BuildConfig;
-import io.blacklagoonapps.myquotes.R;
-
 public class AboutActivity extends ThemedActivity {
 
     @Override
@@ -19,10 +16,10 @@ public class AboutActivity extends ThemedActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        TextView licenseView = (TextView) findViewById(R.id.open_source_licenses);
+        TextView licenseView = (TextView) findViewById(R.id.textview_about_licenses);
         licenseView.setPaintFlags(licenseView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-        TextView versionView = (TextView)findViewById(R.id.version_number);
+        TextView versionView = (TextView)findViewById(R.id.textview_about_version_number);
         versionView.setText(BuildConfig.VERSION_NAME);
     }
 
