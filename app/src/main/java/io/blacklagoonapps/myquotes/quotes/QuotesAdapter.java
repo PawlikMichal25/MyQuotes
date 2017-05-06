@@ -103,7 +103,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
     @Override
     public QuotesAdapter.Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.quote_card, parent, false);
+                .inflate(R.layout.card_quote, parent, false);
 
         return new QuotesAdapter.Holder(itemView);
     }
