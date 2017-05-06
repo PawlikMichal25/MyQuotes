@@ -4,7 +4,7 @@
 
 
     <!-- Main Activity -->
-    <string name="main_title">@string/quotes</string>
+    <string name="main_title">@string/app_name</string>
 
 
     <!-- Settings -->
