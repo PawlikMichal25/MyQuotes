@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/developers"
         android:textStyle="bold"
-        android:text="@string/authors_names"/>
+        android:text="@string/app_authors"/>
 
     <TextView
         android:id="@+id/logo_designer"
@@ -84,7 +84,7 @@
         android:paddingTop="5dp"
         android:textColor="?android:attr/textColorLink"
         android:onClick="onOpenSourceLicensesClick"
-        android:text="@string/title_activity_licenses"/>
+        android:text="@string/licenses_title"/>
 
     <TextView
         android:id="@+id/version"

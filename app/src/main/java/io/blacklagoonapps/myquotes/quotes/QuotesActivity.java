@@ -41,7 +41,7 @@ public class QuotesActivity extends ThemedActivity {
 
     boolean validateFieldNotEmpty(TextInputLayout textInputLayout, EditText editText){
         if (editText.getText().toString().trim().isEmpty()) {
-            textInputLayout.setError(getString(R.string.error_field_empty));
+            textInputLayout.setError(getString(R.string.field_empty_error));
             return false;
         }
         else {

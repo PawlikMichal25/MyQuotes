@@ -1,53 +1,71 @@
 <resources>
+    <!-- App -->
     <string name="app_name">Moje Cytaty</string>
 
-    <string name="title_activity_main">Cytaty</string>
-    <string name="title_activity_settings">Ustawienia</string>
-    <string name="title_activity_about">O aplikacji</string>
-    <string name="title_activity_licenses">Licencje open source</string>
-    <string name="title_activity_authors">Autor</string>
-    <string name="title_activity_add_quote">Dodaj cytat</string>
-    <string name="title_activity_edit_quote">Edytuj cytat</string>
 
-    <string name="quotes_tab">Cytaty</string>
-    <string name="authors_tab">Autorzy</string>
+    <!-- Main Activity -->
+    <string name="main_title">@string/quotes</string>
 
-    <string name="search_title">Szukaj</string>
-    <string name="settings">Ustawienia</string>
-    <string name="about">O aplikacji</string>
-    <string name="authors_empty">Tutaj pojawią się autorzy, gdy dodasz nowe cytaty</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Ustawienia</string>
+
+
+    <!-- About -->
+    <string name="about_title">O aplikacji</string>
+
+
+    <!-- Licenses -->
+    <string name="licenses_title">Licencje open source</string>
+
+
+    <!-- Quotes -->
+    <string name="add_quote_title">Dodaj cytat</string>
+    <string name="edit_quote_title">Edytuj cytat</string>
+    <string name="quotes_tab_title">@string/quotes</string>
     <string name="quotes_empty">Brak cytatów</string>
-    <string name="quotes_empty_add_quote">DODAJ CYTAT</string>
-    <string name="favorite_star">Ulubiony</string>
-
+    <string name="quotes_empty_advice">DODAJ CYTAT</string>
     <string name="quotes_hint_first_name">Imię autora</string>
     <string name="quotes_hint_last_name">Nazwisko autora</string>
     <string name="quotes_hint_quote">Cytat</string>
+    <string name="only_this_quote">Edytuj tylko ten cytat</string>
+    <string name="all_quotes">Edytuj wszystkie cytaty tego autora</string>
 
+
+    <!-- Authors -->
+    <string name="authors_title">@string/authors</string>
+    <string name="authors_tab_title">@string/authors</string>
+    <string name="authors_empty">Tutaj pojawią się autorzy, gdy dodasz nowe cytaty</string>
+    <string name="edit_author_dialog_title">Autor został zmieniony</string>
+    <string name="edit_author_dialog_message">Co chcesz zrobić?</string>
+
+
+    <!-- General -->
+    <string name="quotes">Cytaty</string>
+    <string name="authors">Autorzy</string>
+    <string name="search">Szukaj</string>
+    <string name="settings">Ustawienia</string>
+    <string name="about">O aplikacji</string>
+    <string name="favorite_star">Ulubiony</string>
     <string name="production">Produkcja</string>
     <string name="developers">Deweloperzy</string>
     <string name="source_code">Kod źródłowy</string>
     <string name="application">Aplikacja</string>
     <string name="version">Wersja</string>
     <string name="rate_us">Oceń nas</string>
-
     <string name="copy">Kopiuj</string>
-    <string name="clipboard_copied">Cytat skopiowano do schowka</string>
     <string name="save">Zapisz</string>
     <string name="saved">Zapisano</string>
     <string name="share">Udostępnij</string>
     <string name="delete">Usuń</string>
     <string name="deleted">Usunięto</string>
     <string name="cancel">Anuluj</string>
+    <string name="field_empty_error">Pole nie może być puste</string>
+
+    <string name="quote_copied">Cytat skopiowano do schowka</string>
     <string name="share_quote">Udostępnij cytat…</string>
 
-    <string name="edit_author_dialog_title">Autor został zmieniony</string>
-    <string name="edit_author_dialog_message">Co chcesz zrobić?</string>
-    <string name="only_this_quote">Edytuj tylko ten cytat</string>
-    <string name="all_quotes">Edytuj wszystkie cytaty tego autora</string>
-
-    <string name="error_field_empty">Pole nie może być puste</string>
-
+    <!-- Preferences -->
     <string name="preferences_style">Styl</string>
     <string name="preferences_choose_theme">Wybierz motyw</string>
     <string name="preferences_show_star">Pokaż gwiazdkę ulubionych</string>

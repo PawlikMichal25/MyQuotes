@@ -1,53 +1,72 @@
 <resources>
+    <!-- App -->
     <string name="app_name">Meine Zitate</string>
 
-    <string name="title_activity_main">Zitate</string>
-    <string name="title_activity_settings">Einstellungen</string>
-    <string name="title_activity_about">Über das App</string>
-    <string name="title_activity_licenses">Open-Source-Lizenzen</string>
-    <string name="title_activity_authors">Autor</string>
-    <string name="title_activity_add_quote">Zitat hinzufügen</string>
-    <string name="title_activity_edit_quote">Zitat bearbeiten</string>
 
-    <string name="quotes_tab">Zitate</string>
-    <string name="authors_tab">Autoren</string>
+    <!-- Main Activity -->
+    <string name="main_title">@string/quotes</string>
 
-    <string name="search_title">Suchen</string>
-    <string name="settings">Einstellungen</string>
-    <string name="about">Über das App</string>
-    <string name="authors_empty">Hier erscheinen die Autoren, wenn Sie neue Zitate hinzufügen</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Einstellungen</string>
+
+
+    <!-- About -->
+    <string name="about_title">Über das App</string>
+
+
+    <!-- Licenses -->
+    <string name="licenses_title">Open-Source-Lizenzen</string>
+
+
+    <!-- Quotes -->
+    <string name="add_quote_title">Zitat hinzufügen</string>
+    <string name="edit_quote_title">Zitat bearbeiten</string>
+    <string name="quotes_tab_title">@string/quotes</string>
     <string name="quotes_empty">Keine Zitate</string>
-    <string name="quotes_empty_add_quote">ZITAT HINZUFÜGEN</string>
-    <string name="favorite_star">Favorit</string>
-
+    <string name="quotes_empty_advice">ZITAT HINZUFÜGEN</string>
     <string name="quotes_hint_first_name">Autor Vorname</string>
     <string name="quotes_hint_last_name">Autor Nachname</string>
     <string name="quotes_hint_quote">Zitat</string>
+    <string name="only_this_quote">Editieren Sie nur dieses Zitat</string>
+    <string name="all_quotes">Editieren Sie alle Zitate von diesem Autor</string>
 
+
+    <!-- Authors -->
+    <string name="authors_title">@string/authors</string>
+    <string name="authors_tab_title">@string/authors</string>
+    <string name="authors_empty">Hier erscheinen die Autoren, wenn Sie neue Zitate hinzufügen</string>
+    <string name="edit_author_dialog_title">Autor hat sich geändert</string>
+    <string name="edit_author_dialog_message">Was möchten Sie tun?</string>
+
+
+    <!-- General -->
+    <string name="quotes">Zitate</string>
+    <string name="authors">Autoren</string>
+    <string name="search">Suchen</string>
+    <string name="settings">Einstellungen</string>
+    <string name="about">Über das App</string>
+    <string name="favorite_star">Favorit</string>
     <string name="production">Produktion</string>
     <string name="developers">Entwickler</string>
     <string name="source_code">Quelltext</string>
     <string name="application">Applikation</string>
     <string name="version">Version</string>
     <string name="rate_us">Bewerten Sie unsere Anwendungs</string>
-
     <string name="copy">Kopie</string>
-    <string name="clipboard_copied">In Zwischenablage kopiert</string>
     <string name="save">Speichern</string>
     <string name="saved">Gespeichert</string>
     <string name="share">Aktie</string>
     <string name="delete">Löschen</string>
     <string name="deleted">Gelöscht</string>
     <string name="cancel">Abbrechen</string>
+    <string name="field_empty_error">Feld kann nicht leer sein</string>
+
+    <string name="quote_copied">In Zwischenablage kopiert</string>
     <string name="share_quote">Teilen Zitat…</string>
 
-    <string name="edit_author_dialog_title">Autor hat sich geändert</string>
-    <string name="edit_author_dialog_message">Was möchten Sie tun?</string>
-    <string name="only_this_quote">Editieren Sie nur dieses Zitat</string>
-    <string name="all_quotes">Editieren Sie alle Zitate von diesem Autor</string>
 
-    <string name="error_field_empty">Feld kann nicht leer sein</string>
-
+    <!-- Preferences -->
     <string name="preferences_style">Stil</string>
     <string name="preferences_choose_theme">Design auswählen</string>
     <string name="preferences_show_star">Lieblingsstern zeigen</string>

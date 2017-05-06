@@ -217,7 +217,7 @@ public class MainActivity extends ThemedActivity {
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        private String[] fragmentTitles = {getString(R.string.quotes_tab), getString(R.string.authors_tab)};
+        private String[] fragmentTitles = {getString(R.string.quotes_tab_title), getString(R.string.authors_tab_title)};
 
         SectionsPagerAdapter(FragmentManager fm) {
             super(fm);

@@ -197,9 +197,9 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
 
     private void copyToClipboard(String messageText){
         ClipboardManager clipboard = (ClipboardManager) mActivity.getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText(mActivity.getString(R.string.clipboard_copied), messageText);
+        ClipData clip = ClipData.newPlainText(mActivity.getString(R.string.quote_copied), messageText);
         clipboard.setPrimaryClip(clip);
-        Toast.makeText(mActivity, mActivity.getString(R.string.clipboard_copied), Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity, mActivity.getString(R.string.quote_copied), Toast.LENGTH_SHORT).show();
     }
 
     /*

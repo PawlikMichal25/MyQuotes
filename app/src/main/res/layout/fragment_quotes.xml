@@ -49,7 +49,7 @@
             android:clickable="true"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary"
-            android:text="@string/quotes_empty_add_quote"/>
+            android:text="@string/quotes_empty_advice"/>
     </LinearLayout>
 
 </FrameLayout>
