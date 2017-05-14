@@ -5,20 +5,10 @@ public class Quote {
     public static final String TABLE_NAME = "Quotes";
     private Author author;
     private String content;
-    private boolean isFavorite;
 
-    public Quote(Author author, String content, boolean isFavorite){
+    public Quote(Author author, String content){
         this.author = author;
         this.content = content;
-        this.isFavorite = isFavorite;
-    }
-
-    public boolean isFavorite() {
-        return isFavorite;
-    }
-
-    public void setFavorite(boolean favorite) {
-        isFavorite = favorite;
     }
 
     public Author getAuthor() {
@@ -41,7 +31,6 @@ public class Quote {
         public static final String ID = "_id";
         public static final String AUTHOR_ID = "Author_Id";
         public static final String CONTENT = "Content";
-        public static final String FAVORITE = "Favorite";
 
         private Columns(){ }
     }

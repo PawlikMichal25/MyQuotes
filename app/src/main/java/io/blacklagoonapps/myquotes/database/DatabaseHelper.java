@@ -14,7 +14,7 @@ import io.blacklagoonapps.myquotes.model.Quote;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "Quotes";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     public DatabaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
@@ -22,67 +22,105 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(String.format("CREATE TABLE %s (" +
-                "%s INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "%s TEXT NOT NULL, " +
-                "%s TEXT NOT NULL);",
-                Author.TABLE_NAME, Author.Columns.ID, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME));
-        db.execSQL(String.format("CREATE TABLE %s (" +
-                "%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "%s INTEGER NOT NULL, " +
-                "%s TEXT NOT NULL, " +
-                "%s BOOLEAN NOT NULL," +
-                "FOREIGN KEY(%s) REFERENCES %s(%s));",
-                Quote.TABLE_NAME, Quote.Columns.ID, Quote.Columns.AUTHOR_ID, Quote.Columns.CONTENT,
-                Quote.Columns.FAVORITE, Quote.Columns.AUTHOR_ID, Author.TABLE_NAME, Author.Columns.ID));
-
+        createAuthorTable(db);
+        createQuoteTable(db);
         setUpSampleData(db);
     }
 
+    private void createAuthorTable(SQLiteDatabase db){
+        db.execSQL(String.format("CREATE TABLE %s (" +
+                        "%s INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                        "%s TEXT NOT NULL, " +
+                        "%s TEXT NOT NULL);",
+                Author.TABLE_NAME, Author.Columns.ID, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME));
+    }
+
+    private void createQuoteTable(SQLiteDatabase db){
+        db.execSQL(String.format("CREATE TABLE %s (" +
+                        "%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        "%s INTEGER NOT NULL, " +
+                        "%s TEXT NOT NULL, " +
+                        "FOREIGN KEY(%s) REFERENCES %s(%s));",
+                Quote.TABLE_NAME, Quote.Columns.ID, Quote.Columns.AUTHOR_ID, Quote.Columns.CONTENT,
+                Quote.Columns.AUTHOR_ID, Author.TABLE_NAME, Author.Columns.ID));
+    }
+
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        if(oldVersion < 2){
+            // With this update favorite column was removed
+            // SQLite cannot drop columns :C
+            String BACKUP_TABLE = "QuoteBackup";
+
+            // Create backup table
+            db.execSQL(String.format("CREATE TEMPORARY TABLE %s(" +
+                            "%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                            "%s INTEGER NOT NULL, " +
+                            "%s TEXT NOT NULL, " +
+                            "FOREIGN KEY(%s) REFERENCES %s(%s));",
+                    BACKUP_TABLE, Quote.Columns.ID, Quote.Columns.AUTHOR_ID, Quote.Columns.CONTENT,
+                    Quote.Columns.AUTHOR_ID, Author.TABLE_NAME, Author.Columns.ID));
+
+            // Copy data
+            db.execSQL(String.format("INSERT INTO %s SELECT %s, %s, %s FROM %s",
+                    BACKUP_TABLE, Quote.Columns.ID, Quote.Columns.AUTHOR_ID, Quote.Columns.CONTENT, Quote.TABLE_NAME));
+
+            // Drop table Quote
+            db.execSQL(String.format("DROP TABLE %s", Quote.TABLE_NAME));
+
+            // Create table Quote
+            createQuoteTable(db);
+
+            // Copy back the data
+            db.execSQL(String.format("INSERT INTO %s SELECT %s, %s, %s FROM %s",
+                    Quote.TABLE_NAME, Quote.Columns.ID, Quote.Columns.AUTHOR_ID, Quote.Columns.CONTENT, BACKUP_TABLE));
+
+            // Drop temporary table
+            db.execSQL(String.format("DROP TABLE %s", BACKUP_TABLE));
+        }
+    }
 
     private void setUpSampleData(SQLiteDatabase db) {
 
         long id8 = insertAuthor(db, "Janis", "Joplin");
-        insertQuote(db, id8, "I\'d trade all my tomorrows for a single yesterday.", true);
+        insertQuote(db, id8, "I\'d trade all my tomorrows for a single yesterday.");
 
         long id2 = insertAuthor(db, "Albert", "Einstein");
-        insertQuote(db, id2, "A person who never made a mistake never tried anything new.", true);
+        insertQuote(db, id2, "A person who never made a mistake never tried anything new.");
 
         long id11 = insertAuthor(db, "Mark", "Twain");
-        insertQuote(db, id11, "The man who does not read has no advantage over the man who cannot read.", false);
+        insertQuote(db, id11, "The man who does not read has no advantage over the man who cannot read.");
 
         long id4 = insertAuthor(db, "Abraham", "Lincoln");
-        insertQuote(db, id4, "I\'m a slow walker, but I never walk back.", false);
+        insertQuote(db, id4, "I\'m a slow walker, but I never walk back.");
 
         long id1 = insertAuthor(db, "Bob", "Marley");
-        insertQuote(db, id1, "The truth is, everyone is going to hurt you. You just got to find the ones worth suffering for.", false);
+        insertQuote(db, id1, "The truth is, everyone is going to hurt you. You just got to find the ones worth suffering for.");
 
         long id6 = insertAuthor(db, "Oprah", "Winfrey");
-        insertQuote(db, id6, "The biggest adventure you can ever take is to live the life of your dreams.", false);
+        insertQuote(db, id6, "The biggest adventure you can ever take is to live the life of your dreams.");
 
-        insertQuote(db, id11, "Whenever you find yourself on the side of the majority, it is the time to pause and reflect.", false);
-        insertQuote(db, id11, "Do the thing you fear most and the death of fear is certain.", false);
-        insertQuote(db, id11, "There are lies, damned lies and statistics.", false);
+        insertQuote(db, id11, "Whenever you find yourself on the side of the majority, it is the time to pause and reflect.");
+        insertQuote(db, id11, "Do the thing you fear most and the death of fear is certain.");
+        insertQuote(db, id11, "There are lies, damned lies and statistics.");
 
-        insertQuote(db, id2, "Intellectuals solve problems, geniuses prevent them.", false);
-        insertQuote(db, id2, "Imagination is everything. It is the preview of life\'s coming attractions.", false);
+        insertQuote(db, id2, "Intellectuals solve problems, geniuses prevent them.");
+        insertQuote(db, id2, "Imagination is everything. It is the preview of life\'s coming attractions.");
 
         long id3 = insertAuthor(db, "Jimi", "Hendrix");
-        insertQuote(db, id3, "Knowledge speaks, but wisdom listens.", false);
+        insertQuote(db, id3, "Knowledge speaks, but wisdom listens.");
 
         long id7 = insertAuthor(db, "Audrey", "Hepburn");
-        insertQuote(db, id7, "If I get married, I want to be very married.", false);
+        insertQuote(db, id7, "If I get married, I want to be very married.");
 
         long id5 = insertAuthor(db, "John", "Lennon");
-        insertQuote(db, id5, "Time you enjoy wasting, was not wasted.", false);
+        insertQuote(db, id5, "Time you enjoy wasting, was not wasted.");
 
         long id9 = insertAuthor(db, "Alan", "Watts");
-        insertQuote(db, id9, "The only way to make sense out of change is to plunge into it, move with it, and join the dance.", false);
+        insertQuote(db, id9, "The only way to make sense out of change is to plunge into it, move with it, and join the dance.");
 
         long id10 = insertAuthor(db, "Buddha", "");
-        insertQuote(db, id10, "You yourself, as much as anybody in the entire universe, deserve your love and affection.", false);
+        insertQuote(db, id10, "You yourself, as much as anybody in the entire universe, deserve your love and affection.");
 
     }
 
@@ -93,11 +131,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.insert(Author.TABLE_NAME, null, values);
     }
 
-    private long insertQuote(SQLiteDatabase db, long authorId, String content, boolean isFavorite){
+    private long insertQuote(SQLiteDatabase db, long authorId, String content){
         ContentValues values = new ContentValues();
         values.put(Quote.Columns.AUTHOR_ID, authorId);
         values.put(Quote.Columns.CONTENT, content);
-        values.put(Quote.Columns.FAVORITE, isFavorite);
         return db.insert(Quote.TABLE_NAME, null, values);
     }
 
@@ -170,7 +207,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             authorId = cursor.getLong(0);
         else
             authorId = insertAuthor(db, authorFirstName, authorLastName);           // Create new author
-        insertQuote(db, authorId, quoteContent, true);    // TODO Remove favorite field
+        insertQuote(db, authorId, quoteContent);
 
         if (cursor != null) {
             cursor.close();
@@ -243,21 +280,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getQuotesWithAuthorsCursor(SQLiteDatabase db){
-        String query = String.format("SELECT %s, %s, %s, %s FROM %s AS Q INNER JOIN %s as A ON Q.%s = A.%s ORDER BY %s DESC",
-                Quote.Columns.CONTENT, Quote.Columns.FAVORITE, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME,
+        String query = String.format("SELECT %s, %s, %s FROM %s AS Q INNER JOIN %s as A ON Q.%s = A.%s",
+                Quote.Columns.CONTENT, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME,
                 Quote.TABLE_NAME, Author.TABLE_NAME,
-                Quote.Columns.AUTHOR_ID, Author.Columns.ID,
-                Quote.Columns.FAVORITE);
+                Quote.Columns.AUTHOR_ID, Author.Columns.ID);
         return db.rawQuery(query, null);
     }
 
     public Cursor getSingleAuthorQuotesCursor(SQLiteDatabase db, long authorId){
-        String query = String.format("SELECT %s, %s, %s, %s FROM %s as Q INNER JOIN %s as A ON Q.%s = A.%s WHERE %s = %s ORDER BY %s DESC",
-                Quote.Columns.CONTENT, Quote.Columns.FAVORITE, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME,
+        String query = String.format("SELECT %s, %s, %s FROM %s as Q INNER JOIN %s as A ON Q.%s = A.%s WHERE %s = %s",
+                Quote.Columns.CONTENT, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME,
                 Quote.TABLE_NAME, Author.TABLE_NAME,
                 Quote.Columns.AUTHOR_ID, Author.Columns.ID,
-                Quote.Columns.AUTHOR_ID, authorId,
-                Quote.Columns.FAVORITE);
+                Quote.Columns.AUTHOR_ID, authorId);
         return db.rawQuery(query, null);
     }
 
@@ -269,11 +304,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Returns anything (.*) which consists of (w|w|w) words (\b - word boundaries); regex is case insensitive (?i)
         String regex = String.format("(?i).*\\b(%s)\\b.*", searchWords.trim().replaceAll("\\s", "|"));
 
-        String query = String.format("SELECT %s, %s, %s, %s " +
+        String query = String.format("SELECT %s, %s, %s " +
                 "FROM %s as Q INNER JOIN %s as A ON Q.%s == A.%s " +
                 "WHERE %s REGEXP '%s' OR %s REGEXP '%s' OR %s REGEXP '%s' OR " +                   // Regex to match any words at any position
-                "%s LIKE '%%%s%%' OR %s LIKE '%%%s%%' OR %s LIKE '%%%s%%' ORDER BY %s DESC",       // LIKE to match part of words
-                Quote.Columns.CONTENT, Quote.Columns.FAVORITE, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME,
+                "%s LIKE '%%%s%%' OR %s LIKE '%%%s%%' OR %s LIKE '%%%s%%'",       // LIKE to match part of words
+                Quote.Columns.CONTENT, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME,
                 Quote.TABLE_NAME, Author.TABLE_NAME,
                 Quote.Columns.AUTHOR_ID, Author.Columns.ID,
                 Quote.Columns.CONTENT, regex,
@@ -281,8 +316,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Author.Columns.LAST_NAME, regex,
                 Quote.Columns.CONTENT, searchWords,
                 Author.Columns.FIRST_NAME, searchWords,
-                Author.Columns.LAST_NAME, searchWords,
-                Quote.Columns.FAVORITE);
+                Author.Columns.LAST_NAME, searchWords);
 
         return db.rawQuery(query, null);
     }

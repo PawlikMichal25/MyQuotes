@@ -34,7 +34,6 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
     private Preferences preferences;
 
     private int contentColumnIndex;
-    private int favoriteColumnIndex;
     private int firstNameColumnIndex;
     private int lastNameColumnIndex;
 
@@ -95,7 +94,6 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
             mCursor = cursor;
 
         contentColumnIndex = mCursor.getColumnIndex(Quote.Columns.CONTENT);
-        favoriteColumnIndex = mCursor.getColumnIndex(Quote.Columns.FAVORITE);
         firstNameColumnIndex = mCursor.getColumnIndex(Author.Columns.FIRST_NAME);
         lastNameColumnIndex = mCursor.getColumnIndex(Author.Columns.LAST_NAME);
     }
@@ -114,7 +112,6 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
             final String content = mCursor.getString(contentColumnIndex);
             final String firstName = mCursor.getString(firstNameColumnIndex);
             final String lastName = mCursor.getString(lastNameColumnIndex);
-            final boolean favorite = mCursor.getInt(favoriteColumnIndex) != 0;
 
             holder.content.setText(content);
 
@@ -131,7 +128,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        openEditQuoteActivity(content, favorite, firstName, lastName);
+                        openEditQuoteActivity(content, firstName, lastName);
                     }
                 });
 
@@ -146,7 +143,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
         }
     }
 
-    private void openEditQuoteActivity(String content, boolean favorite, String firstName, String lastName){
+    private void openEditQuoteActivity(String content, String firstName, String lastName){
         Intent intent = new Intent(mActivity, EditQuoteActivity.class);
         intent.putExtra(EditQuoteActivity.QUOTE_CONTENT, content);
         intent.putExtra(EditQuoteActivity.AUTHOR_FIRST_NAME, firstName);
