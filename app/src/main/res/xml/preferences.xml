@@ -13,11 +13,6 @@
             app:colorChoices="@array/color_choices"/>
 
         <android.support.v7.preference.SwitchPreferenceCompat
-            android:title="@string/preferences_show_star"
-            android:key="@string/pref_show_star"
-            android:defaultValue="true"/>
-
-        <android.support.v7.preference.SwitchPreferenceCompat
             android:title="@string/preferences_names_display"
             android:key="@string/pref_names_display"
             android:defaultValue="true"/>

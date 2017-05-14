@@ -127,15 +127,6 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
             else
                 holder.author.setVisibility(View.GONE);
 
-            if(preferences.showFavoriteStar){
-                if(favorite)
-                    holder.favorite.setImageResource(R.drawable.full_star);
-                else
-                    holder.favorite.setImageResource(R.drawable.empty_star);
-            }
-            else
-                holder.favorite.setVisibility(View.GONE);
-
             if(preferences.listenToClickEvents){
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -158,7 +149,6 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
     private void openEditQuoteActivity(String content, boolean favorite, String firstName, String lastName){
         Intent intent = new Intent(mActivity, EditQuoteActivity.class);
         intent.putExtra(EditQuoteActivity.QUOTE_CONTENT, content);
-        intent.putExtra(EditQuoteActivity.IS_FAVORITE, favorite);
         intent.putExtra(EditQuoteActivity.AUTHOR_FIRST_NAME, firstName);
         intent.putExtra(EditQuoteActivity.AUTHOR_LAST_NAME, lastName);
 
@@ -234,7 +224,6 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
 
         @BindView(R.id.textview_quote_content) TextView content;
         @BindView(R.id.textview_quote_author) TextView author;
-        @BindView(R.id.imageview_quote_favorite) ImageView favorite;
 
         Holder(View itemView) {
             super(itemView);
@@ -245,16 +234,14 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
     // "Dumb data holder" ;)
     public static class Preferences {
 
-        public Preferences(boolean showAuthor, boolean showFirstNameFirst, boolean showFavoriteStar, boolean listenToClickEvents){
+        public Preferences(boolean showAuthor, boolean showFirstNameFirst, boolean listenToClickEvents){
             this.showAuthor = showAuthor;
             this.showFirstNameFirst = showFirstNameFirst;
-            this.showFavoriteStar = showFavoriteStar;
             this.listenToClickEvents = listenToClickEvents;
         }
 
-        public boolean showAuthor;
-        public boolean showFirstNameFirst;
-        public boolean showFavoriteStar;
-        public boolean listenToClickEvents;
+        boolean showAuthor;
+        boolean showFirstNameFirst;
+        boolean listenToClickEvents;
     }
 }

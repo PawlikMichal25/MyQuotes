@@ -14,7 +14,6 @@ public class QuotesActivity extends ThemedActivity {
 
     EditText authorFirstNameInput;
     EditText authorLastNameInput;
-    CheckBox isFavoriteBox;
     EditText quoteContentInput;
 
     TextInputLayout authorFirstNameInputLayout;
@@ -28,7 +27,6 @@ public class QuotesActivity extends ThemedActivity {
 
         authorFirstNameInput = (EditText) findViewById(R.id.textinputedittext_quotes_first_name);
         authorLastNameInput = (EditText) findViewById(R.id.textinputedittext_quotes_last_name);
-        isFavoriteBox = (CheckBox) findViewById(R.id.checkbox_quotes_favorite);
         quoteContentInput = (EditText) findViewById(R.id.textinputedittext_quotes_quote);
 
         authorFirstNameInputLayout = (TextInputLayout) findViewById(R.id.textinputlayout_quotes_first_name);

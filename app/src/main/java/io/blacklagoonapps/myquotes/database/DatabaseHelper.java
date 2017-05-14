@@ -113,12 +113,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return -1;
     }
 
-    public long findQuoteId(SQLiteDatabase db, long authorId, String content, boolean favorite){
-        String query = String.format("SELECT %s, %s FROM %s WHERE %s = ? AND %s = ? AND %s = ?",
+    public long findQuoteId(SQLiteDatabase db, long authorId, String content){
+        String query = String.format("SELECT %s, %s FROM %s WHERE %s = ? AND %s = ?",
                 Quote.Columns.ID, Quote.Columns.CONTENT, Quote.TABLE_NAME, Quote.Columns.AUTHOR_ID,
-                Quote.Columns.CONTENT, Quote.Columns.FAVORITE);
+                Quote.Columns.CONTENT);
         Cursor cursor = db.rawQuery(query,
-                new String[]{String.valueOf(authorId), content, String.valueOf(favorite ? 1 : 0)});
+                new String[]{String.valueOf(authorId), content});
         if(cursor.moveToFirst()){
             long result =  cursor.getLong(0);
             cursor.close();
@@ -157,8 +157,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return 0;
     }
 
-    public void addQuote(SQLiteDatabase db, String authorFirstName, String authorLastName, String quoteContent,
-                         boolean isFavorite){
+    public void addQuote(SQLiteDatabase db, String authorFirstName, String authorLastName, String quoteContent){
         long authorId;
         // Check if author already exists:
         Cursor cursor = db.query(Author.TABLE_NAME,
@@ -171,7 +170,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             authorId = cursor.getLong(0);
         else
             authorId = insertAuthor(db, authorFirstName, authorLastName);           // Create new author
-        insertQuote(db, authorId, quoteContent, isFavorite);
+        insertQuote(db, authorId, quoteContent, true);    // TODO Remove favorite field
 
         if (cursor != null) {
             cursor.close();
@@ -202,11 +201,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Changes existing quote, identified by quoteId with given values.
      */
-    public int editQuote(SQLiteDatabase db, long quoteId, long authorId, String content, boolean favorite){
+    public int editQuote(SQLiteDatabase db, long quoteId, long authorId, String content){
         ContentValues cv = new ContentValues();
         cv.put(Quote.Columns.AUTHOR_ID, authorId);
         cv.put(Quote.Columns.CONTENT, content);
-        cv.put(Quote.Columns.FAVORITE, favorite);
         return db.update(Quote.TABLE_NAME, cv, Quote.Columns.ID + "=?", new String[]{String.valueOf(quoteId)});
     }
 

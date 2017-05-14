@@ -48,8 +48,6 @@ public class QuotesFragment extends Fragment {
                 authorId == -1,
                 PreferenceManager.getDefaultSharedPreferences(getContext()).
                         getBoolean(getContext().getString(R.string.pref_names_display), true),
-                PreferenceManager.getDefaultSharedPreferences(getContext()).
-                        getBoolean(getContext().getString(R.string.pref_show_star), true),
                 true);
 
         if(authorId == -1)

@@ -21,13 +21,11 @@ import io.blacklagoonapps.myquotes.command.CommandWrapper;
 public class EditQuoteActivity extends QuotesActivity {
 
     public static final String QUOTE_CONTENT = "QUOTE_CONTENT";
-    public static final String IS_FAVORITE = "IS_FAVORITE";
     public static final String AUTHOR_FIRST_NAME = "AUTHOR_FIRST_NAME";
     public static final String AUTHOR_LAST_NAME = "AUTHOR_LAST_NAME";
 
     private String authorFirstName;
     private String authorLastName;
-    private boolean isFavorite;
     private String quoteContent;
 
     @Override
@@ -38,7 +36,6 @@ public class EditQuoteActivity extends QuotesActivity {
 
         authorFirstName = intent.getStringExtra(AUTHOR_FIRST_NAME);
         authorLastName = intent.getStringExtra(AUTHOR_LAST_NAME);
-        isFavorite = intent.getBooleanExtra(IS_FAVORITE, false);
         quoteContent = intent.getStringExtra(QUOTE_CONTENT);
 
         authorFirstNameInputLayout.setHintAnimationEnabled(false);
@@ -47,8 +44,6 @@ public class EditQuoteActivity extends QuotesActivity {
         authorLastNameInputLayout.setHintAnimationEnabled(false);   //Heh https://code.google.com/p/android/issues/detail?id=178168&thanks=178168&ts=1435254358
         authorLastNameInput.setText(authorLastName);
         authorLastNameInputLayout.setHintAnimationEnabled(true);
-
-        isFavoriteBox.setChecked(isFavorite);
 
         quoteContentInputLayout.setHintAnimationEnabled(false);
         quoteContentInput.setText(quoteContent);
@@ -65,7 +60,7 @@ public class EditQuoteActivity extends QuotesActivity {
         final DatabaseHelper databaseHelper = new DatabaseHelper(this);
         final SQLiteDatabase db = databaseHelper.getWritableDatabase();
         final long authorId = databaseHelper.findAuthorId(db, authorFirstName, authorLastName);
-        final long quoteId = databaseHelper.findQuoteId(db, authorId, quoteContent, isFavorite);
+        final long quoteId = databaseHelper.findQuoteId(db, authorId, quoteContent);
 
         switch(item.getItemId()){
             case R.id.item_editquotes_save:
@@ -78,9 +73,9 @@ public class EditQuoteActivity extends QuotesActivity {
                     final String lastNameInput = authorLastNameInput.getText().toString().trim();
                     final String contentInput = quoteContentInput.getText().toString().trim();
 
-                    // Quote's content or Favorite field have changed
-                    if (!quoteContent.equals(contentInput) || isFavorite != isFavoriteBox.isChecked()) {
-                        databaseHelper.editQuote(db, quoteId, authorId, contentInput, isFavoriteBox.isChecked());
+                    // Quote's content have changed
+                    if (!quoteContent.equals(contentInput)) {
+                        databaseHelper.editQuote(db, quoteId, authorId, contentInput);
                     }
 
                     long newAuthorId = -1;

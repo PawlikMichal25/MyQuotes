@@ -29,8 +29,7 @@ public class AddQuoteActivity extends QuotesActivity {
                     databaseHelper.addQuote(db,
                             authorFirstNameInput.getText().toString().trim(),
                             authorLastNameInput.getText().toString().trim(),
-                            quoteContentInput.getText().toString().trim(),
-                            isFavoriteBox.isChecked());
+                            quoteContentInput.getText().toString().trim());
 
                     Toast toast = Toast.makeText(this, getString(R.string.saved), Toast.LENGTH_SHORT);
                     toast.show();
