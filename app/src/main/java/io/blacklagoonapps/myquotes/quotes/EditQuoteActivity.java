@@ -65,13 +65,19 @@ public class EditQuoteActivity extends QuotesActivity {
         switch(item.getItemId()){
             case R.id.item_editquotes_save:
 
+                final String firstNameInput = authorFirstNameInput.getText().toString().trim();
+                final String lastNameInput = authorLastNameInput.getText().toString().trim();
+                final String contentInput = quoteContentInput.getText().toString().trim();
+
+                if(firstNameInput.equals(authorFirstName) && lastNameInput.equals(authorLastName) && contentInput.equals(quoteContent)){
+                    finish();
+                    return true;
+                }
+
                 // Tmp variables, because if they were both in IF the second one might not be invoked
                 boolean fn = validateFieldNotEmpty(authorFirstNameInputLayout, authorFirstNameInput);
                 boolean qc = validateFieldNotEmpty(quoteContentInputLayout, quoteContentInput);
                 if(fn && qc) {
-                    final String firstNameInput = authorFirstNameInput.getText().toString().trim();
-                    final String lastNameInput = authorLastNameInput.getText().toString().trim();
-                    final String contentInput = quoteContentInput.getText().toString().trim();
 
                     // Quote's content have changed
                     if (!quoteContent.equals(contentInput)) {

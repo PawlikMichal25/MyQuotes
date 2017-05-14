@@ -20,6 +20,15 @@ public class AddQuoteActivity extends QuotesActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_addquotes_save:
+
+                final String firstNameInput = authorFirstNameInput.getText().toString().trim();
+                final String lastNameInput = authorLastNameInput.getText().toString().trim();
+                final String contentInput = quoteContentInput.getText().toString().trim();
+                if(firstNameInput.isEmpty() && lastNameInput.isEmpty() && contentInput.isEmpty()){
+                    finish();
+                    return true;
+                }
+
                 // Tmp variables, because if they were both in IF the second one might not be invoked
                 boolean fn = validateFieldNotEmpty(authorFirstNameInputLayout, authorFirstNameInput);
                 boolean qc = validateFieldNotEmpty(quoteContentInputLayout, quoteContentInput);
@@ -27,9 +36,9 @@ public class AddQuoteActivity extends QuotesActivity {
                     DatabaseHelper databaseHelper = new DatabaseHelper(this);
                     SQLiteDatabase db = databaseHelper.getWritableDatabase();
                     databaseHelper.addQuote(db,
-                            authorFirstNameInput.getText().toString().trim(),
-                            authorLastNameInput.getText().toString().trim(),
-                            quoteContentInput.getText().toString().trim());
+                            firstNameInput,
+                            lastNameInput,
+                            contentInput);
 
                     Toast toast = Toast.makeText(this, getString(R.string.saved), Toast.LENGTH_SHORT);
                     toast.show();
