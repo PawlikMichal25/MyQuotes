@@ -15,10 +15,10 @@
         android:id="@+id/textview_about_production"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:textAppearance="@android:style/TextAppearance.Medium"
-        android:text="@string/production"/>
+        android:layout_alignParentTop="true"
+        android:text="@string/production"
+        android:textAppearance="@android:style/TextAppearance.Medium"/>
 
     <TextView
         android:id="@+id/textview_about_developers"
@@ -33,8 +33,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textview_about_developers"
-        android:textStyle="bold"
-        android:text="@string/app_authors"/>
+        android:text="@string/app_authors"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textview_about_logo_designer"
@@ -49,8 +49,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textview_about_logo_designer"
-        android:textStyle="bold"
-        android:text="@string/logo_designer_name"/>
+        android:text="@string/logo_designer_name"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textview_about_application"
@@ -58,8 +58,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textview_about_logo_designer_name"
         android:paddingTop="20dp"
-        android:textAppearance="@android:style/TextAppearance.Medium"
-        android:text="@string/application"/>
+        android:text="@string/application"
+        android:textAppearance="@android:style/TextAppearance.Medium"/>
 
     <TextView
         android:id="@+id/textview_about_source_code"
@@ -82,10 +82,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textview_about_source_code_url"
-        android:paddingTop="5dp"
-        android:textColor="?android:attr/textColorLink"
         android:onClick="onOpenSourceLicensesClick"
-        android:text="@string/licenses_title"/>
+        android:paddingTop="5dp"
+        android:text="@string/licenses_title"
+        android:textColor="?android:attr/textColorLink"/>
 
     <TextView
         android:id="@+id/textview_about_version"
@@ -106,10 +106,10 @@
         android:id="@+id/button_about_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:onClick="onRateUsClick"
-        android:theme="@style/CustomButton"
-        android:text="@string/rate_us"/>
+        android:text="@string/rate_us"
+        android:theme="@style/CustomButton"/>
 
 </RelativeLayout>

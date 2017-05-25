@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+                                                xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.v7.preference.PreferenceCategory
-        android:title="@string/preferences_style"
-        android:key="pref_cat_style">
+        android:key="pref_cat_style"
+        android:title="@string/preferences_style">
 
         <com.kizitonwose.colorpreferencecompat.ColorPreferenceCompat
-            android:title="@string/preferences_choose_theme"
-            android:key="@string/pref_style_color"
             android:defaultValue="@color/blue700"
-            app:numColumns="3"
-            app:colorChoices="@array/color_choices"/>
+            android:key="@string/pref_style_color"
+            android:title="@string/preferences_choose_theme"
+            app:colorChoices="@array/color_choices"
+            app:numColumns="3"/>
 
         <android.support.v7.preference.SwitchPreferenceCompat
-            android:title="@string/preferences_names_display"
+            android:defaultValue="true"
             android:key="@string/pref_names_display"
-            android:defaultValue="true"/>
+            android:title="@string/preferences_names_display"/>
 
     </android.support.v7.preference.PreferenceCategory>
 
