@@ -37,12 +37,11 @@ public class QuotesActivity extends ThemedActivity {
         quoteContentInput.addTextChangedListener(new MyTextWatcher(quoteContentInputLayout, quoteContentInput));
     }
 
-    boolean validateFieldNotEmpty(TextInputLayout textInputLayout, EditText editText){
+    boolean validateFieldNotEmpty(TextInputLayout textInputLayout, EditText editText) {
         if (editText.getText().toString().trim().isEmpty()) {
             textInputLayout.setError(getString(R.string.field_empty_error));
             return false;
-        }
-        else {
+        } else {
             textInputLayout.setErrorEnabled(false);
             return true;
         }
@@ -53,7 +52,7 @@ public class QuotesActivity extends ThemedActivity {
         private TextInputLayout textInputLayout;
         private EditText editText;
 
-        private MyTextWatcher(TextInputLayout textInputLayout, EditText editText){
+        private MyTextWatcher(TextInputLayout textInputLayout, EditText editText) {
             this.textInputLayout = textInputLayout;
             this.editText = editText;
         }

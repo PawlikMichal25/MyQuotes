@@ -10,7 +10,7 @@ import android.support.v7.preference.PreferenceManager;
 import io.blacklagoonapps.myquotes.R;
 
 
-public class ThemedActivity extends AppCompatActivity{
+public class ThemedActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +19,12 @@ public class ThemedActivity extends AppCompatActivity{
     }
 
 
-    private void setTheme(){
+    private void setTheme() {
         Context ctx = getApplicationContext();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
         int color = prefs.getInt(getString(R.string.pref_style_color), ContextCompat.getColor(ctx, R.color.blue700));
 
-        if(this instanceof MainActivity){
+        if (this instanceof MainActivity) {
             if (color == ContextCompat.getColor(ctx, R.color.indigo700)) {
                 setTheme(R.style.Indigo_NoActionBar);
             } else if (color == ContextCompat.getColor(ctx, R.color.blue700)) {
@@ -38,8 +38,7 @@ public class ThemedActivity extends AppCompatActivity{
             } else if (color == ContextCompat.getColor(ctx, R.color.deepOrange700)) {
                 setTheme(R.style.DeepOrange_NoActionBar);
             }
-        }
-        else {
+        } else {
             if (color == ContextCompat.getColor(ctx, R.color.indigo700)) {
                 setTheme(R.style.Indigo);
             } else if (color == ContextCompat.getColor(ctx, R.color.blue700)) {

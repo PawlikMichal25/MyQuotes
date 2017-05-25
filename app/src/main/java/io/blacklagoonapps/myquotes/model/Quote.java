@@ -6,7 +6,7 @@ public class Quote {
     private Author author;
     private String content;
 
-    public Quote(Author author, String content){
+    public Quote(Author author, String content) {
         this.author = author;
         this.content = content;
     }
@@ -32,6 +32,7 @@ public class Quote {
         public static final String AUTHOR_ID = "Author_Id";
         public static final String CONTENT = "Content";
 
-        private Columns(){ }
+        private Columns() {
+        }
     }
 }

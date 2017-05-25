@@ -25,7 +25,7 @@ public class AuthorsActivity extends ThemedActivity {
         setContentView(R.layout.activity_authors);
 
         quotesFragment = new QuotesFragment();
-        quotesFragment.setAuthorId((long)getIntent().getExtras().get(AUTHOR_ID));
+        quotesFragment.setAuthorId((long) getIntent().getExtras().get(AUTHOR_ID));
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.framelayout_authors, quotesFragment);
@@ -39,14 +39,14 @@ public class AuthorsActivity extends ThemedActivity {
         setTitle();
     }
 
-    private void setUpAuthor(){
+    private void setUpAuthor() {
         Author newAuthor = quotesFragment.getAuthorAt(0);
-        if(newAuthor != null)
+        if (newAuthor != null)
             this.author = newAuthor;
     }
 
-    private void setTitle(){
-        if(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(getString(R.string.pref_names_display), true))
+    private void setTitle() {
+        if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(getString(R.string.pref_names_display), true))
             getSupportActionBar().setTitle(author.getFirstName() + " " + author.getLastName());
         else
             getSupportActionBar().setTitle(author.getLastName() + " " + author.getFirstName());
@@ -55,15 +55,15 @@ public class AuthorsActivity extends ThemedActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == NEW_AUTHOR_ID){
+        if (resultCode == NEW_AUTHOR_ID) {
             setIntent(data);
         }
     }
 
     @Override
-    public void onRestart(){
+    public void onRestart() {
         super.onRestart();
-        quotesFragment.setAuthorId((long)getIntent().getExtras().get(AUTHOR_ID));
+        quotesFragment.setAuthorId((long) getIntent().getExtras().get(AUTHOR_ID));
         quotesFragment.restart();
     }
 }

@@ -16,7 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "Quotes";
     private static final int DB_VERSION = 2;
 
-    public DatabaseHelper(Context context){
+    public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -27,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         setUpSampleData(db);
     }
 
-    private void createAuthorTable(SQLiteDatabase db){
+    private void createAuthorTable(SQLiteDatabase db) {
         db.execSQL(String.format("CREATE TABLE %s (" +
                         "%s INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                         "%s TEXT NOT NULL, " +
@@ -35,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Author.TABLE_NAME, Author.Columns.ID, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME));
     }
 
-    private void createQuoteTable(SQLiteDatabase db){
+    private void createQuoteTable(SQLiteDatabase db) {
         db.execSQL(String.format("CREATE TABLE %s (" +
                         "%s INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "%s INTEGER NOT NULL, " +
@@ -47,7 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion < 2){
+        if (oldVersion < 2) {
             // With this update favorite column was removed
             // SQLite cannot drop columns :C
             String BACKUP_TABLE = "QuoteBackup";
@@ -124,77 +124,76 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public long insertAuthor(SQLiteDatabase db, String firstName, String lastName){
+    public long insertAuthor(SQLiteDatabase db, String firstName, String lastName) {
         ContentValues values = new ContentValues();
         values.put(Author.Columns.FIRST_NAME, firstName);
         values.put(Author.Columns.LAST_NAME, lastName);
         return db.insert(Author.TABLE_NAME, null, values);
     }
 
-    private long insertQuote(SQLiteDatabase db, long authorId, String content){
+    private long insertQuote(SQLiteDatabase db, long authorId, String content) {
         ContentValues values = new ContentValues();
         values.put(Quote.Columns.AUTHOR_ID, authorId);
         values.put(Quote.Columns.CONTENT, content);
         return db.insert(Quote.TABLE_NAME, null, values);
     }
 
-    public long findAuthorId(SQLiteDatabase db, String authorFirstName, String authorLastName){
+    public long findAuthorId(SQLiteDatabase db, String authorFirstName, String authorLastName) {
         String query = String.format("SELECT %s FROM %s WHERE %s = ? AND %s = ?",
                 Author.Columns.ID, Author.TABLE_NAME, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME);
         Cursor cursor = db.rawQuery(query, new String[]{authorFirstName, authorLastName});
-        if(cursor.moveToFirst()) {
-            long result =  cursor.getLong(0);
+        if (cursor.moveToFirst()) {
+            long result = cursor.getLong(0);
             cursor.close();
             return result;
         }
         return -1;
     }
 
-    public long findQuoteId(SQLiteDatabase db, long authorId, String content){
+    public long findQuoteId(SQLiteDatabase db, long authorId, String content) {
         String query = String.format("SELECT %s, %s FROM %s WHERE %s = ? AND %s = ?",
                 Quote.Columns.ID, Quote.Columns.CONTENT, Quote.TABLE_NAME, Quote.Columns.AUTHOR_ID,
                 Quote.Columns.CONTENT);
         Cursor cursor = db.rawQuery(query,
                 new String[]{String.valueOf(authorId), content});
-        if(cursor.moveToFirst()){
-            long result =  cursor.getLong(0);
+        if (cursor.moveToFirst()) {
+            long result = cursor.getLong(0);
             cursor.close();
             return result;
         }
         return -1;
     }
 
-    public Author findAuthorById(SQLiteDatabase db, long authorId){
+    public Author findAuthorById(SQLiteDatabase db, long authorId) {
         String query = String.format("SELECT %s, %s FROM %s WHERE %s = %s",
                 Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME,
                 Author.TABLE_NAME,
                 Author.Columns.ID, authorId);
         Cursor cursor = db.rawQuery(query, null);
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             Author author = new Author(cursor.getString(0), cursor.getString(1));
             cursor.close();
             return author;
-        }
-        else
+        } else
             return null;
     }
 
     /**
      * Returns number of quotes with given Author_id
      */
-    public int countQuotes(SQLiteDatabase db, long authorId){
+    public int countQuotes(SQLiteDatabase db, long authorId) {
         String query = String.format("SELECT COUNT(%s) FROM %s WHERE %s = ?",
                 Quote.Columns.ID, Quote.TABLE_NAME, Quote.Columns.AUTHOR_ID);
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(authorId)});
-        if(cursor.moveToFirst()){
-            int result =  cursor.getInt(0);
+        if (cursor.moveToFirst()) {
+            int result = cursor.getInt(0);
             cursor.close();
             return result;
         }
         return 0;
     }
 
-    public void addQuote(SQLiteDatabase db, String authorFirstName, String authorLastName, String quoteContent){
+    public void addQuote(SQLiteDatabase db, String authorFirstName, String authorLastName, String quoteContent) {
         long authorId;
         // Check if author already exists:
         Cursor cursor = db.query(Author.TABLE_NAME,
@@ -215,19 +214,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public int deleteQuote(SQLiteDatabase db, long quoteId){
+    public int deleteQuote(SQLiteDatabase db, long quoteId) {
         String query = String.format("SELECT %s FROM %s WHERE %s = ?", Quote.Columns.AUTHOR_ID, Quote.TABLE_NAME,
                 Quote.Columns.ID);
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(quoteId)});
 
         // Check if this author has other quotes
-        if(cursor.moveToFirst()){
-            long authorId =  cursor.getLong(0);
+        if (cursor.moveToFirst()) {
+            long authorId = cursor.getLong(0);
             String countQuery = String.format("SELECT COUNT(%s) AS Ids FROM %s WHERE %s = ?",
                     Quote.Columns.ID, Quote.TABLE_NAME, Quote.Columns.AUTHOR_ID);
             Cursor othersCursor = db.rawQuery(countQuery, new String[]{String.valueOf(authorId)});
 
-            if(othersCursor.moveToFirst() && othersCursor.getInt(0) < 2)
+            if (othersCursor.moveToFirst() && othersCursor.getInt(0) < 2)
                 db.delete(Author.TABLE_NAME, Author.Columns.ID + "=?", new String[]{String.valueOf(authorId)});
             othersCursor.close();
         }
@@ -238,7 +237,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Changes existing quote, identified by quoteId with given values.
      */
-    public int editQuote(SQLiteDatabase db, long quoteId, long authorId, String content){
+    public int editQuote(SQLiteDatabase db, long quoteId, long authorId, String content) {
         ContentValues cv = new ContentValues();
         cv.put(Quote.Columns.AUTHOR_ID, authorId);
         cv.put(Quote.Columns.CONTENT, content);
@@ -248,7 +247,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Changes Author_id of quote with given quoteId
      */
-    public void editSingleQuotesAuthor(SQLiteDatabase db, long quoteId, long authorId){
+    public void editSingleQuotesAuthor(SQLiteDatabase db, long quoteId, long authorId) {
         ContentValues cv = new ContentValues();
         cv.put(Quote.Columns.AUTHOR_ID, authorId);
         db.update(Quote.TABLE_NAME, cv, Quote.Columns.ID + "=?", new String[]{String.valueOf(quoteId)});
@@ -258,7 +257,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Changes Author_id of quotes with given oldAuthorId to newAuthorId and deletes author with oldAuthorId if there
      * are no remaining quotes by him/her.
      */
-    public void editQuotesAuthor(SQLiteDatabase db, long oldAuthorId, long newAuthorId){
+    public void editQuotesAuthor(SQLiteDatabase db, long oldAuthorId, long newAuthorId) {
         ContentValues cv = new ContentValues();
         cv.put(Quote.Columns.AUTHOR_ID, newAuthorId);
         db.update(Quote.TABLE_NAME, cv, Quote.Columns.AUTHOR_ID + "=?", new String[]{String.valueOf(oldAuthorId)});
@@ -268,18 +267,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Changes existing author, identified by authorId with given values.
      */
-    public int editAuthor(SQLiteDatabase db, long authorId, String firstName, String lastName){
+    public int editAuthor(SQLiteDatabase db, long authorId, String firstName, String lastName) {
         ContentValues cv = new ContentValues();
         cv.put(Author.Columns.FIRST_NAME, firstName);
         cv.put(Author.Columns.LAST_NAME, lastName);
         return db.update(Author.TABLE_NAME, cv, Author.Columns.ID + "=?", new String[]{String.valueOf(authorId)});
     }
 
-    public int deleteAuthor(SQLiteDatabase db, long authorId){
+    public int deleteAuthor(SQLiteDatabase db, long authorId) {
         return db.delete(Author.TABLE_NAME, Author.Columns.ID + "=?", new String[]{String.valueOf(authorId)});
     }
 
-    public Cursor getQuotesWithAuthorsCursor(SQLiteDatabase db){
+    public Cursor getQuotesWithAuthorsCursor(SQLiteDatabase db) {
         String query = String.format("SELECT %s, %s, %s FROM %s AS Q INNER JOIN %s as A ON Q.%s = A.%s",
                 Quote.Columns.CONTENT, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME,
                 Quote.TABLE_NAME, Author.TABLE_NAME,
@@ -287,7 +286,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery(query, null);
     }
 
-    public Cursor getSingleAuthorQuotesCursor(SQLiteDatabase db, long authorId){
+    public Cursor getSingleAuthorQuotesCursor(SQLiteDatabase db, long authorId) {
         String query = String.format("SELECT %s, %s, %s FROM %s as Q INNER JOIN %s as A ON Q.%s = A.%s WHERE %s = %s",
                 Quote.Columns.CONTENT, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME,
                 Quote.TABLE_NAME, Author.TABLE_NAME,
@@ -299,15 +298,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /*
        Returns cursor with quotes (or their authors) comprising any of the given words
      */
-    public Cursor getQuotesWithAuthorsContainingWords(SQLiteDatabase db, String searchWords){
+    public Cursor getQuotesWithAuthorsContainingWords(SQLiteDatabase db, String searchWords) {
 
         // Returns anything (.*) which consists of (w|w|w) words (\b - word boundaries); regex is case insensitive (?i)
         String regex = String.format("(?i).*\\b(%s)\\b.*", searchWords.trim().replaceAll("\\s", "|"));
 
         String query = String.format("SELECT %s, %s, %s " +
-                "FROM %s as Q INNER JOIN %s as A ON Q.%s == A.%s " +
-                "WHERE %s REGEXP '%s' OR %s REGEXP '%s' OR %s REGEXP '%s' OR " +                   // Regex to match any words at any position
-                "%s LIKE '%%%s%%' OR %s LIKE '%%%s%%' OR %s LIKE '%%%s%%'",       // LIKE to match part of words
+                        "FROM %s as Q INNER JOIN %s as A ON Q.%s == A.%s " +
+                        "WHERE %s REGEXP '%s' OR %s REGEXP '%s' OR %s REGEXP '%s' OR " +                   // Regex to match any words at any position
+                        "%s LIKE '%%%s%%' OR %s LIKE '%%%s%%' OR %s LIKE '%%%s%%'",       // LIKE to match part of words
                 Quote.Columns.CONTENT, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME,
                 Quote.TABLE_NAME, Author.TABLE_NAME,
                 Quote.Columns.AUTHOR_ID, Author.Columns.ID,

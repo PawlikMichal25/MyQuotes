@@ -29,7 +29,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
 
     // Needed for startActivityForResult. Alternatively could be used given context in holder, but the question is, if it is always an instance of activity?
     private Activity mActivity;
-    
+
     private Cursor mCursor;
     private Preferences preferences;
 
@@ -37,19 +37,19 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
     private int firstNameColumnIndex;
     private int lastNameColumnIndex;
 
-    public QuotesAdapter(Activity activity, Preferences preferences){
+    public QuotesAdapter(Activity activity, Preferences preferences) {
         this.preferences = preferences;
         this.mActivity = activity;
         changeDataSet(activity);
     }
 
-    public QuotesAdapter(Activity activity, Preferences preferences, long authorId){
+    public QuotesAdapter(Activity activity, Preferences preferences, long authorId) {
         this.preferences = preferences;
         this.mActivity = activity;
         changeDataSet(activity, authorId);
     }
 
-    public void changeDataSet(Activity activity){
+    public void changeDataSet(Activity activity) {
         this.mActivity = activity;
         DatabaseHelper databaseHelper = new DatabaseHelper(activity);
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
@@ -59,7 +59,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
         updateCursor(cursor);
     }
 
-    public void changeDataSet(Activity activity, long authorId){
+    public void changeDataSet(Activity activity, long authorId) {
         this.mActivity = activity;
         DatabaseHelper databaseHelper = new DatabaseHelper(activity);
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
@@ -69,7 +69,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
         updateCursor(cursor);
     }
 
-    public void changeDataSet(Activity activity, String searchWords){
+    public void changeDataSet(Activity activity, String searchWords) {
         this.mActivity = activity;
         DatabaseHelper databaseHelper = new DatabaseHelper(activity);
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
@@ -84,13 +84,12 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
             return;
         }
 
-        if(mCursor != null){
+        if (mCursor != null) {
             Cursor old = mCursor;
             mCursor = cursor;
             notifyDataSetChanged();
             old.close();
-        }
-        else
+        } else
             mCursor = cursor;
 
         contentColumnIndex = mCursor.getColumnIndex(Quote.Columns.CONTENT);
@@ -108,23 +107,22 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
 
     @Override
     public void onBindViewHolder(QuotesAdapter.Holder holder, int position) {
-        if(mCursor.moveToPosition(position)){
+        if (mCursor.moveToPosition(position)) {
             final String content = mCursor.getString(contentColumnIndex);
             final String firstName = mCursor.getString(firstNameColumnIndex);
             final String lastName = mCursor.getString(lastNameColumnIndex);
 
             holder.content.setText(content);
 
-            if(preferences.showAuthor) {
+            if (preferences.showAuthor) {
                 if (preferences.showFirstNameFirst)
                     holder.author.setText(firstName + " " + lastName);
                 else
                     holder.author.setText(lastName + " " + firstName);
-            }
-            else
+            } else
                 holder.author.setVisibility(View.GONE);
 
-            if(preferences.listenToClickEvents){
+            if (preferences.listenToClickEvents) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -132,9 +130,9 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
                     }
                 });
 
-                holder.itemView.setOnLongClickListener(new View.OnLongClickListener(){
+                holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
-                    public boolean onLongClick(View v){
+                    public boolean onLongClick(View v) {
                         openShareCopyDialog(content, firstName, lastName);
                         return true;
                     }
@@ -143,7 +141,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
         }
     }
 
-    private void openEditQuoteActivity(String content, String firstName, String lastName){
+    private void openEditQuoteActivity(String content, String firstName, String lastName) {
         Intent intent = new Intent(mActivity, EditQuoteActivity.class);
         intent.putExtra(EditQuoteActivity.QUOTE_CONTENT, content);
         intent.putExtra(EditQuoteActivity.AUTHOR_FIRST_NAME, firstName);
@@ -152,7 +150,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
         mActivity.startActivityForResult(intent, 1);
     }
 
-    private void openShareCopyDialog(String content, String firstName, String lastName){
+    private void openShareCopyDialog(String content, String firstName, String lastName) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
 
         final String fullQuote = prepareFullQuote(content, firstName, lastName);
@@ -160,7 +158,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
         builder.setTitle(fullQuote)
                 .setItems(R.array.share_copy, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        switch(which){
+                        switch (which) {
                             case 0:
                                 sharePlainText(fullQuote);
                                 break;
@@ -174,7 +172,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
         builder.create().show();
     }
 
-    private void sharePlainText(String messageText){
+    private void sharePlainText(String messageText) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, messageText);
@@ -182,7 +180,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
         mActivity.startActivity(chosenIntent);
     }
 
-    private void copyToClipboard(String messageText){
+    private void copyToClipboard(String messageText) {
         ClipboardManager clipboard = (ClipboardManager) mActivity.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText(mActivity.getString(R.string.quote_copied), messageText);
         clipboard.setPrimaryClip(clip);
@@ -193,7 +191,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
         "content" firstName lastName
         String concatenation used intentionally
     */
-    private String prepareFullQuote(String content, String firstName, String lastName){
+    private String prepareFullQuote(String content, String firstName, String lastName) {
         return "\"" +
                 content +
                 "\"" +
@@ -209,9 +207,9 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
     }
 
     @Nullable
-    public Author getAuthorAt(int position){
+    public Author getAuthorAt(int position) {
         Author author = null;
-        if(mCursor.moveToPosition(position)){
+        if (mCursor.moveToPosition(position)) {
             author = new Author(mCursor.getString(firstNameColumnIndex), mCursor.getString(lastNameColumnIndex));
         }
         return author;
@@ -219,8 +217,10 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
 
     static class Holder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.textview_quote_content) TextView content;
-        @BindView(R.id.textview_quote_author) TextView author;
+        @BindView(R.id.textview_quote_content)
+        TextView content;
+        @BindView(R.id.textview_quote_author)
+        TextView author;
 
         Holder(View itemView) {
             super(itemView);
@@ -231,7 +231,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
     // "Dumb data holder" ;)
     public static class Preferences {
 
-        public Preferences(boolean showAuthor, boolean showFirstNameFirst, boolean listenToClickEvents){
+        public Preferences(boolean showAuthor, boolean showFirstNameFirst, boolean listenToClickEvents) {
             this.showAuthor = showAuthor;
             this.showFirstNameFirst = showFirstNameFirst;
             this.listenToClickEvents = listenToClickEvents;

@@ -24,7 +24,7 @@ public class AddQuoteActivity extends QuotesActivity {
                 final String firstNameInput = authorFirstNameInput.getText().toString().trim();
                 final String lastNameInput = authorLastNameInput.getText().toString().trim();
                 final String contentInput = quoteContentInput.getText().toString().trim();
-                if(firstNameInput.isEmpty() && lastNameInput.isEmpty() && contentInput.isEmpty()){
+                if (firstNameInput.isEmpty() && lastNameInput.isEmpty() && contentInput.isEmpty()) {
                     finish();
                     return true;
                 }

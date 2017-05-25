@@ -54,26 +54,26 @@ public class MainActivity extends ThemedActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(getIntent().hasExtra(CURRENT_TAB)){
+        if (getIntent().hasExtra(CURRENT_TAB)) {
             TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout_main);
             TabLayout.Tab tab = tabLayout.getTabAt(getIntent().getIntExtra(CURRENT_TAB, 0));
             getIntent().removeExtra(CURRENT_TAB);
-            if(tab != null)
+            if (tab != null)
                 tab.select();
         }
     }
 
     @Override
-    protected void onRestart(){
+    protected void onRestart() {
         super.onRestart();
-        ((QuotesFragment)fragments[0]).restart();
-        ((AuthorsFragment)fragments[1]).initFragment();
+        ((QuotesFragment) fragments[0]).restart();
+        ((AuthorsFragment) fragments[1]).initFragment();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == SettingsActivity.THEME_CHANGED){
+        if (resultCode == SettingsActivity.THEME_CHANGED) {
             // Using recreate() leaded to Exception: Performing pause of activity that is not resumed
             finish();
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -81,7 +81,7 @@ public class MainActivity extends ThemedActivity {
         }
     }
 
-    private void setUpFloatingAddButton(){
+    private void setUpFloatingAddButton() {
         floatingAddButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddQuoteActivity.class);
@@ -90,19 +90,19 @@ public class MainActivity extends ThemedActivity {
         });
     }
 
-    private void setUpViewPager(){
+    private void setUpViewPager() {
         viewPager = (ViewPager) findViewById(R.id.viewpager_main);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
 
             @Override
             public void onPageSelected(int position) {
                 currentTab = position;
-                if (position == 0){
+                if (position == 0) {
                     floatingAddButton.show();
-                }
-                else if (position == 1){
+                } else if (position == 1) {
                     floatingAddButton.hide();
                 }
                 invalidateOptionsMenu();
@@ -110,15 +110,16 @@ public class MainActivity extends ThemedActivity {
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {}
+            public void onPageScrollStateChanged(int state) {
+            }
 
         });
         viewPager.setAdapter(sectionsPagerAdapter);
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu){
-        if(currentTab == 0)
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (currentTab == 0)
             menu.findItem(R.id.item_main_search).setVisible(true);
         else
             menu.findItem(R.id.item_main_search).setVisible(false);
@@ -132,15 +133,15 @@ public class MainActivity extends ThemedActivity {
 
         tabLayout.setupWithViewPager(viewPager);
         TabLayout.Tab quotesTab = tabLayout.getTabAt(0);
-        if(quotesTab != null) {
+        if (quotesTab != null) {
             quotesTab.setIcon(tabIcons[0]);
             quotesTab.setText("");
         }
 
         TabLayout.Tab authorsTab = tabLayout.getTabAt(1);
-        if(authorsTab != null){
+        if (authorsTab != null) {
             Drawable shadowedAuthors = AppCompatResources.getDrawable(this, tabIcons[1]);
-            if(shadowedAuthors != null)
+            if (shadowedAuthors != null)
                 shadowedAuthors.setColorFilter(darkColor, PorterDuff.Mode.SRC_IN);
             authorsTab.setIcon(shadowedAuthors);
             authorsTab.setText("");
@@ -152,14 +153,14 @@ public class MainActivity extends ThemedActivity {
                     @Override
                     public void onTabSelected(TabLayout.Tab tab) {
                         super.onTabSelected(tab);
-                        if(tab.getIcon() != null)
+                        if (tab.getIcon() != null)
                             tab.getIcon().clearColorFilter();
                     }
 
                     @Override
                     public void onTabUnselected(TabLayout.Tab tab) {
                         super.onTabUnselected(tab);
-                        if(tab.getIcon() != null)
+                        if (tab.getIcon() != null)
                             tab.getIcon().setColorFilter(darkColor, PorterDuff.Mode.SRC_IN);
                     }
                 }
@@ -181,7 +182,7 @@ public class MainActivity extends ThemedActivity {
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-                ((QuotesFragment)fragments[0]).restart();
+                ((QuotesFragment) fragments[0]).restart();
                 return true;
             }
         });
@@ -194,7 +195,7 @@ public class MainActivity extends ThemedActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                ((QuotesFragment)fragments[0]).findQuotesWithAuthorsContainingWords(s);
+                ((QuotesFragment) fragments[0]).findQuotesWithAuthorsContainingWords(s);
                 return false;
             }
         });
@@ -203,8 +204,8 @@ public class MainActivity extends ThemedActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.item_main_settings:
                 startActivityForResult(new Intent(this, SettingsActivity.class), 1);
                 break;
@@ -239,9 +240,9 @@ public class MainActivity extends ThemedActivity {
         }
     }
 
-    private void setActionBarTitle(){
+    private void setActionBarTitle() {
         String title = sectionsPagerAdapter.fragmentTitles[currentTab];
-        if(getSupportActionBar() != null)
+        if (getSupportActionBar() != null)
             getSupportActionBar().setTitle(title);
     }
 }

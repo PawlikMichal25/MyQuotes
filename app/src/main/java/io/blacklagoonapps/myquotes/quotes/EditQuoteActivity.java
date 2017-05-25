@@ -56,20 +56,20 @@ public class EditQuoteActivity extends QuotesActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         final DatabaseHelper databaseHelper = new DatabaseHelper(this);
         final SQLiteDatabase db = databaseHelper.getWritableDatabase();
         final long authorId = databaseHelper.findAuthorId(db, authorFirstName, authorLastName);
         final long quoteId = databaseHelper.findQuoteId(db, authorId, quoteContent);
 
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.item_editquotes_save:
 
                 final String firstNameInput = authorFirstNameInput.getText().toString().trim();
                 final String lastNameInput = authorLastNameInput.getText().toString().trim();
                 final String contentInput = quoteContentInput.getText().toString().trim();
 
-                if(firstNameInput.equals(authorFirstName) && lastNameInput.equals(authorLastName) && contentInput.equals(quoteContent)){
+                if (firstNameInput.equals(authorFirstName) && lastNameInput.equals(authorLastName) && contentInput.equals(quoteContent)) {
                     finish();
                     return true;
                 }
@@ -77,7 +77,7 @@ public class EditQuoteActivity extends QuotesActivity {
                 // Tmp variables, because if they were both in IF the second one might not be invoked
                 boolean fn = validateFieldNotEmpty(authorFirstNameInputLayout, authorFirstNameInput);
                 boolean qc = validateFieldNotEmpty(quoteContentInputLayout, quoteContentInput);
-                if(fn && qc) {
+                if (fn && qc) {
 
                     // Quote's content have changed
                     if (!quoteContent.equals(contentInput)) {
@@ -93,7 +93,7 @@ public class EditQuoteActivity extends QuotesActivity {
                             newAuthorId = changeAllQuotes(databaseHelper, db, firstNameInput, lastNameInput, authorId);
                     }
 
-                    if(newAuthorId != -1)
+                    if (newAuthorId != -1)
                         finishWithToastAndResult(getString(R.string.saved), newAuthorId);
                 }
                 break;
@@ -134,14 +134,14 @@ public class EditQuoteActivity extends QuotesActivity {
         centerDialogButtons(dialog);
     }
 
-    private void finishWithToastAndResult(String message, long authorId){
+    private void finishWithToastAndResult(String message, long authorId) {
         Intent intent = new Intent();
         intent.putExtra(AuthorsActivity.AUTHOR_ID, authorId);
         setResult(AuthorsActivity.NEW_AUTHOR_ID, intent);
         finishWithToast(message);
     }
 
-    private void finishWithToast(String message){
+    private void finishWithToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         finish();
     }
@@ -149,11 +149,11 @@ public class EditQuoteActivity extends QuotesActivity {
     private long changeSingleQuote(DatabaseHelper databaseHelper, SQLiteDatabase db, String firstNameInput,
                                    String lastNameInput, long authorId, long quoteId) {
         long newAuthorId = databaseHelper.findAuthorId(db, firstNameInput, lastNameInput);
-        if (newAuthorId == -1){   // quote's new author doesn't exist in database
+        if (newAuthorId == -1) {   // quote's new author doesn't exist in database
             newAuthorId = databaseHelper.insertAuthor(db, firstNameInput, lastNameInput);
         }
         databaseHelper.editSingleQuotesAuthor(db, quoteId, newAuthorId);
-        if (databaseHelper.countQuotes(db, authorId) == 0){  // delete old author if there are no quotes by him/her
+        if (databaseHelper.countQuotes(db, authorId) == 0) {  // delete old author if there are no quotes by him/her
             databaseHelper.deleteAuthor(db, authorId);
         }
 
@@ -163,7 +163,7 @@ public class EditQuoteActivity extends QuotesActivity {
     private long changeAllQuotes(DatabaseHelper databaseHelper, SQLiteDatabase db, String firstNameInput,
                                  String lastNameInput, long authorId) {
         long newAuthorId = databaseHelper.findAuthorId(db, firstNameInput, lastNameInput);
-        if (newAuthorId == -1){ // if new author doesn't exist in database, edit existing author's first name and last name
+        if (newAuthorId == -1) { // if new author doesn't exist in database, edit existing author's first name and last name
             databaseHelper.editAuthor(db, authorId, firstNameInput, lastNameInput);
             return authorId;
         } else {
@@ -173,7 +173,7 @@ public class EditQuoteActivity extends QuotesActivity {
     }
 
     private AlertDialog createEditAuthorDialog(Command allQuotesCommand, Command cancelCommand,
-                                               Command singleQuoteCommand){
+                                               Command singleQuoteCommand) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.edit_author_dialog_title)
                 .setMessage(R.string.edit_author_dialog_message)
@@ -187,12 +187,12 @@ public class EditQuoteActivity extends QuotesActivity {
         Button[] buttons = {dialog.getButton(AlertDialog.BUTTON_POSITIVE), dialog.getButton(AlertDialog.BUTTON_NEUTRAL),
                 dialog.getButton(AlertDialog.BUTTON_NEGATIVE)};
 
-        for (Button button : buttons){
+        for (Button button : buttons) {
             centerButton(button);
         }
     }
 
-    private void centerButton(Button button){
+    private void centerButton(Button button) {
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) button.getLayoutParams();
         layoutParams.gravity = Gravity.CENTER;
         button.setLayoutParams(layoutParams);

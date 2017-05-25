@@ -26,7 +26,8 @@ public class AuthorsFragment extends ListFragment {
     private Cursor cursor;
     private boolean firstNameFirst;
 
-    public AuthorsFragment() { }
+    public AuthorsFragment() {
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.firstNameFirst = PreferenceManager.getDefaultSharedPreferences(getContext()).
@@ -59,7 +60,7 @@ public class AuthorsFragment extends ListFragment {
             SQLiteOpenHelper databaseHelper = new DatabaseHelper(getActivity());
             db = databaseHelper.getReadableDatabase();
             String orderBy;
-            if(firstNameFirst)
+            if (firstNameFirst)
                 orderBy = Author.Columns.FIRST_NAME + " || " + Author.Columns.LAST_NAME + " COLLATE NOCASE";
             else
                 orderBy = Author.Columns.LAST_NAME + " || " + Author.Columns.FIRST_NAME + " COLLATE NOCASE";
@@ -89,7 +90,7 @@ public class AuthorsFragment extends ListFragment {
                 if (cursor.getString(2).isEmpty())
                     name.setText(cursor.getString(1));
                 else {
-                    if(firstNameFirst)
+                    if (firstNameFirst)
                         name.setText(cursor.getString(1) + " " + cursor.getString(2));
                     else
                         name.setText(cursor.getString(2) + " " + cursor.getString(1));
@@ -102,14 +103,14 @@ public class AuthorsFragment extends ListFragment {
     }
 
     @Override
-    public void onListItemClick(ListView listView, View itemView, int position, long id){
+    public void onListItemClick(ListView listView, View itemView, int position, long id) {
         Intent intent = new Intent(getActivity(), AuthorsActivity.class);
         intent.putExtra(AuthorsActivity.AUTHOR_ID, id);
         startActivity(intent);
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
         cursor.close();
         db.close();

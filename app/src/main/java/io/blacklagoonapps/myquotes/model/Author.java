@@ -7,12 +7,12 @@ public class Author {
     private String firstName;
     private String lastName;
 
-    public Author(String firstName, String lastName){
+    public Author(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Author(String firstName){
+    public Author(String firstName) {
         this(firstName, EMPTY_STRING);
     }
 
@@ -33,7 +33,7 @@ public class Author {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return new StringBuilder().append(lastName).append(" ").append(firstName).toString();
     }
 
@@ -42,6 +42,7 @@ public class Author {
         public static final String FIRST_NAME = "FirstName";
         public static final String LAST_NAME = "LastName";
 
-        private Columns(){ }
+        private Columns() {
+        }
     }
 }

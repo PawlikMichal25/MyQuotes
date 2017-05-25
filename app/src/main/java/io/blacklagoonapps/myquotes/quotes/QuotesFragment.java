@@ -24,7 +24,8 @@ public class QuotesFragment extends Fragment {
     private QuotesAdapter quotesAdapter;
     private long authorId = -1;
 
-    public QuotesFragment() { }
+    public QuotesFragment() {
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,14 +44,14 @@ public class QuotesFragment extends Fragment {
         return rootView;
     }
 
-    private void setUpQuotesAdapter(){
+    private void setUpQuotesAdapter() {
         QuotesAdapter.Preferences preferences = new QuotesAdapter.Preferences(
                 authorId == -1,
                 PreferenceManager.getDefaultSharedPreferences(getContext()).
                         getBoolean(getContext().getString(R.string.pref_names_display), true),
                 true);
 
-        if(authorId == -1)
+        if (authorId == -1)
             quotesAdapter = new QuotesAdapter(getActivity(), preferences);
         else
             quotesAdapter = new QuotesAdapter(getActivity(), preferences, authorId);
@@ -66,18 +67,17 @@ public class QuotesFragment extends Fragment {
         View quotesEmpty = findById(rootView, R.id.linearlayout_quotes_empty);
         int visibility;
 
-        if(quotesAdapter.getItemCount() == 0){
+        if (quotesAdapter.getItemCount() == 0) {
             visibility = View.VISIBLE;
             setUpAddQuoteText(rootView);
-        }
-        else
+        } else
             visibility = View.INVISIBLE;
         quotesEmpty.setVisibility(visibility);
     }
 
-    private void setUpAddQuoteText(View rootView){
+    private void setUpAddQuoteText(View rootView) {
         TextView addQuote = findById(rootView, R.id.textview_quotes_add_quote);
-        if(authorId == -1)
+        if (authorId == -1)
             addQuote.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -89,7 +89,7 @@ public class QuotesFragment extends Fragment {
             addQuote.setVisibility(View.GONE);
     }
 
-    public void restart(){
+    public void restart() {
         setUpQuotesAdapter();
         setUpRecyclerView();
         setUpEmptyQuotesView(getView());
@@ -104,7 +104,7 @@ public class QuotesFragment extends Fragment {
     }
 
     @Nullable
-    public Author getAuthorAt(int position){
+    public Author getAuthorAt(int position) {
         return quotesAdapter.getAuthorAt(position);
     }
 }

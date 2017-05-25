@@ -7,12 +7,12 @@ import android.support.v7.preference.PreferenceManager;
 import io.blacklagoonapps.myquotes.ThemedActivity;
 import io.blacklagoonapps.myquotes.R;
 
-public class SettingsActivity extends ThemedActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
+public class SettingsActivity extends ThemedActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     public static final int THEME_CHANGED = 100;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_settings);
@@ -31,7 +31,7 @@ public class SettingsActivity extends ThemedActivity implements SharedPreference
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sp, String key) {
-        if(key.equals("pref_style_color")){
+        if (key.equals("pref_style_color")) {
             setResult(THEME_CHANGED);
             finish();
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
