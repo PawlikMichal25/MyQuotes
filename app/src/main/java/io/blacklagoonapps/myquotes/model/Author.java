@@ -13,7 +13,7 @@ public class Author {
 
     @Override
     public String toString() {
-        return new StringBuilder().append(lastName).append(" ").append(firstName).toString();
+        return lastName + " " + firstName;
     }
 
     public static final class Columns {

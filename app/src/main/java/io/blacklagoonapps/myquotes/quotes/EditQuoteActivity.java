@@ -150,9 +150,9 @@ public class EditQuoteActivity extends QuotesActivity {
                                    String lastNameInput, long authorId, long quoteId) {
         long newAuthorId = databaseHelper.findAuthorId(db, firstNameInput, lastNameInput);
         if (newAuthorId == -1) {   // quote's new author doesn't exist in database
-            newAuthorId = databaseHelper.insertAuthor(db, firstNameInput, lastNameInput);
+            newAuthorId = databaseHelper.addAuthor(db, firstNameInput, lastNameInput);
         }
-        databaseHelper.editSingleQuotesAuthor(db, quoteId, newAuthorId);
+        databaseHelper.updateQuote(db, quoteId, newAuthorId);
         if (databaseHelper.countQuotes(db, authorId) == 0) {  // delete old author if there are no quotes by him/her
             databaseHelper.deleteAuthor(db, authorId);
         }

@@ -40,6 +40,7 @@ public class AddQuoteActivity extends QuotesActivity {
                             lastNameInput,
                             contentInput);
 
+                    db.close();
                     Toast toast = Toast.makeText(this, getString(R.string.saved), Toast.LENGTH_SHORT);
                     toast.show();
                     finish();
