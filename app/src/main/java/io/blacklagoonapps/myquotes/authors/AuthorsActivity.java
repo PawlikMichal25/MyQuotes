@@ -47,9 +47,9 @@ public class AuthorsActivity extends ThemedActivity {
 
     private void setTitle() {
         if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(getString(R.string.pref_names_display), true))
-            getSupportActionBar().setTitle(author.getFirstName() + " " + author.getLastName());
+            getSupportActionBar().setTitle(author.firstName + " " + author.lastName);
         else
-            getSupportActionBar().setTitle(author.getLastName() + " " + author.getFirstName());
+            getSupportActionBar().setTitle(author.lastName + " " + author.firstName);
     }
 
     @Override

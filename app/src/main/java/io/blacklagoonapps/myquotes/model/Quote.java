@@ -3,27 +3,11 @@ package io.blacklagoonapps.myquotes.model;
 public class Quote {
 
     public static final String TABLE_NAME = "Quotes";
-    private Author author;
-    private String content;
+    public Author author;
+    public String content;
 
     public Quote(Author author, String content) {
         this.author = author;
-        this.content = content;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
         this.content = content;
     }
 
