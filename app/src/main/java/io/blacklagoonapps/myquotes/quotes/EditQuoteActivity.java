@@ -128,7 +128,7 @@ public class EditQuoteActivity extends QuotesActivity {
                 finishWithToastAndResult(getString(R.string.saved), newAuthorId);
             }
         };
-        Command emptyCommand = Command.NO_OPERATION;
+        Command emptyCommand = Command.Companion.getNO_OPERATION();
         AlertDialog dialog = createEditAuthorDialog(changeAllQuotesCommand, emptyCommand, changeSingleQuoteCommand);
         dialog.show();
         centerDialogButtons(dialog);
