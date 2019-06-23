@@ -114,10 +114,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
             holder.content.setText(content);
 
             if (preferences.showAuthor) {
-                if (preferences.showFirstNameFirst)
-                    holder.author.setText(firstName + " " + lastName);
-                else
-                    holder.author.setText(lastName + " " + firstName);
+                holder.author.setText(firstName + " " + lastName);
             } else
                 holder.author.setVisibility(View.GONE);
 
@@ -229,14 +226,12 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
     // "Dumb data holder" ;)
     public static class Preferences {
 
-        public Preferences(boolean showAuthor, boolean showFirstNameFirst, boolean listenToClickEvents) {
+        public Preferences(boolean showAuthor, boolean listenToClickEvents) {
             this.showAuthor = showAuthor;
-            this.showFirstNameFirst = showFirstNameFirst;
             this.listenToClickEvents = listenToClickEvents;
         }
 
         boolean showAuthor;
-        boolean showFirstNameFirst;
         boolean listenToClickEvents;
     }
 }

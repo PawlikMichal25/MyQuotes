@@ -6,9 +6,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+
 import androidx.fragment.app.ListFragment;
 import androidx.cursoradapter.widget.SimpleCursorAdapter;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,14 +25,11 @@ public class AuthorsFragment extends ListFragment {
 
     private SQLiteDatabase db;
     private Cursor cursor;
-    private boolean firstNameFirst;
 
     public AuthorsFragment() {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.firstNameFirst = PreferenceManager.getDefaultSharedPreferences(getContext()).
-                getBoolean(getString(R.string.pref_names_display), true);
         return inflater.inflate(R.layout.fragment_authors, container, false);
     }
 
@@ -49,8 +47,6 @@ public class AuthorsFragment extends ListFragment {
     }
 
     public void initFragment() {
-        this.firstNameFirst = PreferenceManager.getDefaultSharedPreferences(getContext()).
-                getBoolean(getContext().getString(R.string.pref_names_display), true);
         createCursor();
         setUpAdapter();
     }
@@ -60,10 +56,7 @@ public class AuthorsFragment extends ListFragment {
             SQLiteOpenHelper databaseHelper = new DatabaseHelper(getActivity());
             db = databaseHelper.getReadableDatabase();
             String orderBy;
-            if (firstNameFirst)
-                orderBy = Author.Columns.FIRST_NAME + " || " + Author.Columns.LAST_NAME + " COLLATE NOCASE";
-            else
-                orderBy = Author.Columns.LAST_NAME + " || " + Author.Columns.FIRST_NAME + " COLLATE NOCASE";
+            orderBy = Author.Columns.FIRST_NAME + " || " + Author.Columns.LAST_NAME + " COLLATE NOCASE";
 
             cursor = db.query(Author.TABLE_NAME,
                     new String[]{Author.Columns.ID, Author.Columns.FIRST_NAME, Author.Columns.LAST_NAME},
@@ -90,10 +83,7 @@ public class AuthorsFragment extends ListFragment {
                 if (cursor.getString(2).isEmpty())
                     name.setText(cursor.getString(1));
                 else {
-                    if (firstNameFirst)
-                        name.setText(cursor.getString(1) + " " + cursor.getString(2));
-                    else
-                        name.setText(cursor.getString(2) + " " + cursor.getString(1));
+                    name.setText(cursor.getString(1) + " " + cursor.getString(2));
                 }
                 return true;
             }

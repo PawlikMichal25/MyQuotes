@@ -2,7 +2,6 @@ package io.blacklagoonapps.myquotes.quotes;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,8 +45,6 @@ public class QuotesFragment extends Fragment {
     private void setUpQuotesAdapter() {
         QuotesAdapter.Preferences preferences = new QuotesAdapter.Preferences(
                 authorId == -1,
-                PreferenceManager.getDefaultSharedPreferences(getContext()).
-                        getBoolean(getContext().getString(R.string.pref_names_display), true),
                 true);
 
         if (authorId == -1)

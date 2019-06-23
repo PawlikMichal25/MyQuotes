@@ -12,11 +12,6 @@
             app:colorChoices="@array/color_choices"
             app:numColumns="3"/>
 
-        <Preference
-            android:defaultValue="true"
-            android:key="@string/pref_names_display"
-            android:title="@string/preferences_names_display"/>
-
     </androidx.preference.PreferenceCategory>
 
 </androidx.preference.PreferenceScreen>

@@ -1,9 +1,9 @@
 package io.blacklagoonapps.myquotes.authors;
 
-
 import android.content.Intent;
-import android.preference.PreferenceManager;
+
 import androidx.fragment.app.FragmentTransaction;
+
 import android.os.Bundle;
 
 import io.blacklagoonapps.myquotes.ThemedActivity;
@@ -46,10 +46,7 @@ public class AuthorsActivity extends ThemedActivity {
     }
 
     private void setTitle() {
-        if (PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(getString(R.string.pref_names_display), true))
-            getSupportActionBar().setTitle(author.firstName + " " + author.lastName);
-        else
-            getSupportActionBar().setTitle(author.lastName + " " + author.firstName);
+        getSupportActionBar().setTitle(author.firstName + " " + author.lastName);
     }
 
     @Override
