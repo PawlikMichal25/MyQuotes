@@ -1,13 +1,12 @@
 package io.blacklagoonapps.myquotes.quotes;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,6 @@ import android.widget.TextView;
 
 import io.blacklagoonapps.myquotes.R;
 import io.blacklagoonapps.myquotes.model.Author;
-
-import static butterknife.ButterKnife.findById;
 
 public class QuotesFragment extends Fragment {
 
@@ -35,7 +32,7 @@ public class QuotesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_quotes, container, false);
-        recyclerView = findById(rootView, R.id.recyclerview_quotes);
+        recyclerView = rootView.findViewById(R.id.recyclerview_quotes);
 
         setUpQuotesAdapter();
         setUpRecyclerView();
@@ -64,7 +61,7 @@ public class QuotesFragment extends Fragment {
     }
 
     private void setUpEmptyQuotesView(View rootView) {
-        View quotesEmpty = findById(rootView, R.id.linearlayout_quotes_empty);
+        View quotesEmpty = rootView.findViewById(R.id.linearlayout_quotes_empty);
         int visibility;
 
         if (quotesAdapter.getItemCount() == 0) {
@@ -76,7 +73,7 @@ public class QuotesFragment extends Fragment {
     }
 
     private void setUpAddQuoteText(View rootView) {
-        TextView addQuote = findById(rootView, R.id.textview_quotes_add_quote);
+        TextView addQuote = rootView.findViewById(R.id.textview_quotes_add_quote);
         if (authorId == -1)
             addQuote.setOnClickListener(new View.OnClickListener() {
                 @Override

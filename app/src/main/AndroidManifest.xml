@@ -72,5 +72,4 @@
                 android:value="io.blacklagoonapps.myquotes.MainActivity"/>
         </activity>
     </application>
-
 </manifest>

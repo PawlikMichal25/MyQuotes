@@ -1,15 +1,14 @@
 package io.blacklagoonapps.myquotes;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.preference.PreferenceManager;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
-import io.blacklagoonapps.myquotes.R;
-
-
+@SuppressLint("Registered")
 public class ThemedActivity extends AppCompatActivity {
 
     @Override
@@ -17,7 +16,6 @@ public class ThemedActivity extends AppCompatActivity {
         setTheme();
         super.onCreate(savedInstanceState);
     }
-
 
     private void setTheme() {
         Context ctx = getApplicationContext();

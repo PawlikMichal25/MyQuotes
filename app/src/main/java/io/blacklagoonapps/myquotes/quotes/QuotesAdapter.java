@@ -8,18 +8,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import io.blacklagoonapps.myquotes.R;
 import io.blacklagoonapps.myquotes.database.DatabaseHelper;
 import io.blacklagoonapps.myquotes.model.Author;
@@ -217,14 +216,13 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.Holder> {
 
     static class Holder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.textview_quote_content)
         TextView content;
-        @BindView(R.id.textview_quote_author)
         TextView author;
 
         Holder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            content = itemView.findViewById(R.id.textview_quote_content);
+            author = itemView.findViewById(R.id.textview_quote_author);
         }
     }
 

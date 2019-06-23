@@ -1,10 +1,9 @@
 package io.blacklagoonapps.myquotes.quotes;
 
-import android.support.design.widget.TextInputLayout;
+import com.google.android.material.textfield.TextInputLayout;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.widget.CheckBox;
 import android.widget.EditText;
 
 import io.blacklagoonapps.myquotes.ThemedActivity;

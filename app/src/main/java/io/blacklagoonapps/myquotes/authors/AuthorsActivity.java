@@ -3,7 +3,7 @@ package io.blacklagoonapps.myquotes.authors;
 
 import android.content.Intent;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import io.blacklagoonapps.myquotes.ThemedActivity;
