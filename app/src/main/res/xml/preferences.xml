@@ -12,7 +12,7 @@
             app:colorChoices="@array/color_choices"
             app:numColumns="3"/>
 
-        <android.support.v7.preference.SwitchPreferenceCompat
+        <Preference
             android:defaultValue="true"
             android:key="@string/pref_names_display"
             android:title="@string/preferences_names_display"/>
