@@ -16,10 +16,10 @@ public class AboutActivity extends ThemedActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        TextView licenseView = (TextView) findViewById(R.id.textview_about_licenses);
+        TextView licenseView = findViewById(R.id.textview_about_licenses);
         licenseView.setPaintFlags(licenseView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
-        TextView versionView = (TextView) findViewById(R.id.textview_about_version_number);
+        TextView versionView = findViewById(R.id.textview_about_version_number);
         versionView.setText(BuildConfig.VERSION_NAME);
     }
 

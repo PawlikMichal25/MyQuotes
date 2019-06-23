@@ -39,11 +39,11 @@ public class MainActivity extends ThemedActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main);
+        Toolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
 
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        floatingAddButton = (FloatingActionButton) findViewById(R.id.fab_main);
+        floatingAddButton = findViewById(R.id.fab_main);
 
         setActionBarTitle();
         setUpFloatingAddButton();
@@ -55,7 +55,7 @@ public class MainActivity extends ThemedActivity {
     protected void onStart() {
         super.onStart();
         if (getIntent().hasExtra(CURRENT_TAB)) {
-            TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout_main);
+            TabLayout tabLayout = findViewById(R.id.tablayout_main);
             TabLayout.Tab tab = tabLayout.getTabAt(getIntent().getIntExtra(CURRENT_TAB, 0));
             getIntent().removeExtra(CURRENT_TAB);
             if (tab != null)
@@ -91,7 +91,7 @@ public class MainActivity extends ThemedActivity {
     }
 
     private void setUpViewPager() {
-        viewPager = (ViewPager) findViewById(R.id.viewpager_main);
+        viewPager = findViewById(R.id.viewpager_main);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -128,7 +128,7 @@ public class MainActivity extends ThemedActivity {
     }
 
     private void setUpTabLayout() {
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout_main);
+        TabLayout tabLayout = findViewById(R.id.tablayout_main);
         final int darkColor = ContextCompat.getColor(this, R.color.color_control_white_dark);
 
         tabLayout.setupWithViewPager(viewPager);

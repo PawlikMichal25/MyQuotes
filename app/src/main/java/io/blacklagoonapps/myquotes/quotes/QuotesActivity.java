@@ -25,13 +25,13 @@ public class QuotesActivity extends ThemedActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quotes);
 
-        authorFirstNameInput = (EditText) findViewById(R.id.textinputedittext_quotes_first_name);
-        authorLastNameInput = (EditText) findViewById(R.id.textinputedittext_quotes_last_name);
-        quoteContentInput = (EditText) findViewById(R.id.textinputedittext_quotes_quote);
+        authorFirstNameInput = findViewById(R.id.textinputedittext_quotes_first_name);
+        authorLastNameInput = findViewById(R.id.textinputedittext_quotes_last_name);
+        quoteContentInput = findViewById(R.id.textinputedittext_quotes_quote);
 
-        authorFirstNameInputLayout = (TextInputLayout) findViewById(R.id.textinputlayout_quotes_first_name);
-        authorLastNameInputLayout = (TextInputLayout) findViewById(R.id.textinputlayout_quotes_last_name);
-        quoteContentInputLayout = (TextInputLayout) findViewById(R.id.textinputlayout_quotes_quote);
+        authorFirstNameInputLayout = findViewById(R.id.textinputlayout_quotes_first_name);
+        authorLastNameInputLayout = findViewById(R.id.textinputlayout_quotes_last_name);
+        quoteContentInputLayout = findViewById(R.id.textinputlayout_quotes_quote);
 
         authorFirstNameInput.addTextChangedListener(new MyTextWatcher(authorFirstNameInputLayout, authorFirstNameInput));
         quoteContentInput.addTextChangedListener(new MyTextWatcher(quoteContentInputLayout, quoteContentInput));
